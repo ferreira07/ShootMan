@@ -38,6 +38,7 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Scene\Battle.cs" />
     <Compile Include="Colision\IHittable.cs" />
     <Compile Include="Colision\EColisionLayer.cs" />
     <Compile Include="Colision\EColisionType.cs" />
@@ -46,6 +47,8 @@
     <Compile Include="Draw\DrawableObject.cs" />
     <Compile Include="Draw\Sprite.cs" />
     <Compile Include="IMapObject.cs" />
+    <Compile Include="Scene\BattleBuilder.cs" />
+    <Compile Include="Scene\IScene.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Move\EProjectilType.cs" />
     <Compile Include="Move\MoveTo.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="Player\IController.cs" />
     <Compile Include="Player\JoypadController.cs" />
     <Compile Include="Player\KeyboardController.cs" />
+    <Compile Include="SceneManager.cs" />
     <Compile Include="ShootMan.cs" />
     <Compile Include="Player\Character.cs" />
     <Compile Include="Program.cs" />

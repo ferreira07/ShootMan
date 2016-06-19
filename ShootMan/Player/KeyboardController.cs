@@ -14,19 +14,28 @@ namespace ShootMan.Player
         public Keys Down { get; set; }
         public Keys Left { get; set; }
         public Keys Right { get; set; }
-        
+        public Keys Fire { get; set; }
+
         public KeyboardController()
         {
-            Up = Keys.Up;
-            Down = Keys.Down;
-            Left = Keys.Left;
-            Right = Keys.Right;
+            Up = Keys.W;
+            Down = Keys.S;
+            Left = Keys.A;
+            Right = Keys.D;
+            Fire = Keys.Down;
+        }
+
+        private KeyboardState oldState;
+        private KeyboardState state;
+        public void UpdateState()
+        {
+            oldState = state;
+            state = Keyboard.GetState();
         }
         public Vector2 Direction()
         {
             int x = 0;
             int y = 0;
-            KeyboardState state = Keyboard.GetState();
             if (state.IsKeyDown(Up)) y += 1;
             if (state.IsKeyDown(Down)) y -= 1;
             if (state.IsKeyDown(Left)) x -= 1;
@@ -36,11 +45,20 @@ namespace ShootMan.Player
             if (v != Vector2.Zero) v.Normalize();
             return v;
         }
-        
+
         public bool Action(EControllerButton type)
         {
-            KeyboardState state = Keyboard.GetState();
-            return state.IsKeyDown(Keys.Space);
+            if (type == EControllerButton.Fire)
+            {
+                bool old = oldState != null ? oldState.IsKeyDown(Fire) : false;
+                return old && state.IsKeyUp(Fire);
+            }
+            else if (type == EControllerButton.StartCharge)
+            {
+                bool old = oldState != null ? oldState.IsKeyUp(Fire) : false;
+                return old && state.IsKeyDown(Fire);
+            }
+            return false;
         }
     }
 }

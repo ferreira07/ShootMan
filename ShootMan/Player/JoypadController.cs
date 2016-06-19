@@ -18,14 +18,32 @@ namespace ShootMan.Player
 
         public int GamePadIndex { get; private set; }
 
+        private GamePadState oldState;
+        private GamePadState state;
+        public void UpdateState()
+        {
+            oldState = state;
+            state = GamePad.GetState(GamePadIndex);
+        }
+
         public bool Action(EControllerButton type)
         {
-            return GamePad.GetState(GamePadIndex).IsButtonDown(Buttons.A);
+            if (type == EControllerButton.Fire)
+            {
+                bool old = oldState != null ? oldState.IsButtonDown(Buttons.A) : false;
+                return old && state.IsButtonUp(Buttons.A);
+            }else if (type == EControllerButton.StartCharge)
+            {
+                bool old = oldState != null ? oldState.IsButtonUp(Buttons.A) : false;
+                return old && state.IsButtonDown(Buttons.A);
+            }
+            return false;
         }
 
         public Vector2 Direction()
         {
-            return GamePad.GetState(GamePadIndex).ThumbSticks.Left;
+            return state.ThumbSticks.Left;
+            //TODO verificar os direcionais
         }
     }
 }

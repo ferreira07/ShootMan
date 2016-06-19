@@ -28,7 +28,7 @@ namespace ShootMan.Move
             float px = Position.X + x;
             float py = Position.Y + y;
 
-            var newPosition = new Rectangle((int)px, (int)py, ColisionRectangle.Width, ColisionRectangle.Height);
+            var newPosition = new Rectangle((int)px, (int)py, Width, Height);
             bool hasColision = false;
             IColider temp = null;
             var colisionObjects = Map.ColisionObjects.ToArray();
@@ -65,10 +65,10 @@ namespace ShootMan.Move
             }
         }        
 
-        protected void UpdateRectangle()
+        public void UpdateRectangle()
         {
             DrawRectangle = new Rectangle((int)Position.X + Dx, (int)Position.Y + Dy, DrawRectangle.Width, DrawRectangle.Height);
-            ColisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, ColisionRectangle.Width, ColisionRectangle.Height);
+            ColisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
         }
 
         public virtual void Update(GameTime gameTime)

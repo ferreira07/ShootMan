@@ -19,8 +19,7 @@ namespace ShootMan
         public static Texture2D textureBLUE;
         public static Texture2D BulletTexture;
         public static float SpeedBase = 100;
-
-         GraphicsDeviceManager graphics;
+        GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         
         public Map Map { get; set; }
@@ -141,14 +140,14 @@ namespace ShootMan
                 item.Draw(spriteBatch);
             }
 
-            IEnumerable<Character> chars = Map.MapObjects.Where(c => c is Character).OrderBy(o=>o.Id).Select(o => o as Character);
+            IEnumerable<Character> chars = Map.Characters;
             int dx = WIDTH / chars.Count();
             int px = dx / 2;
-            foreach (var item in chars)
+            foreach (var c in chars)
             {
-
-                spriteBatch.DrawString(Font1, item.Hp.ToString(), new Vector2(px, 30), Color.Black);
-                    px += dx;
+                if(!c.IsDead)
+                    spriteBatch.DrawString(Font1, c.Hp.ToString(), new Vector2(px, 30), Color.Black);
+                px += dx;
             }
 
             spriteBatch.End();

@@ -22,10 +22,18 @@ namespace ShootMan.Player
 
         public int Hp { get; set; }
 
+        public bool IsDead { get { return Hp <= 0; } }
+
         public Rectangle DisplayPosition { get; set; }
         public IController Controller { get; set; }
         public TimeSpan LastShoot { get; private set; }
         public TimeSpan ShootTime { get; private set; }
+        public bool IsCharged(TimeSpan time)
+        {
+            return StartChargeShoot != TimeSpan.Zero && StartChargeShoot + TimeSpan.FromSeconds(1)< time;
+        }
+        public TimeSpan StartChargeShoot { get; private set; }
+
         private bool _CanShoot;
 
         public Character(ContentManager content, string imagePath, Vector2 position, Rectangle displayPosition, IController controller)
@@ -38,23 +46,22 @@ namespace ShootMan.Player
             Position = position;
             Dy = -16;
             DisplayPosition = displayPosition;
-            ColisionRectangle = new Rectangle(0, 0, 32, 32);
+            Width = 32;
+            Height = 32;
             this.DrawRectangle = Sprite.SourceRectangle;
             UpdateRectangle();
             Hp = 100;
             MaxSpeed = ShootMan.SpeedBase;
             Controller = controller;
-            ShootTime = TimeSpan.FromMilliseconds(500);
+            ShootTime = TimeSpan.FromMilliseconds(200);
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            //spriteBatch.Draw(ShootMan.textureRED, DisplayPosition, Color.White);
-            base.Draw(spriteBatch);
-        }
         public Vector2 FacingDirection;
+
         public override void Update(GameTime gameTime)
         {
+            Controller.UpdateState();
+
             Vector2 v = Controller.Direction();
 
             if (v != Vector2.Zero) FacingDirection = v;
@@ -63,19 +70,26 @@ namespace ShootMan.Player
             {
                 //criar um novo projétil
                 Vector2 position = Position + (FacingDirection * 30 * new Vector2(1, -1));
-                Map.Add(ProjectilFactory.Create(EProjectilType.Bullet, FacingDirection, position));
-                _CanShoot = false; 
+                EProjectilType projectilType = IsCharged(gameTime.TotalGameTime)? EProjectilType.ChargedBullet: EProjectilType.Bullet;
+                Map.Add(ProjectilFactory.Create(projectilType, FacingDirection, this.ColisionRectangle));
+                _CanShoot = false;
                 this.LastShoot = gameTime.TotalGameTime;
+                StartChargeShoot = TimeSpan.Zero;
+            }
+            else if (Controller.Action(EControllerButton.StartCharge))
+            {
+                //TODO CanCharge
+                this.StartChargeShoot = gameTime.TotalGameTime;
             }
             Speed = v * MaxSpeed;
             base.Update(gameTime);
         }
-
+        
         private bool CanShoot(TimeSpan timeSpan)
         {
             if (!_CanShoot)
             {
-                if(timeSpan - LastShoot > ShootTime)
+                if (timeSpan - LastShoot > ShootTime)
                 {
                     _CanShoot = true;
                 }

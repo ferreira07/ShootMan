@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShootMan.Player
+namespace ShootMan.Scene
 {
-    public enum EControllerButton
+    public class BattleBuilder
     {
-        Fire,
-        StartCharge
+
     }
 }

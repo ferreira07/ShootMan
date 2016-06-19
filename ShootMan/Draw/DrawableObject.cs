@@ -18,6 +18,9 @@ namespace ShootMan.Draw
 
         public Vector2 Position { get; set; }
 
+        public int Width { get; internal set; }
+        public int Height { get; internal set; }
+
         public int Dx { get; set; }
 
         public int Dy { get; set; }

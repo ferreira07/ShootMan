@@ -17,6 +17,8 @@ namespace ShootMan.Move
             get { return EColisionType.Hit; }
         }
 
+        public int DamageAmmount { get; internal set; }
+
         public override void Damage(int ammount)
         {
             throw new NotImplementedException();
@@ -31,7 +33,7 @@ namespace ShootMan.Move
             if (c is Character)
             {
                 //TODO calcular Dano
-                c.Damage(10);
+                c.Damage(DamageAmmount);
                 Piercy--;
                 if(Piercy < 0)
                     Map.Remove(this);

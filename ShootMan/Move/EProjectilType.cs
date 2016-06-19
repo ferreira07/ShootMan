@@ -8,6 +8,7 @@ namespace ShootMan.Move
 {
     public enum EProjectilType
     {
-        Bullet
+        Bullet,
+        ChargedBullet
     }
 }
