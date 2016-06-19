@@ -23,8 +23,7 @@ namespace ShootMan.Player
         public int Hp { get; set; }
 
         public bool IsDead { get { return Hp <= 0; } }
-
-        public Rectangle DisplayPosition { get; set; }
+        
         public IController Controller { get; set; }
         public TimeSpan LastShoot { get; private set; }
         public TimeSpan ShootTime { get; private set; }
@@ -32,31 +31,19 @@ namespace ShootMan.Player
         {
             return StartChargeShoot != TimeSpan.Zero && StartChargeShoot + TimeSpan.FromSeconds(1)< time;
         }
-        public TimeSpan StartChargeShoot { get; private set; }
+        private TimeSpan StartChargeShoot { get; set; }
+        private Vector2 FacingDirection;
 
         private bool _CanShoot;
 
-        public Character(ContentManager content, string imagePath, Vector2 position, Rectangle displayPosition, IController controller)
-        {
-            Sprite = new Sprite()
-            {
-                Texture = content.Load<Texture2D>(imagePath),
-                SourceRectangle = new Rectangle(0, 0, 32, 48)
-            };
-            Position = position;
-            Dy = -16;
-            DisplayPosition = displayPosition;
-            Width = 32;
-            Height = 32;
+        public Character(Sprite sprite, IController controller)
+        {            
+            Sprite = sprite;
             this.DrawRectangle = Sprite.SourceRectangle;
             UpdateRectangle();
-            Hp = 100;
-            MaxSpeed = ShootMan.SpeedBase;
             Controller = controller;
             ShootTime = TimeSpan.FromMilliseconds(200);
-        }
-
-        public Vector2 FacingDirection;
+        }       
 
         public override void Update(GameTime gameTime)
         {

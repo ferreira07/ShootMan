@@ -37,5 +37,17 @@ namespace ShootMan.Draw
             }
             spriteBatch.Draw(Sprite.Texture, DrawRectangle, Sprite.SourceRectangle, Color.White);
         }
+
+        public void SetSize(int w, int h)
+        {
+            Width = w;
+            Height = h;
+        }
+
+        public void SetDrawPosition(int dx, int dy)
+        {
+            Dx = 0;
+            Dy = -16;
+        }
     }
 }

@@ -38,6 +38,10 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Draw\ESprite.cs" />
+    <Compile Include="Draw\Sprites.cs" />
+    <Compile Include="Player\CharacterFactory.cs" />
+    <Compile Include="Player\ECharacterType.cs" />
     <Compile Include="Scene\Battle.cs" />
     <Compile Include="Colision\IHittable.cs" />
     <Compile Include="Colision\EColisionLayer.cs" />
@@ -59,7 +63,6 @@
     <Compile Include="Player\IController.cs" />
     <Compile Include="Player\JoypadController.cs" />
     <Compile Include="Player\KeyboardController.cs" />
-    <Compile Include="SceneManager.cs" />
     <Compile Include="ShootMan.cs" />
     <Compile Include="Player\Character.cs" />
     <Compile Include="Program.cs" />

@@ -30,7 +30,7 @@ namespace ShootMan.Move
 
             var newPosition = new Rectangle((int)px, (int)py, Width, Height);
             bool hasColision = false;
-            IColider temp = null;
+            List<IColider> temp = new List<IColider>();
             var colisionObjects = Map.ColisionObjects.ToArray();
             foreach (var item in colisionObjects)
             {
