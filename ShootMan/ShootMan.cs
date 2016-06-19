@@ -19,14 +19,16 @@ namespace ShootMan
         public static Texture2D textureBLUE;
         public static Texture2D BulletTexture;
         public static float SpeedBase = 100;
+        public static SpriteFont Font1;
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         
+        public IScene Scene { get; set; }
+
         public Map Map { get; set; }
 
         public const int WIDTH = 800;
         public const int HEIGHT = 600;
-        SpriteFont Font1;
 
         public ShootMan()
         {
@@ -48,30 +50,39 @@ namespace ShootMan
             graphics.PreferredBackBufferHeight = HEIGHT;
             //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
+
             Sprites.Load(Content);
 
+
+            Scene = new BattleScene() { Map = BuildMap() };
+        }
+
+        private Map BuildMap()
+        {
+            //TODO Carregar o mapa mais desacoplado
             Character p = CharacterFactory.CreateCharacter(ECharacterType.Fulano, new Vector2(100, 150), new JoypadController(0));
             Character p1 = CharacterFactory.CreateCharacter(ECharacterType.Beltrano, new Vector2(200, 150), new JoypadController(1));
             Character p2 = CharacterFactory.CreateCharacter(ECharacterType.Siclano, new Vector2(300, 150), new KeyboardController());
 
-            Map = new Map();
+            Map Map = new Map();
             Map.Add(p);
             Map.Add(p1);
             Map.Add(p2);
 
             Texture2D texture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
             texture.SetData(new Color[] { Color.Green });
-            Sprite s = new Sprite() { Texture = texture, SourceRectangle = new Rectangle(0, 0, 1, 1) }; 
+            Sprite s = new Sprite() { Texture = texture, SourceRectangle = new Rectangle(0, 0, 1, 1) };
             for (int i = 0; i < 25; i++)
             {
                 Map.Add(new Wall(s, new Rectangle(32 * i, 90, 32, 32)));
-                Map.Add(new Wall(s, new Rectangle(32 * i, 90+15*32, 32, 32)));
+                Map.Add(new Wall(s, new Rectangle(32 * i, 90 + 15 * 32, 32, 32)));
             }
             for (int i = 0; i < 14; i++)
             {
                 Map.Add(new Wall(s, new Rectangle(0, 122 + 32 * i, 32, 32)));
-                Map.Add(new Wall(s, new Rectangle(24*32, 122 +32 * i, 32, 32)));
+                Map.Add(new Wall(s, new Rectangle(24 * 32, 122 + 32 * i, 32, 32)));
             }
+            return Map;
         }
 
         /// <summary>
@@ -108,10 +119,7 @@ namespace ShootMan
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            foreach (var item in Map.MapObjects.Where(d=> d is MovingObject).Select(d => d as MovingObject).ToList())
-            {
-                item.Update(gameTime);
-            }
+            Scene.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -123,25 +131,8 @@ namespace ShootMan
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.White);
-            
-            spriteBatch.Begin();
-            IEnumerable<DrawableObject> objs = Map.MapObjects.Where(c => c is DrawableObject).Select(o => o as DrawableObject).OrderBy(o => o.Position.Y);
-            foreach (var item in objs)
-            {
-                item.Draw(spriteBatch);
-            }
 
-            IEnumerable<Character> chars = Map.Characters;
-            int dx = WIDTH / chars.Count();
-            int px = dx / 2;
-            foreach (var c in chars)
-            {
-                if(!c.IsDead)
-                    spriteBatch.DrawString(Font1, c.Hp.ToString(), new Vector2(px, 30), Color.Black);
-                px += dx;
-            }
-
-            spriteBatch.End();
+            Scene.Draw(spriteBatch, gameTime);
 
             base.Draw(gameTime);
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShootMan.Scene
 {
-    public class BattleBuilder
+    public class BattleSceneBuilder
     {
 
     }

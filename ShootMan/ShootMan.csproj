@@ -42,7 +42,7 @@
     <Compile Include="Draw\Sprites.cs" />
     <Compile Include="Player\CharacterFactory.cs" />
     <Compile Include="Player\ECharacterType.cs" />
-    <Compile Include="Scene\Battle.cs" />
+    <Compile Include="Scene\BattleScene.cs" />
     <Compile Include="Colision\IHittable.cs" />
     <Compile Include="Colision\EColisionLayer.cs" />
     <Compile Include="Colision\EColisionType.cs" />
@@ -51,7 +51,7 @@
     <Compile Include="Draw\DrawableObject.cs" />
     <Compile Include="Draw\Sprite.cs" />
     <Compile Include="IMapObject.cs" />
-    <Compile Include="Scene\BattleBuilder.cs" />
+    <Compile Include="Scene\BattleSceneBuilder.cs" />
     <Compile Include="Scene\IScene.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="Move\EProjectilType.cs" />
