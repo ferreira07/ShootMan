@@ -40,6 +40,8 @@
   <ItemGroup>
     <Compile Include="Draw\ESprite.cs" />
     <Compile Include="Draw\Sprites.cs" />
+    <Compile Include="Map\BattleMapBuilder.cs" />
+    <Compile Include="Map\MapObject.cs" />
     <Compile Include="Player\CharacterFactory.cs" />
     <Compile Include="Player\ECharacterType.cs" />
     <Compile Include="Scene\BattleScene.cs" />
@@ -50,10 +52,10 @@
     <Compile Include="Colision\Wall.cs" />
     <Compile Include="Draw\DrawableObject.cs" />
     <Compile Include="Draw\Sprite.cs" />
-    <Compile Include="IMapObject.cs" />
+    <Compile Include="Map\IMapObject.cs" />
     <Compile Include="Scene\BattleSceneBuilder.cs" />
     <Compile Include="Scene\IScene.cs" />
-    <Compile Include="Map.cs" />
+    <Compile Include="Map\BattleMap.cs" />
     <Compile Include="Move\EProjectilType.cs" />
     <Compile Include="Move\MoveTo.cs" />
     <Compile Include="Move\MovingObject.cs" />

@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace ShootMan
 {
-    public class Map
+    public class BattleMap
     {
         public List<IColider> ColisionObjects { get; private set; }
         public List<IMapObject> MapObjects { get; private set; }
         public List<Character> Characters { get; private set; }
 
-        public Map()
+        public BattleMap()
         {
             ColisionObjects = new List<IColider>();
             MapObjects = new List<IMapObject>();

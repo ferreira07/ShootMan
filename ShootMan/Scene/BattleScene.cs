@@ -13,7 +13,7 @@ namespace ShootMan
 {
     public class BattleScene : IScene
     {
-        public Map Map;
+        public BattleMap Map;
 
 
 

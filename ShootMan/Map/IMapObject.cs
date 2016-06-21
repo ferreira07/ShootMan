@@ -9,6 +9,6 @@ namespace ShootMan
     public interface IMapObject
     {
         int Id { get; }
-        Map Map { get; set; }
+        BattleMap Map { get; set; }
     }
 }

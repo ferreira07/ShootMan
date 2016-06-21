@@ -19,6 +19,14 @@ namespace ShootMan.Move
 
         public int DamageAmmount { get; internal set; }
 
+        public override EColisionLayer ColisionLayer
+        {
+            get
+            {
+                return EColisionLayer.Floating;
+            }
+        }
+
         public override void Damage(int ammount)
         {
             throw new NotImplementedException();

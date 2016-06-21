@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ShootMan.Colision;
 using ShootMan.Draw;
+using ShootMan.Map;
 using ShootMan.Move;
 using ShootMan.Player;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace ShootMan
         
         public IScene Scene { get; set; }
 
-        public Map Map { get; set; }
+        public BattleMap Map { get; set; }
 
         public const int WIDTH = 800;
         public const int HEIGHT = 600;
@@ -53,36 +54,11 @@ namespace ShootMan
 
             Sprites.Load(Content);
 
-
-            Scene = new BattleScene() { Map = BuildMap() };
-        }
-
-        private Map BuildMap()
-        {
-            //TODO Carregar o mapa mais desacoplado
-            Character p = CharacterFactory.CreateCharacter(ECharacterType.Fulano, new Vector2(100, 150), new JoypadController(0));
-            Character p1 = CharacterFactory.CreateCharacter(ECharacterType.Beltrano, new Vector2(200, 150), new JoypadController(1));
-            Character p2 = CharacterFactory.CreateCharacter(ECharacterType.Siclano, new Vector2(300, 150), new KeyboardController());
-
-            Map Map = new Map();
-            Map.Add(p);
-            Map.Add(p1);
-            Map.Add(p2);
-
-            Texture2D texture = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
-            texture.SetData(new Color[] { Color.Green });
-            Sprite s = new Sprite() { Texture = texture, SourceRectangle = new Rectangle(0, 0, 1, 1) };
-            for (int i = 0; i < 25; i++)
-            {
-                Map.Add(new Wall(s, new Rectangle(32 * i, 90, 32, 32)));
-                Map.Add(new Wall(s, new Rectangle(32 * i, 90 + 15 * 32, 32, 32)));
-            }
-            for (int i = 0; i < 14; i++)
-            {
-                Map.Add(new Wall(s, new Rectangle(0, 122 + 32 * i, 32, 32)));
-                Map.Add(new Wall(s, new Rectangle(24 * 32, 122 + 32 * i, 32, 32)));
-            }
-            return Map;
+            BattleMapBuilder builder = new BattleMapBuilder();
+            builder.AddCharacter(ECharacterType.Fulano, new JoypadController(0));
+            builder.AddCharacter(ECharacterType.Beltrano, new JoypadController(1));
+            builder.AddCharacter(ECharacterType.Siclano, new KeyboardController());
+            Scene = new BattleScene() { Map = builder.BuildMap() };
         }
 
         /// <summary>

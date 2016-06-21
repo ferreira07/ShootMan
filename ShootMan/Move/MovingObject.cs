@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using ShootMan.Colision;
 using ShootMan.Draw;
+using ShootMan.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,19 +10,11 @@ using System.Threading.Tasks;
 
 namespace ShootMan.Move
 {
-    public abstract class MovingObject : DrawableObject, IColider, IMapObject
+    public abstract class MovingObject : MapObject
     {
-        public Rectangle ColisionRectangle { get; set; }
-
-        public EColisionLayer ColisionLayer { get; set; }
-
-        public virtual EColisionType ColisionType { get; }
-
         public float MaxSpeed { get; set; }
 
         public Vector2 Speed { get; set; }
-
-        public Map Map { get; set; }
 
         protected void AttemptToMove(float x, float y)
         {
@@ -81,8 +74,6 @@ namespace ShootMan.Move
                 AttemptToMove(x, y);
             }
         }
-
-        public abstract void Damage(int ammount);
 
         public virtual void OnColide(IColider c)
         {

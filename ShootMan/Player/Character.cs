@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using ShootMan.Colision;
 using ShootMan.Draw;
+using ShootMan.Map;
 using ShootMan.Move;
 using System;
 using System.Collections.Generic;
@@ -32,6 +33,16 @@ namespace ShootMan.Player
             return StartChargeShoot != TimeSpan.Zero && StartChargeShoot + TimeSpan.FromSeconds(1)< time;
         }
         private TimeSpan StartChargeShoot { get; set; }
+
+
+        public override EColisionLayer ColisionLayer
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         private Vector2 FacingDirection;
 
         private bool _CanShoot;
