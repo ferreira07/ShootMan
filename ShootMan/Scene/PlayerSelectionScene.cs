@@ -47,9 +47,14 @@ namespace ShootMan.Scene
         public void Update(GameTime gameTime)
         {
             TryAddNewPlayer();
-            foreach (var player in Players)
+            foreach (var player in Players.ToArray())
             {
+                bool readToRemove = !player.Confirmed;
                 player.Update();
+                if(readToRemove && player.Controller.Action(EControllerButton.Cancel))
+                {
+                    Players.Remove(player);
+                }
             }
             if (IsComplete())
             {

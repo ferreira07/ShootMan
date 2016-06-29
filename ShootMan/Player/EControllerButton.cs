@@ -11,6 +11,8 @@ namespace ShootMan.Player
         Fire,
         StartCharge,
         LeftPressed,
-        RightPressed
+        RightPressed,
+        Pause,
+        Cancel
     }
 }

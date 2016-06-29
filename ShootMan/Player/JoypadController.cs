@@ -38,15 +38,25 @@ namespace ShootMan.Player
                 bool old = oldState != null ? oldState.IsButtonDown(Buttons.A) : false;
                 return old && state.IsButtonUp(Buttons.A);
             }
-            if (type == EControllerButton.LeftPressed)
+            else if (type == EControllerButton.LeftPressed)
             {
                 bool old = oldState != null ? oldState.IsButtonDown(Buttons.DPadLeft) : false;
                 return old && state.IsButtonUp(Buttons.DPadLeft);
             }
-            if (type == EControllerButton.RightPressed)
+            else if (type == EControllerButton.RightPressed)
             {
                 bool old = oldState != null ? oldState.IsButtonDown(Buttons.DPadRight) : false;
                 return old && state.IsButtonUp(Buttons.DPadRight);
+            }
+            else if (type == EControllerButton.Pause)
+            {
+                bool old = oldState != null ? oldState.IsButtonDown(Buttons.Start) : false;
+                return old && state.IsButtonUp(Buttons.Start);
+            }
+            else if (type == EControllerButton.Cancel)
+            {
+                bool old = oldState != null ? oldState.IsButtonDown(Buttons.B) : false;
+                return old && state.IsButtonUp(Buttons.B);
             }
             else if (type == EControllerButton.StartCharge)
             {

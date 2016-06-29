@@ -58,6 +58,7 @@
     <Compile Include="Draw\DrawableObject.cs" />
     <Compile Include="Draw\Sprite.cs" />
     <Compile Include="Map\IMapObject.cs" />
+    <Compile Include="Scene\EBattleSceneState.cs" />
     <Compile Include="Scene\IScene.cs" />
     <Compile Include="Map\BattleMap.cs" />
     <Compile Include="Move\EProjectilType.cs" />

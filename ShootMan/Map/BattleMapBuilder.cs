@@ -66,7 +66,7 @@ namespace ShootMan.Map
             }
             AddRandomBarrier(EBarrierType.BasicBarrier, 10);
 
-            Map.SetTime(TimeSpan.FromMinutes(0.2));
+            Map.SetTime(TimeSpan.FromMinutes(2));
 
             return Map;
         }

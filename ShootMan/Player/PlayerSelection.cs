@@ -23,6 +23,10 @@ namespace ShootMan.Player
             {
                 Confirmed = true;
             }
+            if (Controller.Action(EControllerButton.Cancel))
+            {
+                Confirmed = false;
+            }
             if (!Confirmed)
             {
                 if (Controller.Action(EControllerButton.LeftPressed))

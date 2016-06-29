@@ -14,10 +14,10 @@ namespace ShootMan.Scene
     public class BattleScene : IScene
     {
         public BattleMap Map;
-
+        private EBattleSceneState State = EBattleSceneState.Ready;
         private bool IsGameOver()
         {
-            
+
             return !(Map.Characters.Where(c => c.Hp > 0).Count() > 1) || Map.RemainTime == TimeSpan.Zero;
         }
 
@@ -47,19 +47,58 @@ namespace ShootMan.Scene
 
         public void Update(GameTime gameTime)
         {
-            Map.PassTime(gameTime.ElapsedGameTime);
-            if (IsGameOver())
+            if (State == EBattleSceneState.Ready)
             {
-                EndBattle();
+                State = EBattleSceneState.Runing;
             }
-            else
+            else if (State == EBattleSceneState.Runing)
             {
-
-                foreach (var item in Map.MapObjects.Where(d => d is MovingObject).Select(d => d as MovingObject).ToList())
+                Map.PassTime(gameTime.ElapsedGameTime);
+                if (IsGameOver())
                 {
-                    item.Update(gameTime);
+                    State = EBattleSceneState.Ending;
+                }
+                else
+                {
+                    foreach (var item in Map.MapObjects.Where(d => d is MovingObject).Select(d => d as MovingObject).ToList())
+                    {
+                        item.Update(gameTime);
+                    }
+                    foreach (var control in Map.Characters.Select(c=>c.Controller))
+                    {
+                        if (control.Action(EControllerButton.Pause))
+                        {
+                            State = EBattleSceneState.Paused;
+                        }
+                    }
                 }
             }
+            else if(State == EBattleSceneState.Paused)
+            {
+                foreach (var control in Map.Characters.Select(c => c.Controller))
+                {
+                    control.UpdateState();
+                    if (control.Action(EControllerButton.Pause) || 
+                        control.Action(EControllerButton.Cancel))
+                    {
+                        State = EBattleSceneState.Runing;
+                    }
+                }
+            }
+            else if (State == EBattleSceneState.Ending)
+            {
+                foreach (var control in Map.Characters.Select(c => c.Controller))
+                {
+                    control.UpdateState();
+                    if (control.Action(EControllerButton.Pause) ||
+                        control.Action(EControllerButton.Cancel) ||
+                        control.Action(EControllerButton.Fire))
+                    {
+                        EndBattle();
+                    }
+                }
+            }
+
         }
 
         private void EndBattle()

@@ -15,6 +15,8 @@ namespace ShootMan.Player
         public Keys Left { get; set; }
         public Keys Right { get; set; }
         public Keys Fire { get; set; }
+        public Keys Pause { get; set; }
+        public Keys Cancel { get; set; }
 
         public KeyboardController()
         {
@@ -23,6 +25,8 @@ namespace ShootMan.Player
             Left = Keys.A;
             Right = Keys.D;
             Fire = Keys.Down;
+            Pause = Keys.Enter;
+            Cancel = Keys.Escape;
         }
 
         private KeyboardState oldState;
@@ -60,15 +64,25 @@ namespace ShootMan.Player
                 bool old = oldState != null ? oldState.IsKeyDown(Fire) : false;
                 return old && state.IsKeyUp(Fire);
             }
-            if (type == EControllerButton.LeftPressed)
+            else if (type == EControllerButton.LeftPressed)
             {
                 bool old = oldState != null ? oldState.IsKeyDown(Left) : false;
                 return old && state.IsKeyUp(Left);
             }
-            if (type == EControllerButton.RightPressed)
+            else if (type == EControllerButton.RightPressed)
             {
                 bool old = oldState != null ? oldState.IsKeyDown(Right) : false;
                 return old && state.IsKeyUp(Right);
+            }
+            else if (type == EControllerButton.Pause)
+            {
+                bool old = oldState != null ? oldState.IsKeyDown(Pause) : false;
+                return old && state.IsKeyUp(Pause);
+            }
+            else if (type == EControllerButton.Cancel)
+            {
+                bool old = oldState != null ? oldState.IsKeyDown(Cancel) : false;
+                return old && state.IsKeyUp(Cancel);
             }
             else if (type == EControllerButton.StartCharge)
             {
