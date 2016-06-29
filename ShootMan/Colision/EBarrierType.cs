@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ShootMan.Scene
+namespace ShootMan.Colision
 {
-    public class BattleSceneBuilder
+    public enum EBarrierType
     {
-
+        BasicBarrier
     }
 }

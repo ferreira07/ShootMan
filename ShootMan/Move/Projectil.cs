@@ -38,7 +38,7 @@ namespace ShootMan.Move
             {
                 Map.Remove(this);
             }
-            if (c is Character)
+            if (c is Character || c is Barrier)
             {
                 //TODO calcular Dano
                 c.Damage(DamageAmmount);

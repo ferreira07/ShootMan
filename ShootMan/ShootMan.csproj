@@ -38,12 +38,17 @@
     <ApplicationIcon>Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Colision\Barrier.cs" />
+    <Compile Include="Colision\BarrierFactory.cs" />
+    <Compile Include="Colision\EBarrierType.cs" />
     <Compile Include="Draw\ESprite.cs" />
     <Compile Include="Draw\Sprites.cs" />
     <Compile Include="Map\BattleMapBuilder.cs" />
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Player\CharacterFactory.cs" />
     <Compile Include="Player\ECharacterType.cs" />
+    <Compile Include="Player\EControllerType.cs" />
+    <Compile Include="Player\PlayerSelection.cs" />
     <Compile Include="Scene\BattleScene.cs" />
     <Compile Include="Colision\IHittable.cs" />
     <Compile Include="Colision\EColisionLayer.cs" />
@@ -53,7 +58,6 @@
     <Compile Include="Draw\DrawableObject.cs" />
     <Compile Include="Draw\Sprite.cs" />
     <Compile Include="Map\IMapObject.cs" />
-    <Compile Include="Scene\BattleSceneBuilder.cs" />
     <Compile Include="Scene\IScene.cs" />
     <Compile Include="Map\BattleMap.cs" />
     <Compile Include="Move\EProjectilType.cs" />
@@ -65,6 +69,7 @@
     <Compile Include="Player\IController.cs" />
     <Compile Include="Player\JoypadController.cs" />
     <Compile Include="Player\KeyboardController.cs" />
+    <Compile Include="Scene\PlayerSelectionScene.cs" />
     <Compile Include="ShootMan.cs" />
     <Compile Include="Player\Character.cs" />
     <Compile Include="Program.cs" />

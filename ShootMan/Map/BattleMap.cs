@@ -12,6 +12,7 @@ namespace ShootMan
 {
     public class BattleMap
     {
+        public TimeSpan RemainTime { get; private set; }
         public List<IColider> ColisionObjects { get; private set; }
         public List<IMapObject> MapObjects { get; private set; }
         public List<Character> Characters { get; private set; }
@@ -37,20 +38,24 @@ namespace ShootMan
             {
                 Characters.Add(character);
             }
-
-            MovingObject movingObject = obj as MovingObject;
-            if(movingObject!= null)
-            {
-                movingObject.Map = this;
-            }
+            obj.Map = this;
         }
-
+        public void SetTime(TimeSpan time)
+        {
+            RemainTime = time;
+        }
         internal void Remove(IMapObject obj)
         {
             MapObjects.Remove(obj);
             ColisionObjects.Remove(obj as IColider);
 
             //Não remover da lista de personagens
+        }
+
+        internal void PassTime(TimeSpan elapsedGameTime)
+        {
+            RemainTime -= elapsedGameTime;
+            if (RemainTime <= TimeSpan.Zero) RemainTime = TimeSpan.Zero;
         }
     }
 }

@@ -9,6 +9,7 @@ namespace ShootMan.Player
 {
     public interface IController
     {
+        EControllerType ControllerType { get; }
         void UpdateState();
         Vector2 Direction();
         bool Action(EControllerButton type);

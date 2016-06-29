@@ -6,6 +6,7 @@ using ShootMan.Draw;
 using ShootMan.Map;
 using ShootMan.Move;
 using ShootMan.Player;
+using ShootMan.Scene;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -54,11 +55,15 @@ namespace ShootMan
 
             Sprites.Load(Content);
 
-            BattleMapBuilder builder = new BattleMapBuilder();
-            builder.AddCharacter(ECharacterType.Fulano, new JoypadController(0));
-            builder.AddCharacter(ECharacterType.Beltrano, new JoypadController(1));
-            builder.AddCharacter(ECharacterType.Siclano, new KeyboardController());
-            Scene = new BattleScene() { Map = builder.BuildMap() };
+            Scene = new PlayerSelectionScene();
+
+            Scene.ChangeScene += changeScene;
+        }
+        private void changeScene(object sender, IScene scene)
+        {
+            Scene.ChangeScene -= changeScene;
+            Scene = scene;
+            Scene.ChangeScene += changeScene;
         }
 
         /// <summary>

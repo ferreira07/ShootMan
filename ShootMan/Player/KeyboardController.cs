@@ -27,6 +27,13 @@ namespace ShootMan.Player
 
         private KeyboardState oldState;
         private KeyboardState state;
+
+
+        public EControllerType ControllerType
+        {
+            get { return EControllerType.Keyboard; }
+        }
+
         public void UpdateState()
         {
             oldState = state;
@@ -52,6 +59,16 @@ namespace ShootMan.Player
             {
                 bool old = oldState != null ? oldState.IsKeyDown(Fire) : false;
                 return old && state.IsKeyUp(Fire);
+            }
+            if (type == EControllerButton.LeftPressed)
+            {
+                bool old = oldState != null ? oldState.IsKeyDown(Left) : false;
+                return old && state.IsKeyUp(Left);
+            }
+            if (type == EControllerButton.RightPressed)
+            {
+                bool old = oldState != null ? oldState.IsKeyDown(Right) : false;
+                return old && state.IsKeyUp(Right);
             }
             else if (type == EControllerButton.StartCharge)
             {

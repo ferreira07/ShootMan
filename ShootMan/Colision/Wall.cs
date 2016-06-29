@@ -31,7 +31,7 @@ namespace ShootMan.Colision
 
         public override void Damage(int ammount)
         {
-            //Não faz nada
+            // Faz nada
         }
     }
 }

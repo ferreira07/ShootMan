@@ -18,7 +18,7 @@ namespace ShootMan.Player
             {
                 case ECharacterType.Fulano:
                     ret = new Character(Sprites.GetSprite(ESprite.char1), controller);
-                    ret.Position = position;
+                    ret.Position = position - new Vector2(16,16);
                     ret.SetDrawPosition(0, 16);
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();
@@ -27,7 +27,7 @@ namespace ShootMan.Player
                     break;
                 case ECharacterType.Beltrano:
                     ret = new Character(Sprites.GetSprite(ESprite.char2), controller);
-                    ret.Position = position;
+                    ret.Position = position - new Vector2(16, 16);
                     ret.SetDrawPosition(0, 16);
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();
@@ -36,7 +36,7 @@ namespace ShootMan.Player
                     break;
                 case ECharacterType.Siclano:
                     ret = new Character(Sprites.GetSprite(ESprite.char3), controller);
-                    ret.Position = position;
+                    ret.Position = position - new Vector2(16, 16);
                     ret.SetDrawPosition(0, 16);
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();

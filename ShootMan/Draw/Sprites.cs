@@ -19,6 +19,12 @@ namespace ShootMan.Draw
             _SpriteDict.Add(ESprite.char1, Load(content, "Images\\char0"));
             _SpriteDict.Add(ESprite.char2, Load(content, "Images\\char1"));
             _SpriteDict.Add(ESprite.char3, Load(content, "Images\\char2"));
+            _SpriteDict.Add(ESprite.Title, Load(content, "Images\\titulo"));
+
+            List<Sprite> barrier = LoadList(content, "Images\\Barrier1", new Rectangle(0,0,32,32), new Rectangle(32, 0, 32, 32));
+            _SpriteDict.Add(ESprite.barrier11, barrier[0]);
+            _SpriteDict.Add(ESprite.barrier12, barrier[1]);
+
         }
 
         private static Sprite Load(ContentManager content, string imagePath)
@@ -28,6 +34,19 @@ namespace ShootMan.Draw
                 Texture = content.Load<Texture2D>(imagePath),
                 SourceRectangle = new Rectangle(0, 0, 32, 48)
             };
+        }
+        private static List<Sprite> LoadList(ContentManager content, string imagePath, params Rectangle[] sourceRectangles)
+        {
+            List<Sprite> ret = new List<Sprite>();
+            foreach (var sourceRectangle in sourceRectangles)
+            {
+                ret.Add(new Sprite()
+                {
+                    Texture = content.Load<Texture2D>(imagePath),
+                    SourceRectangle = sourceRectangle
+                });
+            }
+            return ret;
         }
 
         public static Sprite GetSprite(ESprite spriteType)

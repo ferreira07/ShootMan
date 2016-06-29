@@ -18,6 +18,11 @@ namespace ShootMan.Player
 
         public int GamePadIndex { get; private set; }
 
+        public EControllerType ControllerType
+        {
+            get { return EControllerType.Joypad; }
+        }
+
         private GamePadState oldState;
         private GamePadState state;
         public void UpdateState()
@@ -32,7 +37,18 @@ namespace ShootMan.Player
             {
                 bool old = oldState != null ? oldState.IsButtonDown(Buttons.A) : false;
                 return old && state.IsButtonUp(Buttons.A);
-            }else if (type == EControllerButton.StartCharge)
+            }
+            if (type == EControllerButton.LeftPressed)
+            {
+                bool old = oldState != null ? oldState.IsButtonDown(Buttons.DPadLeft) : false;
+                return old && state.IsButtonUp(Buttons.DPadLeft);
+            }
+            if (type == EControllerButton.RightPressed)
+            {
+                bool old = oldState != null ? oldState.IsButtonDown(Buttons.DPadRight) : false;
+                return old && state.IsButtonUp(Buttons.DPadRight);
+            }
+            else if (type == EControllerButton.StartCharge)
             {
                 bool old = oldState != null ? oldState.IsButtonUp(Buttons.A) : false;
                 return old && state.IsButtonDown(Buttons.A);
@@ -42,8 +58,20 @@ namespace ShootMan.Player
 
         public Vector2 Direction()
         {
-            return state.ThumbSticks.Left;
-            //TODO verificar os direcionais
+            Vector2 v = state.ThumbSticks.Left;
+            if (v == Vector2.Zero)
+            {
+                int x = 0;
+                int y = 0;
+                if (state.IsButtonDown(Buttons.DPadUp)) y += 1;
+                if (state.IsButtonDown(Buttons.DPadDown)) y -= 1;
+                if (state.IsButtonDown(Buttons.DPadLeft)) x -= 1;
+                if (state.IsButtonDown(Buttons.DPadRight)) x += 1;
+
+                v = new Vector2(x, y);
+                if (v != Vector2.Zero) v.Normalize();
+            }
+            return v;
         }
     }
 }

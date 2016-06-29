@@ -10,6 +10,9 @@ namespace ShootMan.Draw
     {
         char1,
         char2,
-        char3
+        char3,
+        Title,
+        barrier11,
+        barrier12
     }
 }

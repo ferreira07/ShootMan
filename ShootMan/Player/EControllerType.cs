@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace ShootMan.Player
 {
-    public enum EControllerButton
+    public enum EControllerType
     {
-        Fire,
-        StartCharge,
-        LeftPressed,
-        RightPressed
+        Keyboard,
+        Joypad
     }
 }
