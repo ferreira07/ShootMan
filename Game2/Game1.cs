@@ -1,37 +1,28 @@
-﻿using GameEngine.Draw;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using GameEngine.Map;
-using GameEngine.Move;
-using GameEngine.Player;
-using GameEngine.Scene;
-using System.Collections.Generic;
-using System.Linq;
-using GameEngine.Impl.Scene;
 
-namespace ShootMan
+namespace Game2
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
-    public class ShootMan : Game
+    public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
-        public IScene Scene { get; set; }
 
-        public BattleMap Map { get; set; }
-
-        public const int WIDTH = 800;
-        public const int HEIGHT = 600;
-
-        public ShootMan()
+        public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+
+            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferWidth = 800;
+            graphics.PreferredBackBufferHeight = 480;
+            graphics.SupportedOrientations = DisplayOrientation.LandscapeLeft | DisplayOrientation.LandscapeRight;
         }
+
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
         /// This is where it can query for any required services and load any non-graphic
@@ -40,25 +31,9 @@ namespace ShootMan
         /// </summary>
         protected override void Initialize()
         {
+            // TODO: Add your initialization logic here
+
             base.Initialize();
-            
-            graphics.PreferredBackBufferWidth = WIDTH;
-            graphics.PreferredBackBufferHeight = HEIGHT;
-            //graphics.IsFullScreen = true;
-            graphics.ApplyChanges();
-
-            Sprites.Load(Content);
-            Fonts.Load(Content);
-
-            Scene = new PlayerSelectionScene();
-
-            Scene.ChangeScene += changeScene;
-        }
-        private void changeScene(object sender, IScene scene)
-        {
-            Scene.ChangeScene -= changeScene;
-            Scene = scene;
-            Scene.ChangeScene += changeScene;
         }
 
         /// <summary>
@@ -68,7 +43,7 @@ namespace ShootMan
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
-            spriteBatch = new SpriteBatch(GraphicsDevice);            
+            spriteBatch = new SpriteBatch(GraphicsDevice);
 
             // TODO: use this.Content to load your game content here
         }
@@ -89,7 +64,10 @@ namespace ShootMan
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
-            Scene.Update(gameTime);
+            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
+                Exit();
+
+            // TODO: Add your update logic here
 
             base.Update(gameTime);
         }
@@ -100,9 +78,9 @@ namespace ShootMan
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.White);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            Scene.Draw(spriteBatch, gameTime);
+            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
