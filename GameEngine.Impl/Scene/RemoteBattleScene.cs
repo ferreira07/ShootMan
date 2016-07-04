@@ -21,14 +21,12 @@ namespace GameEngine.Impl.Scene
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             //GetStatus();
-            //
             throw new NotImplementedException();
         }
 
         public void Update(GameTime gameTime)
         {
             //SetControllerStatus();
-            //
             throw new NotImplementedException();
         }
     }
