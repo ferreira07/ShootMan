@@ -41,11 +41,16 @@
     <Compile Include="Colision\IColider.cs" />
     <Compile Include="Colision\IHittable.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="Draw\BreakableSprite.cs" />
+    <Compile Include="Draw\DamageChangeSprite.cs" />
     <Compile Include="Draw\DrawableObject.cs" />
     <Compile Include="Draw\EFontType.cs" />
+    <Compile Include="Draw\ESpriteChangeType.cs" />
     <Compile Include="Draw\ESpriteType.cs" />
     <Compile Include="Draw\Fonts.cs" />
+    <Compile Include="Draw\IDamageChangeSprite.cs" />
+    <Compile Include="Draw\IFacingChangeSprite.cs" />
+    <Compile Include="Draw\IMoveChangeSprite.cs" />
+    <Compile Include="Draw\ITimeChangeSprite.cs" />
     <Compile Include="Draw\Sprite.cs" />
     <Compile Include="Draw\SpriteList.cs" />
     <Compile Include="Draw\Sprites.cs" />

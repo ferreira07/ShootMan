@@ -55,15 +55,11 @@ namespace GameEngine.Impl.Colision
 
         private void SelectSprite()
         {
-            double percent = 1.0*(Hp) / MaxHp;
-            BreakableSprite bs = this.Sprite as BreakableSprite;
-            if ( bs != null)
+            double damagePercent = 1.0*(MaxHp - Hp) / MaxHp;
+            if ( this.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Damage))
             {
-                bs.SetState(percent);
+                (this.Sprite as IDamageChangeSprite).SetDamagePercent(damagePercent);
             }
-            //Sprite
-            //int pos = (int)Math.Min(Math.Floor(percent * this.Sprites.Count()), this.Sprites.Count() - 1);
-            //this.Sprite = Sprites[pos];
         }
     }
 }

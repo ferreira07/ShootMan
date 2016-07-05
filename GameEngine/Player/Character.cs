@@ -62,8 +62,15 @@ namespace GameEngine.Player
 
             Vector2 v = Controller.Direction();
 
-            if (v != Vector2.Zero) FacingDirection = v;
 
+            if (v != Vector2.Zero)
+            {
+                FacingDirection = v;
+                if (this.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Facing))
+                {
+                    (Sprite as IFacingChangeSprite).SetFacing(FacingDirection);
+                }
+            }
             if (Controller.Action(EControllerButton.Fire) && CanShoot(gameTime.TotalGameTime))
             {
                 //criar um novo projétil
@@ -81,6 +88,11 @@ namespace GameEngine.Player
             }
             Speed = v * MaxSpeed;
             base.Update(gameTime);
+
+            if (this.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Time))
+            {
+                (Sprite as ITimeChangeSprite).PassTime(gameTime.ElapsedGameTime);
+            }
         }
         
         private bool CanShoot(TimeSpan timeSpan)

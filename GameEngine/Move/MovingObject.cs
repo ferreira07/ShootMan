@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameEngine.Draw;
 
 namespace GameEngine.Move
 {
@@ -53,6 +54,10 @@ namespace GameEngine.Move
             if (!hasColision)
             {
                 Position = new Vector2(px, py);
+                if (this.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Move))
+                {
+                    (this.Sprite as IMoveChangeSprite).Move(new Vector2(x, y).Length());
+                }
                 UpdateRectangle();
             }
         }        
@@ -65,7 +70,7 @@ namespace GameEngine.Move
 
         public virtual void Update(GameTime gameTime)
         {
-            if (Speed.X != 0 || Speed.Y != 0)
+            if (Speed!=Vector2.Zero)
             {
                 float x = Speed.X * gameTime.ElapsedGameTime.Milliseconds / 1000;
                 float y = -Speed.Y * gameTime.ElapsedGameTime.Milliseconds / 1000;

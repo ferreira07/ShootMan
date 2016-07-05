@@ -47,9 +47,9 @@ namespace GameEngine.Draw
                 SourceRectangle = new Rectangle(0, 0, w, h)
             };
         }
-        private static BreakableSprite LoadList(ContentManager content, string imagePath, params Rectangle[] sourceRectangles)
+        private static DamageChangeSprite LoadList(ContentManager content, string imagePath, params Rectangle[] sourceRectangles)
         {
-            BreakableSprite ret = new BreakableSprite()
+            DamageChangeSprite ret = new DamageChangeSprite()
             {
                 Texture = content.Load<Texture2D>(imagePath),
                 Positions = sourceRectangles,

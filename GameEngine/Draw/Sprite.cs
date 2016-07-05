@@ -12,7 +12,10 @@ namespace GameEngine.Draw
     {
         public Texture2D Texture { get; set; }
         public Rectangle SourceRectangle { get; set; }
-
+        public virtual ESpriteChangeType SpriteChangeType
+        {
+            get { return ESpriteChangeType.None; }
+        }
         public virtual Sprite Clone()
         {
             return new Sprite()
