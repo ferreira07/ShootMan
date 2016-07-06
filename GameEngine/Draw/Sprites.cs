@@ -24,6 +24,8 @@ namespace GameEngine.Draw
             _SpriteDict.Add(ESpriteType.Bullet2, Load(content, "Images\\bullet2", 20));
             _SpriteDict.Add(ESpriteType.Fireball, LoadTimeAnimated(content, "Images\\fireball", 16,16,4, 0.3f));
 
+            _SpriteDict.Add(ESpriteType.Crate, Load(content, "Images\\crate", 32));
+            _SpriteDict.Add(ESpriteType.RedGem, LoadTimeAnimated(content, "Images\\RedGem", 14,14,4, 1));
             _SpriteDict.Add(ESpriteType.barrier11, LoadList(content, "Images\\Barrier1", new Rectangle(0,0,32,32), new Rectangle(32, 0, 32, 32)));
         }
 

@@ -72,10 +72,14 @@
     <Compile Include="Player\ECharacterType.cs" />
     <Compile Include="Player\EControllerAction.cs" />
     <Compile Include="Player\EControllerType.cs" />
+    <Compile Include="Player\EPowerUpType.cs" />
     <Compile Include="Player\IController.cs" />
+    <Compile Include="Player\IPowerUp.cs" />
     <Compile Include="Player\JoypadController.cs" />
     <Compile Include="Player\KeyboardController.cs" />
     <Compile Include="Player\PlayerSelection.cs" />
+    <Compile Include="Player\PowerUp.cs" />
+    <Compile Include="Player\PowerUpFactory.cs" />
     <Compile Include="Player\ProjectilAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene\EBattleSceneState.cs" />

@@ -1,6 +1,7 @@
 ﻿using GameEngine.Colision;
 using GameEngine.Draw;
 using GameEngine.Map;
+using GameEngine.Player;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,9 @@ namespace GameEngine.Impl.Colision
             {
                 case EBarrierType.BasicBarrier: 
                     ret = new Barrier(position, 50, Sprites.GetSprite(ESpriteType.barrier11));
+                    break;
+                case EBarrierType.Box:
+                    ret = new Box(position, 10, Sprites.GetSprite(ESpriteType.Crate), EPowerUpType.Hp);
                     break;
                 case EBarrierType.Wall:
                     ret = new Wall(Sprites.GetSprite(ESpriteType.barrier11), position);

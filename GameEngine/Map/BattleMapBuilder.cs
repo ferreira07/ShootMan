@@ -44,9 +44,9 @@ namespace GameEngine.Map
             Map.Add(CharacterFactory.CreateCharacter(characterType, Positions[Map.Characters.Count], controller));
         }
         
+        static Random r = new Random();
         public void AddRandomBarrier(EBarrierType barrierType, int count)
         {
-            Random r = new Random();
             for (int i = 0; i < count; i++)
             {
                 int x = r.Next(MaxX - 1) + 1;
@@ -69,6 +69,8 @@ namespace GameEngine.Map
                 Map.Add(barrierFactory.CreateBarrier(EBarrierType.Wall, GetRectangle(0, i + 1)));
                 Map.Add(barrierFactory.CreateBarrier(EBarrierType.Wall, GetRectangle(MaxX, i + 1)));
             }
+
+            AddRandomBarrier(EBarrierType.Box, 4);
             AddRandomBarrier(EBarrierType.BasicBarrier, 10);
 
             Map.SetTime(TimeSpan.FromMinutes(2));

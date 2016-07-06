@@ -16,6 +16,8 @@ namespace GameEngine.Draw
         barrier12,
         Bullet,
         Bullet2,
-        Fireball
+        Fireball,
+        RedGem,
+        Crate
     }
 }

@@ -30,7 +30,7 @@ namespace GameEngine.Impl.Scene
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             spriteBatch.Begin();
-            IEnumerable<DrawableObject> objs = Map.MapObjects.Where(c => c is DrawableObject).Select(o => o as DrawableObject).OrderBy(o => o.Position.Y);
+            IEnumerable<DrawableObject> objs = Map.DrawableObjects.OrderBy(o => o.Position.Y);
             foreach (var item in objs)
             {
                 item.Draw(spriteBatch);
@@ -43,8 +43,8 @@ namespace GameEngine.Impl.Scene
             {
                 if (!c.IsDead)
                 {
-                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), c.Hp.ToString(), new Vector2(px, 25), Color.Black);
-                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), c.Mp.ToString(), new Vector2(px, 50), Color.Blue);
+                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), c.Hp.ToString(), new Vector2(px, 20), Color.Black);
+                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), c.Mp.ToString(), new Vector2(px, 40), Color.Blue);
                 }
                 px += dx;
             }
@@ -67,10 +67,20 @@ namespace GameEngine.Impl.Scene
                 }
                 else
                 {
-                    foreach (var item in Map.MapObjects.Where(d => d is MovingObject).Select(d => d as MovingObject).ToList())
+                    foreach (var item in Map.DrawableObjects.ToList())
                     {
-                        item.Update(gameTime);
+                        var moveObject = item as MovingObject;
+
+                        if (moveObject != null)
+                        {
+                            moveObject.Update(gameTime);
+                        }
+                        if (item.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Time))
+                        {
+                            (item.Sprite as ITimeChangeSprite).PassTime(gameTime.ElapsedGameTime);
+                        }
                     }
+
                     foreach (var control in Map.Characters.Select(c=>c.Controller))
                     {
                         if (control.Action(EControllerAction.Pause))

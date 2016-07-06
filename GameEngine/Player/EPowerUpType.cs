@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Colision
+namespace GameEngine.Player
 {
-    public enum EBarrierType
+    public enum EPowerUpType
     {
-        BasicBarrier,
-        Wall,
-        Box
+        Nothing,
+        Hp,
+        Mp,
+        Speed
     }
 }

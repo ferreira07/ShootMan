@@ -77,11 +77,6 @@ namespace GameEngine.Move
 
                 AttemptToMove(x, y);
             }
-
-            if (this.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Time))
-            {
-                (Sprite as ITimeChangeSprite).PassTime(gameTime.ElapsedGameTime);
-            }
         }
 
         public virtual void OnColide(IColider c)

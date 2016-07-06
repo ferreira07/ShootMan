@@ -56,10 +56,6 @@
     <MonoGameContentReference Include="Content\Content.mgcb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Data\Data.csproj">
-      <Project>{bebcf4af-bd4d-4e4c-826e-a8e704efd7f6}</Project>
-      <Name>Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\GameEngine.Impl\GameEngine.Impl.csproj">
       <Project>{93450c31-3534-42ee-8ac8-96293eedbb13}</Project>
       <Name>GameEngine.Impl</Name>

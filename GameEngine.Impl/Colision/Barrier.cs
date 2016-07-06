@@ -48,12 +48,17 @@ namespace GameEngine.Impl.Colision
             if (Hp <= 0)
             {
                 Hp = 0;
-                //TODO comportamento adequado para barreira destruída
-                Map.Remove(this);
+                OnZeroHp();
             }
         }
 
-        private void SelectSprite()
+        protected virtual void OnZeroHp()
+        {
+            //TODO comportamento adequado para barreira destruída
+            Map.Remove(this);
+        }
+
+        protected void SelectSprite()
         {
             double damagePercent = 1.0*(MaxHp - Hp) / MaxHp;
             if ( this.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Damage))

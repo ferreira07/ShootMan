@@ -14,6 +14,7 @@ namespace GameEngine.Map
     {
         public TimeSpan RemainTime { get; private set; }
         public List<IColider> ColisionObjects { get; private set; }
+        public List<DrawableObject> DrawableObjects { get; private set; }
         public List<IMapObject> MapObjects { get; private set; }
         public List<Character> Characters { get; private set; }
 
@@ -22,6 +23,7 @@ namespace GameEngine.Map
             ColisionObjects = new List<IColider>();
             MapObjects = new List<IMapObject>();
             Characters = new List<Character>();
+            DrawableObjects = new List<DrawableObject>();
         }
 
         public void Add(IMapObject obj)
@@ -38,6 +40,12 @@ namespace GameEngine.Map
             {
                 Characters.Add(character);
             }
+            DrawableObject drawable = obj as DrawableObject;
+            if (drawable != null)
+            {
+                DrawableObjects.Add(drawable);
+            }
+            
             obj.Map = this;
         }
         public void SetTime(TimeSpan time)
@@ -48,7 +56,7 @@ namespace GameEngine.Map
         {
             MapObjects.Remove(obj);
             ColisionObjects.Remove(obj as IColider);
-
+            DrawableObjects.Remove(obj as DrawableObject);
             //Não remover da lista de personagens
         }
 

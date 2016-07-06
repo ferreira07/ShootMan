@@ -68,14 +68,14 @@ namespace GameEngine.Player
         }
         public void Recharge(TimeSpan time)
         {
-            RealMp += (float) (MpRechargeSpeed * time.TotalSeconds);
+            RealMp += (float)(MpRechargeSpeed * time.TotalSeconds);
             RealMp = Math.Min(RealMp, MaxMp);
         }
 
         public TimeSpan ShootTime { get; private set; }
         public bool IsCharged(TimeSpan time)
         {
-            return StartChargeShoot != TimeSpan.Zero && StartChargeShoot + TimeSpan.FromSeconds(1)< time;
+            return StartChargeShoot != TimeSpan.Zero && StartChargeShoot + TimeSpan.FromSeconds(1) < time;
         }
         private TimeSpan StartChargeShoot { get; set; }
 
@@ -89,16 +89,16 @@ namespace GameEngine.Player
         }
 
         public Vector2 FacingDirection { get; private set; }
-        
+
         public Character(Sprite sprite, IController controller)
-        {            
+        {
             Sprite = sprite;
             this.DrawRectangle = Sprite.SourceRectangle;
             UpdateRectangle();
             Controller = controller;
             ShootTime = TimeSpan.FromMilliseconds(200);
             Actions = new List<Action>();
-        }       
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -121,19 +121,26 @@ namespace GameEngine.Player
             {
                 action.Check();
             }
-            
+
             if (IsFatigated())
             {
                 FatigatedTime -= gameTime.ElapsedGameTime;
-                if(FatigatedTime < TimeSpan.Zero)
+                if (FatigatedTime < TimeSpan.Zero)
                 {
                     FatigatedTime = TimeSpan.Zero;
                 }
             }
 
-            base.Update(gameTime);            
+            base.Update(gameTime);
         }
-        
+
+        public override void OnColide(IColider c)
+        {
+            if (c is IPowerUp)
+            {
+                (c as IPowerUp).Aplly(this);
+            }
+        }
         public override void Damage(int ammount)
         {
             this.Hp -= ammount;
