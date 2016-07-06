@@ -31,44 +31,68 @@ namespace GameEngine.Player
             state = GamePad.GetState(GamePadIndex);
         }
 
-        public bool Action(EControllerButton type)
+        public bool Action(EControllerAction type)
         {
-            if (type == EControllerButton.Fire)
+            if (type == EControllerAction.Release1)
             {
-                bool old = oldState != null ? oldState.IsButtonDown(Buttons.A) : false;
-                return old && state.IsButtonUp(Buttons.A);
+                return Release(Buttons.A);
             }
-            if (type == EControllerButton.Fire2)
+            else if (type == EControllerAction.StartCharge1)
             {
-                bool old = oldState != null ? oldState.IsButtonDown(Buttons.X) : false;
-                return old && state.IsButtonUp(Buttons.X);
+                return StartCharge(Buttons.A);
             }
-            else if (type == EControllerButton.LeftPressed)
+            else if (type == EControllerAction.Release2)
             {
-                bool old = oldState != null ? oldState.IsButtonDown(Buttons.DPadLeft) : false;
-                return old && state.IsButtonUp(Buttons.DPadLeft);
+                return Release(Buttons.B);
             }
-            else if (type == EControllerButton.RightPressed)
+            else if (type == EControllerAction.StartCharge2)
             {
-                bool old = oldState != null ? oldState.IsButtonDown(Buttons.DPadRight) : false;
-                return old && state.IsButtonUp(Buttons.DPadRight);
+                return StartCharge(Buttons.B);
             }
-            else if (type == EControllerButton.Pause)
+            else if (type == EControllerAction.Release3)
             {
-                bool old = oldState != null ? oldState.IsButtonDown(Buttons.Start) : false;
-                return old && state.IsButtonUp(Buttons.Start);
+                return Release(Buttons.X);
             }
-            else if (type == EControllerButton.Cancel)
+            else if (type == EControllerAction.StartCharge3)
             {
-                bool old = oldState != null ? oldState.IsButtonDown(Buttons.B) : false;
-                return old && state.IsButtonUp(Buttons.B);
+                return StartCharge(Buttons.X);
             }
-            else if (type == EControllerButton.StartCharge)
+            else if (type == EControllerAction.Release4)
             {
-                bool old = oldState != null ? oldState.IsButtonUp(Buttons.A) : false;
-                return old && state.IsButtonDown(Buttons.A);
+                return Release(Buttons.Y);
+            }
+            else if (type == EControllerAction.StartCharge4)
+            {
+                return StartCharge(Buttons.Y);
+            }
+            else if (type == EControllerAction.LeftPressed)
+            {
+                return Release(Buttons.DPadLeft);
+            }
+            else if (type == EControllerAction.RightPressed)
+            {
+                return Release(Buttons.DPadRight);
+            }
+            else if (type == EControllerAction.Pause)
+            {
+                return Release(Buttons.Start);
+            }
+            else if (type == EControllerAction.Cancel)
+            {
+                return Release(Buttons.B);
             }
             return false;
+        }
+
+        private bool Release(Buttons button)
+        {
+            bool old = oldState != null ? oldState.IsButtonDown(button) : false;
+            return old && state.IsButtonUp(button);
+        }
+        private bool StartCharge(Buttons button)
+        {
+            bool old = oldState != null ? oldState.IsButtonUp(button) : false;
+            return old && state.IsButtonDown(button);
         }
 
         public Vector2 Direction()

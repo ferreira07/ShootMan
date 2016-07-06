@@ -22,24 +22,54 @@ namespace GameEngine.Player
         }
 
         public int Hp { get; set; }
-        public int Mp { get; set; }
         public int MaxHp { get; set; }
+
+        public int Mp { get { return (int)Math.Floor(RealMp); } }
+        public float RealMp { get; set; }
+        public float MpRechargeSpeed { get; set; }
         public int MaxMp { get; set; }
 
+        public List<Action> Actions { get; private set; }
         public bool IsDead { get { return Hp <= 0; } }
-        
         public IController Controller { get; set; }
-        public TimeSpan LastShoot { get; private set; }
+
+        internal void AddAction(Action action)
+        {
+            Actions.Add(action);
+            action.Character = this;
+        }
+
+        public TimeSpan FatigatedTime { get; private set; }
+
+        internal bool IsFatigated()
+        {
+            return FatigatedTime != TimeSpan.Zero;
+        }
+        internal void Fatigated(TimeSpan exaustingTime)
+        {
+            FatigatedTime = exaustingTime;
+        }
+
 
         internal void SetHp(int value)
         {
             Hp = value;
             MaxHp = value;
         }
-        internal void SetMp(int value)
+        internal void SetMp(int value, float rechargeSpeed)
         {
-            Mp = value;
+            RealMp = value;
             MaxMp = value;
+            MpRechargeSpeed = rechargeSpeed;
+        }
+        public void ExpendMp(int value)
+        {
+            RealMp -= value;
+        }
+        public void Recharge(TimeSpan time)
+        {
+            RealMp += (float) (MpRechargeSpeed * time.TotalSeconds);
+            RealMp = Math.Min(RealMp, MaxMp);
         }
 
         public TimeSpan ShootTime { get; private set; }
@@ -58,10 +88,8 @@ namespace GameEngine.Player
             }
         }
 
-        private Vector2 FacingDirection;
-
-        private bool _CanShoot;
-
+        public Vector2 FacingDirection { get; private set; }
+        
         public Character(Sprite sprite, IController controller)
         {            
             Sprite = sprite;
@@ -69,6 +97,7 @@ namespace GameEngine.Player
             UpdateRectangle();
             Controller = controller;
             ShootTime = TimeSpan.FromMilliseconds(200);
+            Actions = new List<Action>();
         }       
 
         public override void Update(GameTime gameTime)
@@ -76,7 +105,7 @@ namespace GameEngine.Player
             Controller.UpdateState();
 
             Vector2 v = Controller.Direction();
-
+            Speed = v * MaxSpeed;
 
             if (v != Vector2.Zero)
             {
@@ -86,44 +115,25 @@ namespace GameEngine.Player
                     (Sprite as IFacingChangeSprite).SetFacing(FacingDirection);
                 }
             }
-            if (Controller.Action(EControllerButton.Fire) && CanShoot(gameTime.TotalGameTime))
+
+            Recharge(gameTime.ElapsedGameTime);
+            foreach (var action in Actions)
             {
-                //criar um novo projétil
-                EProjectilType projectilType = IsCharged(gameTime.TotalGameTime)? EProjectilType.ChargedBullet: EProjectilType.Bullet;
-                Map.Add(ProjectilFactory.Create(projectilType, FacingDirection, this.ColisionRectangle));
-                _CanShoot = false;
-                this.LastShoot = gameTime.TotalGameTime;
-                StartChargeShoot = TimeSpan.Zero;
+                action.Check();
             }
-            else if (Controller.Action(EControllerButton.StartCharge))
+            
+            if (IsFatigated())
             {
-                //TODO CanCharge
-                this.StartChargeShoot = gameTime.TotalGameTime;
+                FatigatedTime -= gameTime.ElapsedGameTime;
+                if(FatigatedTime < TimeSpan.Zero)
+                {
+                    FatigatedTime = TimeSpan.Zero;
+                }
             }
-            if (Controller.Action(EControllerButton.Fire2) && CanShoot(gameTime.TotalGameTime))
-            {
-                //criar um novo projétil
-                Map.Add(ProjectilFactory.Create(EProjectilType.Fireball, FacingDirection, this.ColisionRectangle));
-                _CanShoot = false;
-                this.LastShoot = gameTime.TotalGameTime;
-                StartChargeShoot = TimeSpan.Zero;
-            }
-            Speed = v * MaxSpeed;
+
             base.Update(gameTime);            
         }
         
-        private bool CanShoot(TimeSpan timeSpan)
-        {
-            if (!_CanShoot)
-            {
-                if (timeSpan - LastShoot > ShootTime)
-                {
-                    _CanShoot = true;
-                }
-            }
-            return _CanShoot;
-        }
-
         public override void Damage(int ammount)
         {
             this.Hp -= ammount;

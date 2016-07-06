@@ -12,6 +12,6 @@ namespace GameEngine.Player
         EControllerType ControllerType { get; }
         void UpdateState();
         Vector2 Direction();
-        bool Action(EControllerButton type);
+        bool Action(EControllerAction type);
     }
 }

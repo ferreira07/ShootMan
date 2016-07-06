@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameEngine.Move;
 
 namespace GameEngine.Player
 {
@@ -19,11 +20,15 @@ namespace GameEngine.Player
             {
                 case ECharacterType.Fulano:
                     ret = new Character(Sprites.GetSprite(ESpriteType.char1), controller);
-                    ret.Position = position - new Vector2(16,16);
+                    ret.Position = position - new Vector2(16, 16);
                     ret.SetDrawPosition(0, -16);
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();
                     ret.SetHp(100);
+                    ret.SetMp(50, 10);
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release1, 10, EProjectilType.Bullet, TimeSpan.FromSeconds(0.2)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release3, 50, EProjectilType.ChargedBullet, TimeSpan.FromSeconds(1)));
                     ret.MaxSpeed = Constants.SpeedBase;
                     break;
                 case ECharacterType.Beltrano:
@@ -33,6 +38,10 @@ namespace GameEngine.Player
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();
                     ret.SetHp(80);
+                    ret.SetMp(50, 10);
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release1, 10, EProjectilType.Bullet, TimeSpan.FromSeconds(0.2)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release3, 50, EProjectilType.ChargedBullet, TimeSpan.FromSeconds(1)));
                     ret.MaxSpeed = Constants.SpeedBase * 1.1f;
                     break;
                 case ECharacterType.Siclano:
@@ -42,6 +51,10 @@ namespace GameEngine.Player
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();
                     ret.SetHp(120);
+                    ret.SetMp(50, 10);
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release1, 10, EProjectilType.Bullet, TimeSpan.FromSeconds(0.2)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release3, 50, EProjectilType.ChargedBullet, TimeSpan.FromSeconds(1)));
                     ret.MaxSpeed = Constants.SpeedBase * 0.9f;
                     break;
             }

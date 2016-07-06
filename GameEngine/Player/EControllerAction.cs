@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Player
 {
-    public enum EControllerButton
+    public enum EControllerAction
     {
-        Fire,
-        StartCharge,
+        Release1,
+        StartCharge1,
+        Release2,
+        StartCharge2,
+        Release3,
+        StartCharge3,
+        Release4,
+        StartCharge4,
         LeftPressed,
         RightPressed,
         Pause,
-        Cancel,
-        Fire2
+        Cancel
     }
 }

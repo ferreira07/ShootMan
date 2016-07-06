@@ -42,7 +42,10 @@ namespace GameEngine.Impl.Scene
             foreach (var c in chars)
             {
                 if (!c.IsDead)
-                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), c.Hp.ToString(), new Vector2(px, 30), Color.Black);
+                {
+                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), c.Hp.ToString(), new Vector2(px, 25), Color.Black);
+                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), c.Mp.ToString(), new Vector2(px, 50), Color.Blue);
+                }
                 px += dx;
             }
             spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), Map.RemainTime.ToString("mm") + ":" + Map.RemainTime.ToString("ss"), new Vector2(15, 30), Color.Black);
@@ -70,7 +73,7 @@ namespace GameEngine.Impl.Scene
                     }
                     foreach (var control in Map.Characters.Select(c=>c.Controller))
                     {
-                        if (control.Action(EControllerButton.Pause))
+                        if (control.Action(EControllerAction.Pause))
                         {
                             State = EBattleSceneState.Paused;
                         }
@@ -82,8 +85,8 @@ namespace GameEngine.Impl.Scene
                 foreach (var control in Map.Characters.Select(c => c.Controller))
                 {
                     control.UpdateState();
-                    if (control.Action(EControllerButton.Pause) || 
-                        control.Action(EControllerButton.Cancel))
+                    if (control.Action(EControllerAction.Pause) || 
+                        control.Action(EControllerAction.Cancel))
                     {
                         State = EBattleSceneState.Runing;
                     }
@@ -94,7 +97,7 @@ namespace GameEngine.Impl.Scene
                 foreach (var control in Map.Characters.Select(c => c.Controller))
                 {
                     control.UpdateState();
-                    if (control.Action(EControllerButton.Pause))
+                    if (control.Action(EControllerAction.Pause))
                     {
                         EndBattle();
                     }

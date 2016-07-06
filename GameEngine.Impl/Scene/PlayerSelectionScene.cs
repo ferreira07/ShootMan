@@ -55,7 +55,7 @@ namespace GameEngine.Impl.Scene
             {
                 bool readToRemove = !player.Confirmed;
                 player.Update();
-                if(readToRemove && player.Controller.Action(EControllerButton.Cancel))
+                if(readToRemove && player.Controller.Action(EControllerAction.Cancel))
                 {
                     Players.Remove(player);
                 }

@@ -19,22 +19,22 @@ namespace GameEngine.Player
         {
             Controller.UpdateState();
 
-            if (Controller.Action(EControllerButton.Fire))
+            if (Controller.Action(EControllerAction.Release1))
             {
                 Confirmed = true;
             }
-            if (Controller.Action(EControllerButton.Cancel))
+            if (Controller.Action(EControllerAction.Cancel))
             {
                 Confirmed = false;
             }
             if (!Confirmed)
             {
-                if (Controller.Action(EControllerButton.LeftPressed))
+                if (Controller.Action(EControllerAction.LeftPressed))
                 {
                     Type--;
                     if(Type < 0) Type = MAX_TYPE; 
                 }
-                if (Controller.Action(EControllerButton.RightPressed))
+                if (Controller.Action(EControllerAction.RightPressed))
                 {
                     Type++;
                     if (Type > MAX_TYPE) Type = MIN_TYPE;

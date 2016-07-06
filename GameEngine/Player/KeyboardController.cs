@@ -14,8 +14,10 @@ namespace GameEngine.Player
         public Keys Down { get; set; }
         public Keys Left { get; set; }
         public Keys Right { get; set; }
-        public Keys Fire { get; set; }
-        public Keys Fire2 { get; set; }
+        public Keys Action1 { get; set; }
+        public Keys Action2 { get; set; }
+        public Keys Action3 { get; set; }
+        public Keys Action4 { get; set; }
         public Keys Pause { get; set; }
         public Keys Cancel { get; set; }
 
@@ -30,8 +32,10 @@ namespace GameEngine.Player
                 Down = Keys.S;
                 Left = Keys.A;
                 Right = Keys.D;
-                Fire = Keys.J;
-                Fire2 = Keys.H;
+                Action1 = Keys.J;
+                Action2 = Keys.K;
+                Action3 = Keys.H;
+                Action4 = Keys.U;
                 Pause = Keys.Space;
                 Cancel = Keys.K;
             }
@@ -41,8 +45,10 @@ namespace GameEngine.Player
                 Down = Keys.Down;
                 Left = Keys.Left;
                 Right = Keys.Right;
-                Fire = Keys.NumPad2;
-                Fire2 = Keys.NumPad1;
+                Action1 = Keys.NumPad2;
+                Action2 = Keys.NumPad3;
+                Action3 = Keys.NumPad1;
+                Action4 = Keys.NumPad5;
                 Pause = Keys.Enter;
                 Cancel = Keys.NumPad3;
             }
@@ -76,44 +82,69 @@ namespace GameEngine.Player
             return v;
         }
 
-        public bool Action(EControllerButton type)
+        public bool Action(EControllerAction type)
         {
-            if (type == EControllerButton.Fire)
+            if (type == EControllerAction.Release1)
             {
-                bool old = oldState != null ? oldState.IsKeyDown(Fire) : false;
-                return old && state.IsKeyUp(Fire);
+                return Release(Action1);
             }
-            else if (type == EControllerButton.Fire2)
+            else if (type == EControllerAction.StartCharge1)
             {
-                bool old = oldState != null ? oldState.IsKeyDown(Fire2) : false;
-                return old && state.IsKeyUp(Fire2);
+                return StartCharge(Action1);
             }
-            else if (type == EControllerButton.LeftPressed)
+            else if (type == EControllerAction.Release2)
             {
-                bool old = oldState != null ? oldState.IsKeyDown(Left) : false;
-                return old && state.IsKeyUp(Left);
+                return Release(Action2);
             }
-            else if (type == EControllerButton.RightPressed)
+            else if (type == EControllerAction.StartCharge2)
             {
-                bool old = oldState != null ? oldState.IsKeyDown(Right) : false;
-                return old && state.IsKeyUp(Right);
+                return StartCharge(Action2);
             }
-            else if (type == EControllerButton.Pause)
+            else if (type == EControllerAction.Release3)
             {
-                bool old = oldState != null ? oldState.IsKeyDown(Pause) : false;
-                return old && state.IsKeyUp(Pause);
+                return Release(Action3);
             }
-            else if (type == EControllerButton.Cancel)
+            else if (type == EControllerAction.StartCharge3)
             {
-                bool old = oldState != null ? oldState.IsKeyDown(Cancel) : false;
-                return old && state.IsKeyUp(Cancel);
+                return StartCharge(Action3);
             }
-            else if (type == EControllerButton.StartCharge)
+            else if (type == EControllerAction.Release4)
             {
-                bool old = oldState != null ? oldState.IsKeyUp(Fire) : false;
-                return old && state.IsKeyDown(Fire);
+                return Release(Action4);
+            }
+            else if (type == EControllerAction.StartCharge4)
+            {
+                return StartCharge(Action4);
+            }
+            else if (type == EControllerAction.LeftPressed)
+            {
+                return Release(Left);
+            }
+            else if (type == EControllerAction.RightPressed)
+            {
+                return Release(Right);
+            }
+            else if (type == EControllerAction.Pause)
+            {
+                return Release(Pause);
+            }
+            else if (type == EControllerAction.Cancel)
+            {
+                return Release(Cancel);
             }
             return false;
+        }
+
+        private bool StartCharge(Keys key)
+        {
+            bool old = oldState != null ? oldState.IsKeyUp(key) : false;
+            return old && state.IsKeyDown(key);
+        }
+
+        private bool Release(Keys key)
+        {
+            bool old = oldState != null ? oldState.IsKeyDown(key) : false;
+            return old && state.IsKeyUp(key);
         }
     }
 }
