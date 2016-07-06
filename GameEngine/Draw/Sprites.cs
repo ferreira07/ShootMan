@@ -16,14 +16,35 @@ namespace GameEngine.Draw
         public static void Load(ContentManager content)
         {
             _SpriteDict = new Dictionary<ESpriteType, Sprite>();
-            _SpriteDict.Add(ESpriteType.char1, Load(content, "Images\\char0"));
-            _SpriteDict.Add(ESpriteType.char2, Load(content, "Images\\char1"));
-            _SpriteDict.Add(ESpriteType.char3, Load(content, "Images\\char2"));
+            _SpriteDict.Add(ESpriteType.char1, LoadCharacter(content, "Images\\char0"));
+            _SpriteDict.Add(ESpriteType.char2, LoadCharacter(content, "Images\\char1"));
+            _SpriteDict.Add(ESpriteType.char3, LoadCharacter(content, "Images\\char2"));
             _SpriteDict.Add(ESpriteType.Title, Load(content, "Images\\titulo"));
             _SpriteDict.Add(ESpriteType.Bullet, Load(content, "Images\\bullet1", 10));
             _SpriteDict.Add(ESpriteType.Bullet2, Load(content, "Images\\bullet2", 20));
+            _SpriteDict.Add(ESpriteType.Fireball, LoadTimeAnimated(content, "Images\\fireball", 16,16,4, 0.3f));
 
             _SpriteDict.Add(ESpriteType.barrier11, LoadList(content, "Images\\Barrier1", new Rectangle(0,0,32,32), new Rectangle(32, 0, 32, 32)));
+        }
+
+        private static Sprite LoadTimeAnimated(ContentManager content, string imagePath, int w, int h, int count, float time)
+        {
+            Rectangle[] positions = new Rectangle[count];
+            for (int i = 0; i < count; i++)
+            {
+                positions[i] = new Rectangle(i * w, 0, w, h);
+            }
+            return new TimeChangeSprite(content.Load<Texture2D>(imagePath), positions, time);
+        }
+
+        private static Sprite LoadCharacter(ContentManager content, string imagePath)
+        {
+            return LoadCharacter(content, imagePath, 32, 48);
+        }
+
+        private static Sprite LoadCharacter(ContentManager content, string imagePath, int w, int h)
+        {
+            return new BasicPlayerSprite(content.Load<Texture2D>(imagePath), w, h);
         }
 
         public static Sprite GetSprite(ESpriteType spriteType)

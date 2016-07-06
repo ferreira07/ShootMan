@@ -9,6 +9,7 @@ namespace GameEngine.Move
     public enum EProjectilType
     {
         Bullet,
-        ChargedBullet
+        ChargedBullet,
+        Fireball
     }
 }

@@ -41,6 +41,7 @@
     <Compile Include="Colision\IColider.cs" />
     <Compile Include="Colision\IHittable.cs" />
     <Compile Include="Constants.cs" />
+    <Compile Include="Draw\BasicPlayerSprite.cs" />
     <Compile Include="Draw\DamageChangeSprite.cs" />
     <Compile Include="Draw\DrawableObject.cs" />
     <Compile Include="Draw\EFontType.cs" />
@@ -53,7 +54,9 @@
     <Compile Include="Draw\ITimeChangeSprite.cs" />
     <Compile Include="Draw\Sprite.cs" />
     <Compile Include="Draw\SpriteList.cs" />
+    <Compile Include="Draw\SpriteList2.cs" />
     <Compile Include="Draw\Sprites.cs" />
+    <Compile Include="Draw\TimeChangeSprite.cs" />
     <Compile Include="Map\BattleMap.cs" />
     <Compile Include="Map\BattleMapBuilder.cs" />
     <Compile Include="Map\IMapObject.cs" />

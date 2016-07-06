@@ -23,7 +23,7 @@ namespace GameEngine.Player
                     ret.SetDrawPosition(0, -16);
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();
-                    ret.Hp = 100;
+                    ret.SetHp(100);
                     ret.MaxSpeed = Constants.SpeedBase;
                     break;
                 case ECharacterType.Beltrano:
@@ -32,7 +32,7 @@ namespace GameEngine.Player
                     ret.SetDrawPosition(0, -16);
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();
-                    ret.Hp = 80;
+                    ret.SetHp(80);
                     ret.MaxSpeed = Constants.SpeedBase * 1.1f;
                     break;
                 case ECharacterType.Siclano:
@@ -41,7 +41,7 @@ namespace GameEngine.Player
                     ret.SetDrawPosition(0, -16);
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();
-                    ret.Hp = 120;
+                    ret.SetHp(120);
                     ret.MaxSpeed = Constants.SpeedBase * 0.9f;
                     break;
             }

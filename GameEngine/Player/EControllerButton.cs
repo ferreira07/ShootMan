@@ -13,6 +13,7 @@ namespace GameEngine.Player
         LeftPressed,
         RightPressed,
         Pause,
-        Cancel
+        Cancel,
+        Fire2
     }
 }

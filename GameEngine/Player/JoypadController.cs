@@ -38,6 +38,11 @@ namespace GameEngine.Player
                 bool old = oldState != null ? oldState.IsButtonDown(Buttons.A) : false;
                 return old && state.IsButtonUp(Buttons.A);
             }
+            if (type == EControllerButton.Fire2)
+            {
+                bool old = oldState != null ? oldState.IsButtonDown(Buttons.X) : false;
+                return old && state.IsButtonUp(Buttons.X);
+            }
             else if (type == EControllerButton.LeftPressed)
             {
                 bool old = oldState != null ? oldState.IsButtonDown(Buttons.DPadLeft) : false;

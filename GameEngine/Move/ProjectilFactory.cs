@@ -36,6 +36,15 @@ namespace GameEngine.Move
                     p.Speed = direction * (Constants.SpeedBase * 5f);
                     p.DamageAmmount = 20;
                     break;
+                case EProjectilType.Fireball:
+                    p.Width = 16;
+                    p.Height = 16;
+                    p.Sprite = Sprites.GetSprite(ESpriteType.Fireball);
+                    p.DrawRectangle = p.Sprite.SourceRectangle;
+                    p.SetSize(16, 16);
+                    p.Speed = direction * (Constants.SpeedBase * 2f);
+                    p.DamageAmmount = 20;
+                    break;
             }
             p.Position = _GetStartPosition(direction, CreatorRectangle, p.Width, p.Height);
             p.UpdateRectangle();

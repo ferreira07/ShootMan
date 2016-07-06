@@ -29,6 +29,7 @@ namespace GameEngine.Impl.Scene
 
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
+            SpriteFont font = Fonts.GetFont(EFontType.Font1);
             spriteBatch.Begin();
 
             spriteBatch.Draw(Sprites.GetSprite(ESpriteType.Title).Texture, new Vector2(100, 100), Color.White);
@@ -37,9 +38,10 @@ namespace GameEngine.Impl.Scene
             {
                 if (Players.Count > i)
                 {
-                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), Players[i].Controller.ControllerType.ToString(), new Vector2(100 * i, 200), Color.Black);
-                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), Players[i].Type.ToString(), new Vector2(100 * i, 220), Color.Black);
-                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), Players[i].Confirmed.ToString(), new Vector2(100 * i, 240), Color.Black);
+                    spriteBatch.DrawString(font, Players[i].Controller.ControllerType.ToString(), new Vector2(100 * i, 200), Color.Black);
+                    spriteBatch.DrawString(font, Players[i].Type.ToString(), new Vector2(100 * i, 220), Color.Black);
+
+                    spriteBatch.DrawString(font, Players[i].Confirmed.ToString(), new Vector2(100 * i, 240), Color.Black);
                 }
             }
 

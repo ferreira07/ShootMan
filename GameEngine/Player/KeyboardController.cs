@@ -15,6 +15,7 @@ namespace GameEngine.Player
         public Keys Left { get; set; }
         public Keys Right { get; set; }
         public Keys Fire { get; set; }
+        public Keys Fire2 { get; set; }
         public Keys Pause { get; set; }
         public Keys Cancel { get; set; }
 
@@ -30,6 +31,7 @@ namespace GameEngine.Player
                 Left = Keys.A;
                 Right = Keys.D;
                 Fire = Keys.J;
+                Fire2 = Keys.H;
                 Pause = Keys.Space;
                 Cancel = Keys.K;
             }
@@ -40,6 +42,7 @@ namespace GameEngine.Player
                 Left = Keys.Left;
                 Right = Keys.Right;
                 Fire = Keys.NumPad2;
+                Fire2 = Keys.NumPad1;
                 Pause = Keys.Enter;
                 Cancel = Keys.NumPad3;
             }
@@ -79,6 +82,11 @@ namespace GameEngine.Player
             {
                 bool old = oldState != null ? oldState.IsKeyDown(Fire) : false;
                 return old && state.IsKeyUp(Fire);
+            }
+            else if (type == EControllerButton.Fire2)
+            {
+                bool old = oldState != null ? oldState.IsKeyDown(Fire2) : false;
+                return old && state.IsKeyUp(Fire2);
             }
             else if (type == EControllerButton.LeftPressed)
             {

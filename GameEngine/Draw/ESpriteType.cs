@@ -15,6 +15,7 @@ namespace GameEngine.Draw
         barrier11,
         barrier12,
         Bullet,
-        Bullet2
+        Bullet2,
+        Fireball
     }
 }

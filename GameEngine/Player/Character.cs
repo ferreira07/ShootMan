@@ -22,11 +22,26 @@ namespace GameEngine.Player
         }
 
         public int Hp { get; set; }
+        public int Mp { get; set; }
+        public int MaxHp { get; set; }
+        public int MaxMp { get; set; }
 
         public bool IsDead { get { return Hp <= 0; } }
         
         public IController Controller { get; set; }
         public TimeSpan LastShoot { get; private set; }
+
+        internal void SetHp(int value)
+        {
+            Hp = value;
+            MaxHp = value;
+        }
+        internal void SetMp(int value)
+        {
+            Mp = value;
+            MaxMp = value;
+        }
+
         public TimeSpan ShootTime { get; private set; }
         public bool IsCharged(TimeSpan time)
         {
@@ -74,7 +89,6 @@ namespace GameEngine.Player
             if (Controller.Action(EControllerButton.Fire) && CanShoot(gameTime.TotalGameTime))
             {
                 //criar um novo projétil
-                Vector2 position = Position + (FacingDirection * 30 * new Vector2(1, -1));
                 EProjectilType projectilType = IsCharged(gameTime.TotalGameTime)? EProjectilType.ChargedBullet: EProjectilType.Bullet;
                 Map.Add(ProjectilFactory.Create(projectilType, FacingDirection, this.ColisionRectangle));
                 _CanShoot = false;
@@ -86,13 +100,16 @@ namespace GameEngine.Player
                 //TODO CanCharge
                 this.StartChargeShoot = gameTime.TotalGameTime;
             }
-            Speed = v * MaxSpeed;
-            base.Update(gameTime);
-
-            if (this.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Time))
+            if (Controller.Action(EControllerButton.Fire2) && CanShoot(gameTime.TotalGameTime))
             {
-                (Sprite as ITimeChangeSprite).PassTime(gameTime.ElapsedGameTime);
+                //criar um novo projétil
+                Map.Add(ProjectilFactory.Create(EProjectilType.Fireball, FacingDirection, this.ColisionRectangle));
+                _CanShoot = false;
+                this.LastShoot = gameTime.TotalGameTime;
+                StartChargeShoot = TimeSpan.Zero;
             }
+            Speed = v * MaxSpeed;
+            base.Update(gameTime);            
         }
         
         private bool CanShoot(TimeSpan timeSpan)

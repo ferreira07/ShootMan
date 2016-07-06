@@ -94,9 +94,7 @@ namespace GameEngine.Impl.Scene
                 foreach (var control in Map.Characters.Select(c => c.Controller))
                 {
                     control.UpdateState();
-                    if (control.Action(EControllerButton.Pause) ||
-                        control.Action(EControllerButton.Cancel) ||
-                        control.Action(EControllerButton.Fire))
+                    if (control.Action(EControllerButton.Pause))
                     {
                         EndBattle();
                     }

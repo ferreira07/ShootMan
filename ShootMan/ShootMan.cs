@@ -21,9 +21,7 @@ namespace ShootMan
         SpriteBatch spriteBatch;
         
         public IScene Scene { get; set; }
-
-        public BattleMap Map { get; set; }
-
+        
         public const int WIDTH = 800;
         public const int HEIGHT = 600;
 

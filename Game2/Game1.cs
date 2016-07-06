@@ -1,3 +1,9 @@
+using GameEngine.Draw;
+using GameEngine.Impl.Colision;
+using GameEngine.Impl.Scene;
+using GameEngine.Map;
+using GameEngine.Player;
+using GameEngine.Scene;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -11,6 +17,8 @@ namespace Game2
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+
+        public IScene Scene { get; set; }
 
         public Game1()
         {
@@ -33,9 +41,30 @@ namespace Game2
         {
             // TODO: Add your initialization logic here
 
+            Sprites.Load(Content);
+            Fonts.Load(Content);
+
+            //Scene = new PlayerSelectionScene();
+            BattleScene bs = new BattleScene();
+
+            BattleMapBuilder builder = new BattleMapBuilder();
+            builder.AddCharacter(ECharacterType.Fulano, new KeyboardController(0));
+            builder.AddCharacter(ECharacterType.Fulano, new KeyboardController(1));
+            builder.AddBarrierFactory(new BarrierFactory());
+            var newScene = new BattleScene() { Map = builder.BuildMap() };
+            Scene = bs;
+
+
+            Scene.ChangeScene += changeScene;
+
             base.Initialize();
         }
-
+        private void changeScene(object sender, IScene scene)
+        {
+            Scene.ChangeScene -= changeScene;
+            Scene = scene;
+            Scene.ChangeScene += changeScene;
+        }
         /// <summary>
         /// LoadContent will be called once per game and is the place to load
         /// all of your content.
@@ -66,8 +95,8 @@ namespace Game2
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 Exit();
-
-            // TODO: Add your update logic here
+            
+            Scene.Update(gameTime);
 
             base.Update(gameTime);
         }
@@ -78,9 +107,10 @@ namespace Game2
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            // TODO: Add your drawing code here
+            GraphicsDevice.Clear(Color.White);
+
+            Scene.Draw(spriteBatch, gameTime);
 
             base.Draw(gameTime);
         }
