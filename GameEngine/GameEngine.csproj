@@ -58,7 +58,6 @@
     <Compile Include="Draw\Sprites.cs" />
     <Compile Include="Draw\TimeChangeSprite.cs" />
     <Compile Include="Map\BattleMap.cs" />
-    <Compile Include="Map\BattleMapBuilder.cs" />
     <Compile Include="Map\IMapObject.cs" />
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Move\EProjectilType.cs" />
@@ -66,9 +65,10 @@
     <Compile Include="Move\MovingObject.cs" />
     <Compile Include="Move\Projectil.cs" />
     <Compile Include="Move\ProjectilFactory.cs" />
-    <Compile Include="Player\Action.cs" />
+    <Compile Include="Player\Actions\Action.cs" />
     <Compile Include="Player\Character.cs" />
-    <Compile Include="Player\CharacterFactory.cs" />
+    <Compile Include="Player\Actions\ChargingAction.cs" />
+    <Compile Include="Player\Actions\CreateBarrierAction.cs" />
     <Compile Include="Player\ECharacterType.cs" />
     <Compile Include="Player\EControllerAction.cs" />
     <Compile Include="Player\EControllerType.cs" />
@@ -80,7 +80,7 @@
     <Compile Include="Player\PlayerSelection.cs" />
     <Compile Include="Player\PowerUp.cs" />
     <Compile Include="Player\PowerUpFactory.cs" />
-    <Compile Include="Player\ProjectilAction.cs" />
+    <Compile Include="Player\Actions\ProjectilAction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scene\EBattleSceneState.cs" />
     <Compile Include="Scene\IBattleScene.cs" />

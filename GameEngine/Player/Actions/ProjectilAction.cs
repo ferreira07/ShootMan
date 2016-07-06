@@ -14,12 +14,15 @@ namespace GameEngine.Player
 
         }
         public ProjectilAction(EControllerAction action, int mpCost, EProjectilType projectilTipe, TimeSpan exaustingTime)
+            : this(action, mpCost, projectilTipe, exaustingTime, TimeSpan.Zero)
+        { }
+
+        public ProjectilAction(EControllerAction action, int mpCost, EProjectilType projectilTipe, TimeSpan exaustingTime, TimeSpan chargingTime)
+            : base(action, mpCost, exaustingTime, chargingTime)
         {
-            ControllerAction = action;
-            MpCost = mpCost;
             ProjectilType = projectilTipe;
-            ExaustingTime = exaustingTime;
         }
+
         public EProjectilType ProjectilType { get; set; }
 
         protected override void _Execute()

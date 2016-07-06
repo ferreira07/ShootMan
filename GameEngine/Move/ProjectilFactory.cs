@@ -53,23 +53,24 @@ namespace GameEngine.Move
 
         private static Vector2 _GetStartPosition(Vector2 dir, Rectangle creatorRect, int width, int height)
         {
-            float x = 0,y = 0;
+            float x = 0, y = 0;
             int cx = creatorRect.X + creatorRect.Width / 2 - width / 2;
             int cy = creatorRect.Y + creatorRect.Height / 2 - height / 2;
             float proportionCreator = creatorRect.Width / creatorRect.Height;
-            if (Math.Abs(dir.X)  > Math.Abs(dir.Y) * proportionCreator)
+            if (Math.Abs(dir.X) > Math.Abs(dir.Y) * proportionCreator)
             {
                 //Borda horizontal
-                if(dir.X < 0)
+                if (dir.X < 0)
                 {
                     x = creatorRect.X - width;
                 }
                 else
                 {
-                    x = creatorRect.X  + creatorRect.Width + 1;
+                    x = creatorRect.X + creatorRect.Width + 1;
                 }
-                y = cy + ((cx - x) * dir.Y)/dir.X;
-            }else
+                y = cy + ((cx - x) * dir.Y) / dir.X;
+            }
+            else
             {
                 //Borda Lateral
                 if (dir.Y > 0)

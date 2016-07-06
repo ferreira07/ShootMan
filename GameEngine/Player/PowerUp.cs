@@ -52,6 +52,12 @@ namespace GameEngine.Player
                 case EPowerUpType.Hp:
                     c.SetHp(c.MaxHp + 10);
                     break;
+                case EPowerUpType.Mp:
+                    c.SetMp(c.MaxMp + 10, c.MpRechargeSpeed + 2);
+                    break;
+                case EPowerUpType.Speed:
+                    c.MaxSpeed = c.MaxSpeed + Constants.SpeedBase * 0.1f;
+                    break;
             }
         }
     }

@@ -8,7 +8,7 @@ namespace GameEngine
 {
     public class Constants
     {
-        internal static readonly float SpeedBase = 100;
+        public static readonly float SpeedBase = 100;
 
         public static int WIDTH = 800;
     }

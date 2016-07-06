@@ -18,17 +18,30 @@ namespace GameEngine.Impl.Colision
             IMapObject ret = null;
             switch (type)
             {
-                case EBarrierType.BasicBarrier: 
+                case EBarrierType.BasicBarrier:
                     ret = new Barrier(position, 50, Sprites.GetSprite(ESpriteType.barrier11));
                     break;
                 case EBarrierType.Box:
-                    ret = new Box(position, 10, Sprites.GetSprite(ESpriteType.Crate), EPowerUpType.Hp);
+                    ret = new Box(position, 10, Sprites.GetSprite(ESpriteType.Crate), RandomPowerUp());
                     break;
                 case EBarrierType.Wall:
                     ret = new Wall(Sprites.GetSprite(ESpriteType.barrier11), position);
                     break;
             }
             return ret;
+        }
+
+        static Random Random = new Random();
+        private static EPowerUpType RandomPowerUp()
+        {
+            List<EPowerUpType> powerUps = new List<EPowerUpType>()
+            {
+                EPowerUpType.Hp,
+                EPowerUpType.Mp,
+                EPowerUpType.Speed
+            };
+
+            return powerUps[Random.Next(powerUps.Count)];
         }
     }
 }

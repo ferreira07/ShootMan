@@ -28,15 +28,45 @@ namespace GameEngine.Player
         public float RealMp { get; set; }
         public float MpRechargeSpeed { get; set; }
         public int MaxMp { get; set; }
+        public bool IsDead { get { return Hp <= 0; } }
 
         public List<Action> Actions { get; private set; }
-        public bool IsDead { get { return Hp <= 0; } }
-        public IController Controller { get; set; }
-
-        internal void AddAction(Action action)
+        public  void AddAction(Action action)
         {
             Actions.Add(action);
             action.Character = this;
+        }
+        public IController Controller { get; set; }
+
+        public void SetHp(int value)
+        {
+            Hp = value;
+            MaxHp = value;
+        }
+        public void SetMp(int value, float rechargeSpeed)
+        {
+            RealMp = value;
+            MaxMp = value;
+            MpRechargeSpeed = rechargeSpeed;
+        }
+        public void ExpendMp(int value)
+        {
+            RealMp -= value;
+        }
+
+        public void Recharge(TimeSpan time)
+        {
+            RealMp += (float)(MpRechargeSpeed * time.TotalSeconds);
+            RealMp = Math.Min(RealMp, MaxMp);
+
+            if (IsFatigated())
+            {
+                FatigatedTime -= time;
+                if (FatigatedTime < TimeSpan.Zero)
+                {
+                    FatigatedTime = TimeSpan.Zero;
+                }
+            }
         }
 
         public TimeSpan FatigatedTime { get; private set; }
@@ -49,42 +79,22 @@ namespace GameEngine.Player
         {
             FatigatedTime = exaustingTime;
         }
+        public ChargingAction ChargingAction { get; set; }
 
-
-        internal void SetHp(int value)
+        internal bool CanAct()
         {
-            Hp = value;
-            MaxHp = value;
+            return !IsFatigated() && ChargingAction == null;
         }
-        internal void SetMp(int value, float rechargeSpeed)
-        {
-            RealMp = value;
-            MaxMp = value;
-            MpRechargeSpeed = rechargeSpeed;
-        }
-        public void ExpendMp(int value)
-        {
-            RealMp -= value;
-        }
-        public void Recharge(TimeSpan time)
-        {
-            RealMp += (float)(MpRechargeSpeed * time.TotalSeconds);
-            RealMp = Math.Min(RealMp, MaxMp);
-        }
-
-        public TimeSpan ShootTime { get; private set; }
-        public bool IsCharged(TimeSpan time)
-        {
-            return StartChargeShoot != TimeSpan.Zero && StartChargeShoot + TimeSpan.FromSeconds(1) < time;
-        }
+        
         private TimeSpan StartChargeShoot { get; set; }
 
+        private EColisionLayer _ColisionLayer { get; set; }
 
         public override EColisionLayer ColisionLayer
         {
             get
             {
-                throw new NotImplementedException();
+                return _ColisionLayer;
             }
         }
 
@@ -96,42 +106,54 @@ namespace GameEngine.Player
             this.DrawRectangle = Sprite.SourceRectangle;
             UpdateRectangle();
             Controller = controller;
-            ShootTime = TimeSpan.FromMilliseconds(200);
             Actions = new List<Action>();
         }
 
         public override void Update(GameTime gameTime)
         {
             Controller.UpdateState();
-
-            Vector2 v = Controller.Direction();
-            Speed = v * MaxSpeed;
-
-            if (v != Vector2.Zero)
-            {
-                FacingDirection = v;
-                if (this.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Facing))
-                {
-                    (Sprite as IFacingChangeSprite).SetFacing(FacingDirection);
-                }
-            }
-
             Recharge(gameTime.ElapsedGameTime);
-            foreach (var action in Actions)
-            {
-                action.Check();
-            }
-
-            if (IsFatigated())
-            {
-                FatigatedTime -= gameTime.ElapsedGameTime;
-                if (FatigatedTime < TimeSpan.Zero)
-                {
-                    FatigatedTime = TimeSpan.Zero;
-                }
-            }
+            CheckActions(gameTime.ElapsedGameTime);            
 
             base.Update(gameTime);
+        }
+
+        private void SetFacing(Vector2 v)
+        {
+            FacingDirection = v;
+            if (this.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Facing))
+            {
+                (Sprite as IFacingChangeSprite).SetFacing(FacingDirection);
+            }
+        }
+
+        private void CheckActions(TimeSpan elapsedGameTime)
+        {
+            if(ChargingAction!= null)
+            {
+                ChargingAction.RemainTime -= elapsedGameTime;
+                if(ChargingAction.RemainTime <= TimeSpan.Zero)
+                {
+                    ChargingAction.Action.Execute();
+                    ChargingAction = null;
+                }
+                Speed = Vector2.Zero;
+            }
+            else
+            {
+                Vector2 v = Controller.Direction();
+                Speed = v * MaxSpeed;
+
+                if (v != Vector2.Zero)
+                {
+                    SetFacing(v);
+                }
+
+                foreach (var action in Actions)
+                {
+                    action.Check();
+                }
+            }
         }
 
         public override void OnColide(IColider c)

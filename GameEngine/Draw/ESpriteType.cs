@@ -18,6 +18,8 @@ namespace GameEngine.Draw
         Bullet2,
         Fireball,
         RedGem,
-        Crate
+        Crate,
+        BlueGem,
+        GreenGem
     }
 }

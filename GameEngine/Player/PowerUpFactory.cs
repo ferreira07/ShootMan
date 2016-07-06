@@ -19,6 +19,12 @@ namespace GameEngine.Player
                 case EPowerUpType.Hp:
                     ret = new PowerUp(position, Sprites.GetSprite(ESpriteType.RedGem), type);
                     break;
+                case EPowerUpType.Mp:
+                    ret = new PowerUp(position, Sprites.GetSprite(ESpriteType.BlueGem), type);
+                    break;
+                case EPowerUpType.Speed:
+                    ret = new PowerUp(position, Sprites.GetSprite(ESpriteType.GreenGem), type);
+                    break;
             }
             return ret;
         }

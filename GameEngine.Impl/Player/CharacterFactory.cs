@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine.Move;
+using GameEngine.Impl.Colision;
 
 namespace GameEngine.Player
 {
@@ -25,9 +26,9 @@ namespace GameEngine.Player
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();
                     ret.SetHp(100);
-                    ret.SetMp(50, 10);
+                    ret.SetMp(50, 15);
                     ret.AddAction(new ProjectilAction(EControllerAction.Release1, 10, EProjectilType.Bullet, TimeSpan.FromSeconds(0.2)));
-                    ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5), TimeSpan.FromSeconds(0.2)));
                     ret.AddAction(new ProjectilAction(EControllerAction.Release3, 50, EProjectilType.ChargedBullet, TimeSpan.FromSeconds(1)));
                     ret.MaxSpeed = Constants.SpeedBase;
                     break;
@@ -38,10 +39,11 @@ namespace GameEngine.Player
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();
                     ret.SetHp(80);
-                    ret.SetMp(50, 10);
+                    ret.SetMp(50, 15);
                     ret.AddAction(new ProjectilAction(EControllerAction.Release1, 10, EProjectilType.Bullet, TimeSpan.FromSeconds(0.2)));
-                    ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5), TimeSpan.FromSeconds(0.2)));
                     ret.AddAction(new ProjectilAction(EControllerAction.Release3, 50, EProjectilType.ChargedBullet, TimeSpan.FromSeconds(1)));
+                    ret.AddAction(new CreateBarrierAction(EControllerAction.Release4, 30, new BarrierFactory(), TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(0.2)));
                     ret.MaxSpeed = Constants.SpeedBase * 1.1f;
                     break;
                 case ECharacterType.Siclano:
@@ -51,9 +53,9 @@ namespace GameEngine.Player
                     ret.SetSize(32, 32);
                     ret.UpdateRectangle();
                     ret.SetHp(120);
-                    ret.SetMp(50, 10);
+                    ret.SetMp(50, 12);
                     ret.AddAction(new ProjectilAction(EControllerAction.Release1, 10, EProjectilType.Bullet, TimeSpan.FromSeconds(0.2)));
-                    ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5), TimeSpan.FromSeconds(0.2)));
                     ret.AddAction(new ProjectilAction(EControllerAction.Release3, 50, EProjectilType.ChargedBullet, TimeSpan.FromSeconds(1)));
                     ret.MaxSpeed = Constants.SpeedBase * 0.9f;
                     break;
