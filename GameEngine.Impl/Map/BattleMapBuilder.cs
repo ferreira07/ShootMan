@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameEngine.Player.AI;
 
 namespace GameEngine.Map
 {
@@ -41,7 +42,12 @@ namespace GameEngine.Map
 
         public void AddCharacter(ECharacterType characterType, IController controller)
         {
-            Map.Add(CharacterFactory.CreateCharacter(characterType, Positions[Map.Characters.Count], controller));
+            Character c = CharacterFactory.CreateCharacter(characterType, Positions[Map.Characters.Count], controller);
+            Map.Add(c);
+            if (controller is BattlerAIController)
+            {
+                (controller as BattlerAIController).Character = c;
+            }
         }
         
         static Random r = new Random();

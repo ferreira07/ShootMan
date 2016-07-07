@@ -9,6 +9,7 @@ namespace GameEngine.Player
     public enum EControllerType
     {
         Keyboard,
-        Joypad
+        Joypad,
+        ArtificialInteligence
     }
 }

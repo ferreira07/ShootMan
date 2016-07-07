@@ -66,6 +66,10 @@
     <Compile Include="Move\Projectil.cs" />
     <Compile Include="Move\ProjectilFactory.cs" />
     <Compile Include="Player\Actions\Action.cs" />
+    <Compile Include="Player\AI\AIController.cs" />
+    <Compile Include="Player\AI\BattlerAIController.cs" />
+    <Compile Include="Player\AI\RandomBattlerIAController.cs" />
+    <Compile Include="Player\AI\SeekerBattlerIAController.cs" />
     <Compile Include="Player\Character.cs" />
     <Compile Include="Player\Actions\ChargingAction.cs" />
     <Compile Include="Player\Actions\CreateBarrierAction.cs" />

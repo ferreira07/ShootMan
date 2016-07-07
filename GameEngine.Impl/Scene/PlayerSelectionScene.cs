@@ -11,6 +11,7 @@ using GameEngine.Player;
 using GameEngine.Draw;
 using GameEngine.Scene;
 using GameEngine.Impl.Colision;
+using GameEngine.Player.AI;
 
 namespace GameEngine.Impl.Scene
 {
@@ -55,7 +56,7 @@ namespace GameEngine.Impl.Scene
             {
                 bool readToRemove = !player.Confirmed;
                 player.Update();
-                if(readToRemove && player.Controller.Action(EControllerAction.Cancel))
+                if (readToRemove && player.Controller.Action(EControllerAction.Cancel))
                 {
                     Players.Remove(player);
                 }
@@ -70,7 +71,7 @@ namespace GameEngine.Impl.Scene
         {
             return Players.Count > 1 && (Players.Where(p => !p.Confirmed).Count() == 0);
         }
-
+        KeyboardState _oldState;
         private void TryAddNewPlayer()
         {
             for (int i = 0; i < GamePad.MaximumGamePadCount; i++)
@@ -85,7 +86,8 @@ namespace GameEngine.Impl.Scene
                     }
                 }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Enter))
+            KeyboardState keyboardState = Keyboard.GetState();
+            if (_oldState != null && _oldState.IsKeyUp(Keys.Enter) && keyboardState.IsKeyDown(Keys.Enter))
             {
                 bool hasController = HasKeybord(1);
                 if (!hasController)
@@ -93,7 +95,7 @@ namespace GameEngine.Impl.Scene
                     Players.Add(new PlayerSelection() { Controller = new KeyboardController(1) });
                 }
             }
-            if (Keyboard.GetState().IsKeyDown(Keys.Space))
+            if (_oldState!= null && _oldState.IsKeyUp(Keys.Space) && keyboardState.IsKeyDown(Keys.Space))
             {
                 bool hasController = HasKeybord(0);
                 if (!hasController)
@@ -101,7 +103,20 @@ namespace GameEngine.Impl.Scene
                     Players.Add(new PlayerSelection() { Controller = new KeyboardController(0) });
                 }
             }
+            if (_oldState != null && _oldState.IsKeyUp(Keys.F1) && keyboardState.IsKeyDown(Keys.F1))
+            {
+                if (Players.Count < 4)
+                    Players.Add(new PlayerSelection() { Controller = new SeekerBattlerIAController(), Confirmed = true });
+            }
+            if (_oldState != null && _oldState.IsKeyUp(Keys.F2) && keyboardState.IsKeyDown(Keys.F2))
+            {
+                if (Players.Count < 4)
+                    Players.Add(new PlayerSelection() { Controller = new RandomBattlerIAController(), Confirmed = true });
+            }
+
+            _oldState = keyboardState;
         }
+
 
         private bool HasKeybord(int i)
         {

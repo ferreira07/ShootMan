@@ -33,16 +33,18 @@ namespace GameEngine.Player
                 Character.Controller.Action(ControllerAction) &&
                 Character.Mp >= MpCost)
             {
-                if (this.ChargingTime == TimeSpan.Zero)
-                {
-                    Character.ExpendMp(MpCost);
-                    Character.Fatigated(ExaustingTime);
-                    Execute();
-                }
-                else
-                {
-                    Character.ChargingAction = new ChargingAction() { Action = this, RemainTime = ChargingTime };
-                }
+
+                Character.ExpendMp(MpCost);
+                Character.Fatigated(ExaustingTime);
+                Character.ChargingAction = new ChargingAction() { Action = this, RemainTime = ChargingTime };
+                //if (this.ChargingTime == TimeSpan.Zero)
+                //{
+                //    Execute();
+                //}
+                //else
+                //{
+                    
+                //}
             };
         }
 

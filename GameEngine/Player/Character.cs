@@ -31,7 +31,7 @@ namespace GameEngine.Player
         public bool IsDead { get { return Hp <= 0; } }
 
         public List<Action> Actions { get; private set; }
-        public  void AddAction(Action action)
+        public void AddAction(Action action)
         {
             Actions.Add(action);
             action.Character = this;
@@ -85,7 +85,7 @@ namespace GameEngine.Player
         {
             return !IsFatigated() && ChargingAction == null;
         }
-        
+
         private TimeSpan StartChargeShoot { get; set; }
 
         private EColisionLayer _ColisionLayer { get; set; }
@@ -113,7 +113,7 @@ namespace GameEngine.Player
         {
             Controller.UpdateState();
             Recharge(gameTime.ElapsedGameTime);
-            CheckActions(gameTime.ElapsedGameTime);            
+            CheckActions(gameTime.ElapsedGameTime);
 
             base.Update(gameTime);
         }
@@ -129,10 +129,10 @@ namespace GameEngine.Player
 
         private void CheckActions(TimeSpan elapsedGameTime)
         {
-            if(ChargingAction!= null)
+            if (ChargingAction != null)
             {
                 ChargingAction.RemainTime -= elapsedGameTime;
-                if(ChargingAction.RemainTime <= TimeSpan.Zero)
+                if (ChargingAction.RemainTime <= TimeSpan.Zero)
                 {
                     ChargingAction.Action.Execute();
                     ChargingAction = null;
@@ -142,12 +142,10 @@ namespace GameEngine.Player
             else
             {
                 Vector2 v = Controller.Direction();
+                if (v.Length() > 1) v.Normalize();
                 Speed = v * MaxSpeed;
-
-                if (v != Vector2.Zero)
-                {
-                    SetFacing(v);
-                }
+                if (v != Vector2.Zero) SetFacing(v);
+                //TODO Como fazer para movimentar antes de executar alguma ação?
 
                 foreach (var action in Actions)
                 {
