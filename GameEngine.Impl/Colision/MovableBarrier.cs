@@ -30,6 +30,8 @@ namespace GameEngine.Impl.Colision
             DrawRectangle = position;
             ColisionRectangle = position;
             Position = new Vector2(position.X, position.Y);
+            Width = position.Width;
+            Height = position.Height;
             SetHp(hp);
             _State = EMovableBarrierState.Rising;
         }
@@ -45,6 +47,19 @@ namespace GameEngine.Impl.Colision
                 }
             }
             base.Update(gameTime);
+        }
+
+        public void StartMove(Vector2 facingDirection)
+        {
+            if (facingDirection == Vector2.Zero) return;
+
+            facingDirection.Normalize();
+            Speed = facingDirection * MaxSpeed;
+            if (this.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Facing))
+            {
+                (Sprite as IFacingChangeSprite).SetFacing(facingDirection);
+            }
+            this._State = EMovableBarrierState.Moving;
         }
 
         public override EColisionLayer ColisionLayer
@@ -63,6 +78,6 @@ namespace GameEngine.Impl.Colision
             }
         }
 
-        public int DamageAmmount { get; internal set; }        
+        public int DamageAmmount { get; internal set; }
     }
 }

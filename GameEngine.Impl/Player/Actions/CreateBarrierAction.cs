@@ -1,4 +1,5 @@
 ﻿using GameEngine.Colision;
+using GameEngine.Player;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -6,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Player
+namespace GameEngine.Impl.Player.Actions
 {
-    public class CreateBarrierAction : Action
+    public class CreateBarrierAction : GameEngine.Player.Action
     {
         public CreateBarrierAction(EControllerAction action, int mpCost, IBarrierFactory factory, TimeSpan exaustingActionTime, TimeSpan exaustingMoveTime, TimeSpan chargingTime)
             : base(action, mpCost, exaustingActionTime, exaustingMoveTime, chargingTime)
@@ -20,11 +21,11 @@ namespace GameEngine.Player
 
         protected override void _Execute()
         {
-            Rectangle position = GetBarrierBosition(Character.FacingDirection, Character.ColisionRectangle);
+            Rectangle position = GetBarrierPosition(Character.FacingDirection, Character.ColisionRectangle);
             Character.Map.Add(Factory.CreateBarrier(EBarrierType.Stone, position));
         }
 
-        private Rectangle GetBarrierBosition(Vector2 dir, Rectangle creatorRect)
+        private Rectangle GetBarrierPosition(Vector2 dir, Rectangle creatorRect)
         {
             int width = 32, height = 32;
             float x = 0, y = 0;

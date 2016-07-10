@@ -53,7 +53,7 @@ namespace GameEngine.Impl.Colision
             }
             else if (hit is MovableBarrier)
             {
-                ret = new MovableBarrierColisionStrategy(hit as MovableBarrier, blocking);                
+                ret = new MovableBarrierColisionStrategy(hit as MovableBarrier, blocking);
             }
             else if (hit is IPowerUp && blocking is Character)
             {
@@ -64,7 +64,28 @@ namespace GameEngine.Impl.Colision
 
         private IColisionStrategy ColideHitHit(IColider hit1, IColider hit2)
         {
-            return null;
+            IColisionStrategy ret = null;
+
+            if (hit1 is MovableBarrier)
+            {
+                if (hit2 is MovableBarrier)
+                {
+                    ret = new MovableBarriersColisionStrategy(hit1 as MovableBarrier, hit2 as MovableBarrier);
+                }
+                else if (hit2 is Projectil)
+                {
+                    ret = new ProjectilColisionStrategy(hit2 as Projectil, hit1);
+                }
+            }
+            else if (hit1 is Projectil)
+            {
+                if (hit2 is MovableBarrier)
+                {
+                    ret = new ProjectilColisionStrategy(hit1 as Projectil, hit2);
+                }
+            }
+
+            return ret;
         }
     }
 }

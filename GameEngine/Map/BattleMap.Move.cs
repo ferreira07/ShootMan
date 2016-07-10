@@ -38,6 +38,9 @@ namespace GameEngine.Map
             {
                 foreach (var item2 in ColisionObjects.ToArray())
                 {
+                    if (item1 == item2) continue;
+
+
                     if (item1.ColisionRectangle.Intersects(item2.ColisionRectangle))
                     {
                         ColisionStrategyFactory.Create(item1, item2)?.ProcessColision();

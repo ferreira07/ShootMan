@@ -18,8 +18,8 @@ namespace GameEngine.Draw
 
         public Vector2 Position { get; set; }
 
-        public int Width { get; internal set; }
-        public int Height { get; internal set; }
+        public int Width { get; set; }
+        public int Height { get; set; }
 
         public int Dx { get; set; }
 
@@ -31,7 +31,15 @@ namespace GameEngine.Draw
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
+#if Debuging
+#endif
+            if (this is IColider)
+            {
+                Sprite s = Sprites.GetSprite(ESpriteType.ColisionArea);
+                spriteBatch.Draw(s.Texture, (this as IColider).ColisionRectangle, s.SourceRectangle, Color.White);
+            }
             spriteBatch.Draw(Sprite.Texture, DrawRectangle, Sprite.SourceRectangle, Color.White);
+
         }
 
         public void SetSize(int w, int h)

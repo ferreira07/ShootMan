@@ -1,13 +1,14 @@
 ﻿using GameEngine.Move;
+using GameEngine.Player;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Player
+namespace GameEngine.Impl.Player.Actions
 {
-    public class ProjectilAction : Action
+    public class ProjectilAction : GameEngine.Player.Action
     {
         public ProjectilAction()
         {

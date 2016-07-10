@@ -30,7 +30,8 @@ namespace GameEngine.Impl.Colision
                 case EBarrierType.Stone:
                     ret = new MovableBarrier(position, 50, (TimeChangeSprite)Sprites.GetSprite(ESpriteType.EmergingStone), Sprites.GetSprite(ESpriteType.RollingStone))
                     {
-                        DamageAmmount = 20
+                        DamageAmmount = 20,
+                        MaxSpeed = Constants.SpeedBase * 1.5f
                     };
                     break;
             }
