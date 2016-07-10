@@ -23,7 +23,7 @@ namespace GameEngine.Impl.Colision
 
         protected override void OnZeroHp()
         {
-            Map.Remove(this);
+            Remove();
             PowerUpFactory factory = new PowerUpFactory();
             Map.Add(factory.CreatePowerUp(this.PowerUp, new Rectangle((int)Position.X+10, (int)Position.Y + 10, 14,14)));
         }

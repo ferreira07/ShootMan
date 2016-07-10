@@ -9,5 +9,7 @@ namespace GameEngine.Draw
     public interface ITimeChangeSprite
     {
         void PassTime(TimeSpan time);
+        bool AnimateOnce { get; set; }
+        bool StopAnimate { get; set; }
     }
 }

@@ -14,9 +14,38 @@ namespace GameEngine.Map
         public abstract EColisionLayer ColisionLayer { get; }
         public Rectangle ColisionRectangle { get; set; }
         public abstract EColisionType ColisionType { get; }
-        
-        public abstract void Damage(int ammount);
 
+        public int Hp { get; set; }
+        public int MaxHp { get; set; }
+        public void SetHp(int value)
+        {
+            Hp = value;
+            MaxHp = value;
+        }
+        public virtual void Damage(int ammount)
+        {
+            this.Hp -= ammount;
+            if (this.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Damage))
+            {
+                double damagePercent = 1.0 * (MaxHp - Hp) / MaxHp;
+                (this.Sprite as IDamageChangeSprite).SetDamagePercent(damagePercent);
+            }
+            if (Hp <= 0)
+            {
+                Hp = 0;
+                OnZeroHp();
+            }
+        }
+        protected virtual void OnZeroHp()
+        {
+            //TODO comportamento adequado para objeto destruido
+            Remove();
+        }
+        
         public BattleMap Map { get; set; }
+        public void Remove()
+        {
+            Map.Remove(this);
+        }
     }
 }

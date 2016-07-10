@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine.Player.AI;
+using GameEngine.Impl.Colision;
 
 namespace GameEngine.Map
 {
@@ -80,6 +81,8 @@ namespace GameEngine.Map
             AddRandomBarrier(EBarrierType.BasicBarrier, 10);
 
             Map.SetTime(TimeSpan.FromMinutes(2));
+
+            Map.ColisionStrategyFactory = new ColisionStrategyFactory();
 
             return Map;
         }

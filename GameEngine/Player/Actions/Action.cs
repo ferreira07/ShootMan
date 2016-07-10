@@ -9,42 +9,33 @@ namespace GameEngine.Player
     public abstract class Action
     {
         public Action() { }
-        public Action(EControllerAction action, int mpCost, TimeSpan exaustingTime, TimeSpan chargingTime)
+        public Action(EControllerAction action, int mpCost, TimeSpan exaustingActionTime, TimeSpan exaustingMoveTime, TimeSpan chargingTime)
         {
             ControllerAction = action;
             MpCost = mpCost;
-            ExaustingTime = exaustingTime;
+            ExaustingActionTime = exaustingActionTime;
+            ExaustingMoveTime = exaustingMoveTime;
             ChargingTime = chargingTime;
         }
         public int MpCost { get; set; }
-        // TODO Realizar ações com atraso
         public TimeSpan ChargingTime { get; set; }
 
         /// <summary>
         /// Tempo de Fadiga para o personagem
         /// </summary>
-        public TimeSpan ExaustingTime { get; set; }
+        public TimeSpan ExaustingActionTime { get; set; }
+        public TimeSpan ExaustingMoveTime { get; set; }
         public Character Character { get; set; }
         public EControllerAction ControllerAction { get; set; }
 
         public void Check()
         {
-            if (!Character.IsFatigated() &&
-                Character.Controller.Action(ControllerAction) &&
+            if (Character.Controller.Action(ControllerAction) &&
                 Character.Mp >= MpCost)
             {
 
                 Character.ExpendMp(MpCost);
-                Character.Fatigated(ExaustingTime);
                 Character.ChargingAction = new ChargingAction() { Action = this, RemainTime = ChargingTime };
-                //if (this.ChargingTime == TimeSpan.Zero)
-                //{
-                //    Execute();
-                //}
-                //else
-                //{
-                    
-                //}
             };
         }
 
@@ -55,6 +46,7 @@ namespace GameEngine.Player
 
         public void Execute()
         {
+            Character.Fatigated(ExaustingActionTime, ExaustingMoveTime);
             _Execute();
         }
 

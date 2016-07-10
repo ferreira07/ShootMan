@@ -44,6 +44,11 @@
     <Compile Include="Colision\Barrier.cs" />
     <Compile Include="Colision\BarrierFactory.cs" />
     <Compile Include="Colision\Box.cs" />
+    <Compile Include="Colision\ColisionStrategies\MovableBarrierColisionStrategy.cs" />
+    <Compile Include="Colision\ColisionStrategies\PowerUpCharacterColisionStrategy.cs" />
+    <Compile Include="Colision\ColisionStrategies\ProjectilColisionStrategy.cs" />
+    <Compile Include="Colision\ColisionStrategyFactory.cs" />
+    <Compile Include="Colision\MovableBarrier.cs" />
     <Compile Include="Colision\Wall.cs" />
     <Compile Include="Map\BattleMapBuilder.cs" />
     <Compile Include="Player\CharacterFactory.cs" />

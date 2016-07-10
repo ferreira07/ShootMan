@@ -21,8 +21,7 @@ namespace GameEngine.Player
             get { return EColisionType.Blocking; }
         }
 
-        public int Hp { get; set; }
-        public int MaxHp { get; set; }
+
 
         public int Mp { get { return (int)Math.Floor(RealMp); } }
         public float RealMp { get; set; }
@@ -38,11 +37,6 @@ namespace GameEngine.Player
         }
         public IController Controller { get; set; }
 
-        public void SetHp(int value)
-        {
-            Hp = value;
-            MaxHp = value;
-        }
         public void SetMp(int value, float rechargeSpeed)
         {
             RealMp = value;
@@ -59,31 +53,45 @@ namespace GameEngine.Player
             RealMp += (float)(MpRechargeSpeed * time.TotalSeconds);
             RealMp = Math.Min(RealMp, MaxMp);
 
-            if (IsFatigated())
+            if (IsActFatigated())
             {
-                FatigatedTime -= time;
-                if (FatigatedTime < TimeSpan.Zero)
+                FatigatedActionTime -= time;
+                if (FatigatedActionTime < TimeSpan.Zero)
                 {
-                    FatigatedTime = TimeSpan.Zero;
+                    FatigatedActionTime = TimeSpan.Zero;
+                }
+            }
+            if (IsMoveFatigated())
+            {
+                FatigatedMoveTime -= time;
+                if (FatigatedMoveTime < TimeSpan.Zero)
+                {
+                    FatigatedMoveTime = TimeSpan.Zero;
                 }
             }
         }
 
-        public TimeSpan FatigatedTime { get; private set; }
+        public TimeSpan FatigatedActionTime { get; private set; }
+        public TimeSpan FatigatedMoveTime { get; private set; }
 
-        internal bool IsFatigated()
+        internal bool IsActFatigated()
         {
-            return FatigatedTime != TimeSpan.Zero;
+            return FatigatedActionTime != TimeSpan.Zero;
         }
-        internal void Fatigated(TimeSpan exaustingTime)
+        internal bool IsMoveFatigated()
         {
-            FatigatedTime = exaustingTime;
+            return FatigatedMoveTime != TimeSpan.Zero;
+        }
+        internal void Fatigated(TimeSpan exaustingActionTime, TimeSpan exaustingMoveTime)
+        {
+            FatigatedActionTime = exaustingActionTime;
+            FatigatedMoveTime = exaustingMoveTime;
         }
         public ChargingAction ChargingAction { get; set; }
 
         internal bool CanAct()
         {
-            return !IsFatigated() && ChargingAction == null;
+            return !IsActFatigated() && ChargingAction == null;
         }
 
         private TimeSpan StartChargeShoot { get; set; }
@@ -114,8 +122,6 @@ namespace GameEngine.Player
             Controller.UpdateState();
             Recharge(gameTime.ElapsedGameTime);
             CheckActions(gameTime.ElapsedGameTime);
-
-            base.Update(gameTime);
         }
 
         private void SetFacing(Vector2 v)
@@ -141,26 +147,24 @@ namespace GameEngine.Player
             }
             else
             {
-                Vector2 v = Controller.Direction();
-                if (v.Length() > 1) v.Normalize();
-                Speed = v * MaxSpeed;
-                if (v != Vector2.Zero) SetFacing(v);
-                //TODO Como fazer para movimentar antes de executar alguma ação?
-
-                foreach (var action in Actions)
+                if (!IsMoveFatigated())
                 {
-                    action.Check();
+                    Vector2 v = Controller.Direction();
+                    if (v.Length() > 1) v.Normalize();
+                    Speed = v * MaxSpeed;
+                    if (v != Vector2.Zero) SetFacing(v);
+                    Map.Move(this, elapsedGameTime);
+                }
+                if (!IsActFatigated())
+                {
+                    foreach (var action in Actions)
+                    {
+                        action.Check();
+                    }
                 }
             }
         }
 
-        public override void OnColide(IColider c)
-        {
-            if (c is IPowerUp)
-            {
-                (c as IPowerUp).Aplly(this);
-            }
-        }
         public override void Damage(int ammount)
         {
             this.Hp -= ammount;
@@ -168,7 +172,7 @@ namespace GameEngine.Player
             {
                 Hp = 0;
                 //TODO comportamento adequado para personagem morto
-                Map.Remove(this);
+                Remove();
             }
         }
     }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Map
 {
-    public class BattleMap
+    public partial class BattleMap
     {
         public TimeSpan RemainTime { get; private set; }
         public List<IColider> ColisionObjects { get; private set; }
@@ -18,12 +18,16 @@ namespace GameEngine.Map
         public List<IMapObject> MapObjects { get; private set; }
         public List<Character> Characters { get; private set; }
 
+
+        private List<IMapObject> _ToRemove;
+
         public BattleMap()
         {
             ColisionObjects = new List<IColider>();
             MapObjects = new List<IMapObject>();
             Characters = new List<Character>();
             DrawableObjects = new List<DrawableObject>();
+            _ToRemove = new List<IMapObject>();
         }
 
         public void Add(IMapObject obj)
@@ -31,7 +35,7 @@ namespace GameEngine.Map
             MapObjects.Add(obj);
 
             IColider colider = obj as IColider;
-            if(colider!= null)
+            if (colider != null)
             {
                 ColisionObjects.Add(colider);
             }
@@ -45,7 +49,7 @@ namespace GameEngine.Map
             {
                 DrawableObjects.Add(drawable);
             }
-            
+
             obj.Map = this;
         }
         public void SetTime(TimeSpan time)
@@ -54,10 +58,18 @@ namespace GameEngine.Map
         }
         public void Remove(IMapObject obj)
         {
-            MapObjects.Remove(obj);
-            ColisionObjects.Remove(obj as IColider);
-            DrawableObjects.Remove(obj as DrawableObject);
-            //Não remover da lista de personagens
+            _ToRemove.Add(obj);
+        }
+        public void RemoveObjects()
+        {
+            foreach (var obj in _ToRemove)
+            {
+                MapObjects.Remove(obj);
+                ColisionObjects.Remove(obj as IColider);
+                DrawableObjects.Remove(obj as DrawableObject);
+                //Não remover da lista de personagens
+            }
+            _ToRemove.Clear();
         }
 
         public void PassTime(TimeSpan elapsedGameTime)

@@ -14,7 +14,7 @@ namespace GameEngine.Draw
         {
 
         }
-        public BasicPlayerSprite(Texture2D texture, int w = 32, int h = 48)
+        public BasicPlayerSprite(Texture2D texture, int w = 32, int h = 48, int moveCount = 4)
         {
             Texture = texture;
 
@@ -22,7 +22,6 @@ namespace GameEngine.Draw
             MoveCicle = 40;
 
             int dirCount = 4;
-            int moveCount = 4;
             Positions = GeneratePositions(w, h, dirCount, moveCount);
             this.SourceRectangle = Positions[facingIndex][movingIndex];
         }

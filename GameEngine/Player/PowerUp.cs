@@ -46,7 +46,7 @@ namespace GameEngine.Player
 
         public void Aplly(Character c)
         {
-            Map.Remove(this);
+            Remove();
             switch (this.PowerUpType)
             {
                 case EPowerUpType.Hp:

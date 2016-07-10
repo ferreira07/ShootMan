@@ -60,7 +60,10 @@ namespace GameEngine.Impl.Scene
             }
             else if (State == EBattleSceneState.Runing)
             {
+
                 Map.PassTime(gameTime.ElapsedGameTime);
+                Map.RemoveObjects();
+
                 if (IsGameOver())
                 {
                     State = EBattleSceneState.Ending;
@@ -80,7 +83,7 @@ namespace GameEngine.Impl.Scene
                             (item.Sprite as ITimeChangeSprite).PassTime(gameTime.ElapsedGameTime);
                         }
                     }
-
+                    Map.VerifyColision();
                     foreach (var control in Map.Characters.Select(c=>c.Controller))
                     {
                         if (control.Action(EControllerAction.Pause))

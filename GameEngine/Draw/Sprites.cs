@@ -23,6 +23,8 @@ namespace GameEngine.Draw
             _SpriteDict.Add(ESpriteType.Bullet, Load(content, "Images\\bullet1", 10));
             _SpriteDict.Add(ESpriteType.Bullet2, Load(content, "Images\\bullet2", 20));
             _SpriteDict.Add(ESpriteType.Fireball, LoadTimeAnimated(content, "Images\\fireball", 16,16,4, 0.3f));
+            _SpriteDict.Add(ESpriteType.RollingStone, LoadAnimated(content, "Images\\rollingstone", 32,32,3));
+            _SpriteDict.Add(ESpriteType.EmergingStone, LoadTimeAnimated(content, "Images\\emergingstone", 32, 32, 13, 0.1f));
 
             _SpriteDict.Add(ESpriteType.Crate, Load(content, "Images\\crate", 32));
             _SpriteDict.Add(ESpriteType.RedGem, LoadTimeAnimated(content, "Images\\RedGem", 14,14,4, 1));
@@ -43,10 +45,10 @@ namespace GameEngine.Draw
 
         private static Sprite LoadCharacter(ContentManager content, string imagePath)
         {
-            return LoadCharacter(content, imagePath, 32, 48);
+            return LoadAnimated(content, imagePath, 32, 48, 4);
         }
 
-        private static Sprite LoadCharacter(ContentManager content, string imagePath, int w, int h)
+        private static Sprite LoadAnimated(ContentManager content, string imagePath, int w, int h, int count)
         {
             return new BasicPlayerSprite(content.Load<Texture2D>(imagePath), w, h);
         }

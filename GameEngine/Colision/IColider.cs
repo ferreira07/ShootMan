@@ -10,6 +10,6 @@ namespace GameEngine.Colision
 
         EColisionType ColisionType { get; }
 
-        void Damage(int ammount);
+        void Damage(int ammount);        
     }
 }

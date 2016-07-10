@@ -13,12 +13,12 @@ namespace GameEngine.Player
         {
 
         }
-        public ProjectilAction(EControllerAction action, int mpCost, EProjectilType projectilTipe, TimeSpan exaustingTime)
-            : this(action, mpCost, projectilTipe, exaustingTime, TimeSpan.Zero)
+        public ProjectilAction(EControllerAction action, int mpCost, EProjectilType projectilTipe, TimeSpan exaustingActionTime)
+            : this(action, mpCost, projectilTipe, exaustingActionTime, TimeSpan.Zero, TimeSpan.Zero)
         { }
 
-        public ProjectilAction(EControllerAction action, int mpCost, EProjectilType projectilTipe, TimeSpan exaustingTime, TimeSpan chargingTime)
-            : base(action, mpCost, exaustingTime, chargingTime)
+        public ProjectilAction(EControllerAction action, int mpCost, EProjectilType projectilTipe, TimeSpan exaustingActionTime, TimeSpan exaustingMoveTime, TimeSpan chargingTime)
+            : base(action, mpCost, exaustingActionTime, exaustingMoveTime, chargingTime)
         {
             ProjectilType = projectilTipe;
         }

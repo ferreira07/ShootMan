@@ -27,6 +27,12 @@ namespace GameEngine.Impl.Colision
                 case EBarrierType.Wall:
                     ret = new Wall(Sprites.GetSprite(ESpriteType.barrier11), position);
                     break;
+                case EBarrierType.Stone:
+                    ret = new MovableBarrier(position, 50, (TimeChangeSprite)Sprites.GetSprite(ESpriteType.EmergingStone), Sprites.GetSprite(ESpriteType.RollingStone))
+                    {
+                        DamageAmmount = 20
+                    };
+                    break;
             }
             return ret;
         }

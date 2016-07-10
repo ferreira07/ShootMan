@@ -10,8 +10,8 @@ namespace GameEngine.Player
 {
     public class CreateBarrierAction : Action
     {
-        public CreateBarrierAction(EControllerAction action, int mpCost, IBarrierFactory factory, TimeSpan exaustingTime, TimeSpan chargingTime)
-            : base(action, mpCost, exaustingTime, chargingTime)
+        public CreateBarrierAction(EControllerAction action, int mpCost, IBarrierFactory factory, TimeSpan exaustingActionTime, TimeSpan exaustingMoveTime, TimeSpan chargingTime)
+            : base(action, mpCost, exaustingActionTime, exaustingMoveTime, chargingTime)
         {
             Factory = factory;
         }
@@ -21,7 +21,7 @@ namespace GameEngine.Player
         protected override void _Execute()
         {
             Rectangle position = GetBarrierBosition(Character.FacingDirection, Character.ColisionRectangle);
-            Character.Map.Add(Factory.CreateBarrier(EBarrierType.BasicBarrier, position));
+            Character.Map.Add(Factory.CreateBarrier(EBarrierType.Stone, position));
         }
 
         private Rectangle GetBarrierBosition(Vector2 dir, Rectangle creatorRect)

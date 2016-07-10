@@ -20,6 +20,8 @@ namespace GameEngine.Draw
         RedGem,
         Crate,
         BlueGem,
-        GreenGem
+        GreenGem,
+        RollingStone,
+        EmergingStone
     }
 }

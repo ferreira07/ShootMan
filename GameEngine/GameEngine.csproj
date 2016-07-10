@@ -58,9 +58,12 @@
     <Compile Include="Draw\Sprites.cs" />
     <Compile Include="Draw\TimeChangeSprite.cs" />
     <Compile Include="Map\BattleMap.cs" />
+    <Compile Include="Map\BattleMap.Move.cs" />
     <Compile Include="Map\IMapObject.cs" />
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Move\EProjectilType.cs" />
+    <Compile Include="Colision\IColisionStrategy.cs" />
+    <Compile Include="Colision\IColisionStrategyFactory.cs" />
     <Compile Include="Move\MoveTo.cs" />
     <Compile Include="Move\MovingObject.cs" />
     <Compile Include="Move\Projectil.cs" />

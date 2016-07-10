@@ -16,6 +16,9 @@ namespace GameEngine.Draw
         {
             get { return ESpriteChangeType.Time; }
         }
+        public bool AnimateOnce { get; set; }
+        public bool StopAnimate { get; set; }
+
         public TimeChangeSprite()
         {
 
@@ -31,14 +34,25 @@ namespace GameEngine.Draw
         }
         public void PassTime(TimeSpan time)
         {
-            TimeCount += time;
-            if(TimeCount > TimeCicle)
+            if (!StopAnimate)
             {
-                TimeCount = TimeSpan.Zero;
+                TimeCount += time;
+                if (TimeCount > TimeCicle)
+                {
+                    if (AnimateOnce)
+                    {
+                        TimeCount = TimeCicle;
+                        StopAnimate = true;
+                    }
+                    else
+                    {
+                        TimeCount = TimeSpan.Zero;
+                    }
+                }
+                int count = this.Positions.Count();
+                int index = (int)Math.Min(Math.Floor((TimeCount.TotalMilliseconds / TimeCicle.TotalMilliseconds) * count), count - 1);
+                this.SourceRectangle = Positions[index];
             }
-            int count = this.Positions.Count();
-            int index = (int)Math.Min(Math.Floor((TimeCount.TotalMilliseconds / TimeCicle.TotalMilliseconds) * count), count - 1);
-            this.SourceRectangle = Positions[index];
         }
         public override Sprite Clone()
         {

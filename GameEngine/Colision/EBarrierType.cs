@@ -10,6 +10,7 @@ namespace GameEngine.Colision
     {
         BasicBarrier,
         Wall,
-        Box
+        Box,
+        Stone
     }
 }

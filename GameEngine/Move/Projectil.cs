@@ -31,17 +31,5 @@ namespace GameEngine.Move
         {
             throw new NotImplementedException();
         }
-
-        public override void OnColide(IColider c)
-        {
-            if(c.ColisionType == EColisionType.Blocking)
-            {
-                //TODO calcular Dano
-                c.Damage(DamageAmmount);
-                Piercy--;
-                if(Piercy < 0)
-                    Map.Remove(this);
-            }
-        }
     }
 }
