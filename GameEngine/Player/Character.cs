@@ -117,11 +117,11 @@ namespace GameEngine.Player
             Actions = new List<Action>();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(TimeSpan elapsedGameTime)
         {
             Controller.UpdateState();
-            Recharge(gameTime.ElapsedGameTime);
-            CheckActions(gameTime.ElapsedGameTime);
+            Recharge(elapsedGameTime);
+            CheckActions(elapsedGameTime);
         }
 
         private void SetFacing(Vector2 v)

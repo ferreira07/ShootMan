@@ -72,12 +72,13 @@ namespace GameEngine.Impl.Scene
                 {
                     foreach (var item in Map.DrawableObjects.ToList())
                     {
-                        var moveObject = item as MovingObject;
+                        var moveObject = item as IUpdateableObject;
 
                         if (moveObject != null)
                         {
-                            moveObject.Update(gameTime);
+                            moveObject.Update(gameTime.ElapsedGameTime);
                         }
+
                         if (item.Sprite.SpriteChangeType.HasFlag(ESpriteChangeType.Time))
                         {
                             (item.Sprite as ITimeChangeSprite).PassTime(gameTime.ElapsedGameTime);

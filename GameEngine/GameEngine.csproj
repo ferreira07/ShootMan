@@ -52,6 +52,7 @@
     <Compile Include="Draw\IFacingChangeSprite.cs" />
     <Compile Include="Draw\IMoveChangeSprite.cs" />
     <Compile Include="Draw\ITimeChangeSprite.cs" />
+    <Compile Include="Draw\IUpdateableObject.cs" />
     <Compile Include="Draw\Sprite.cs" />
     <Compile Include="Draw\SpriteList.cs" />
     <Compile Include="Draw\SpriteList2.cs" />

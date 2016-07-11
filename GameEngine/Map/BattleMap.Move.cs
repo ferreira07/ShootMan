@@ -24,7 +24,7 @@ namespace GameEngine.Map
 
             if (obj.ColisionType == EColisionType.Blocking)
             {
-                TryMove(obj, speed);
+                TryMove(obj, speed, ColisionObjects.Where(c => c != obj && c.ColisionType == EColisionType.Blocking));
             }
             else
             {
@@ -32,6 +32,9 @@ namespace GameEngine.Map
             }
         }
 
+        /// <summary>
+        /// Verificar Colisão entre objetos do mapa
+        /// </summary>
         public void VerifyColision()
         {
             foreach (var item1 in ColisionObjects.Where(c => c.ColisionType == EColisionType.Hit).ToArray())
@@ -64,7 +67,7 @@ namespace GameEngine.Map
             obj.UpdateRectangle();
         }
 
-        private void TryMove(MovingObject obj, Vector2 speed)
+        private void TryMove(MovingObject obj, Vector2 speed, IEnumerable<IColider> colisionObjects)
         {
             //só tentar mover se tiver alguma velocidade
             if (speed == Vector2.Zero) return;
@@ -77,24 +80,25 @@ namespace GameEngine.Map
 
             bool colide = false;
             List<Vector2> sugestedPositions = new List<Vector2>();
-            foreach (var item in ColisionObjects.Where(c => c!= obj && c.ColisionType == EColisionType.Blocking))
+            List<IColider> newColisionObjects = new List<IColider>();
+
+            foreach (var item in colisionObjects)
             {
                 if (item.ColisionRectangle.Intersects(newPosition))
                 {
                     colide = true;
                     // Calcular um posição sugerida
                     sugestedPositions.Add(MoveTo.Move(speed.X, speed.Y, obj.ColisionRectangle, item.ColisionRectangle));
+                    newColisionObjects.Add(item);
                 }
             }
 
             if (colide)
             {
-                //Verificar qual posição sugerida se desloca mais
-                //tentar novamente andar nessa direção;
                 Vector2 newSpeed = sugestedPositions.OrderByDescending(v => v.Length()).First();
                 if (newSpeed.Length() < speed.Length())
                 {
-                    TryMove(obj, newSpeed);
+                    TryMove(obj, newSpeed, newColisionObjects);
                 }
             }
             else

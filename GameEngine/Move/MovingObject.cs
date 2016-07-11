@@ -10,7 +10,7 @@ using GameEngine.Draw;
 
 namespace GameEngine.Move
 {
-    public abstract class MovingObject : MapObject
+    public abstract class MovingObject : MapObject, IUpdateableObject
     {
         public float MaxSpeed { get; set; }
 
@@ -22,9 +22,9 @@ namespace GameEngine.Move
             ColisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
         }
 
-        public virtual void Update(GameTime gameTime)
+        public virtual void Update(TimeSpan elapsedGameTime)
         {
-            Map.Move(this, gameTime.ElapsedGameTime);
+            Map.Move(this, elapsedGameTime);
         }
     }
 }

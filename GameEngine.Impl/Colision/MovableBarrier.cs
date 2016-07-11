@@ -36,7 +36,7 @@ namespace GameEngine.Impl.Colision
             _State = EMovableBarrierState.Rising;
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(TimeSpan elapsedGameTime)
         {
             if(this._State == EMovableBarrierState.Rising)
             {
@@ -46,7 +46,7 @@ namespace GameEngine.Impl.Colision
                     _State = EMovableBarrierState.Barrier;
                 }
             }
-            base.Update(gameTime);
+            base.Update(elapsedGameTime);
         }
 
         public void StartMove(Vector2 facingDirection)

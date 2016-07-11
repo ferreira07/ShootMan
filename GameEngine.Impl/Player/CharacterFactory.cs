@@ -23,8 +23,8 @@ namespace GameEngine.Player
                 case ECharacterType.Fulano:
                     ret = new Character(Sprites.GetSprite(ESpriteType.char1), controller);
                     ret.Position = position - new Vector2(16, 16);
-                    ret.SetDrawPosition(0, -16);
-                    ret.SetSize(32, 32);
+                    ret.SetDrawPosition(-4, -21);
+                    ret.SetSize(25, 25);
                     ret.UpdateRectangle();
                     ret.SetHp(100);
                     ret.SetMp(50, 15);
@@ -36,8 +36,8 @@ namespace GameEngine.Player
                 case ECharacterType.Beltrano:
                     ret = new Character(Sprites.GetSprite(ESpriteType.char2), controller);
                     ret.Position = position - new Vector2(16, 16);
-                    ret.SetDrawPosition(0, -16);
-                    ret.SetSize(32, 32);
+                    ret.SetDrawPosition(-4, -21);
+                    ret.SetSize(25, 25);
                     ret.UpdateRectangle();
                     ret.SetHp(80);
                     ret.SetMp(50, 15);
@@ -50,8 +50,8 @@ namespace GameEngine.Player
                 case ECharacterType.Siclano:
                     ret = new Character(Sprites.GetSprite(ESpriteType.char3), controller);
                     ret.Position = position - new Vector2(16, 16);
-                    ret.SetDrawPosition(0, -16);
-                    ret.SetSize(32, 32);
+                    ret.SetDrawPosition(-4, -21);
+                    ret.SetSize(25, 25);
                     ret.UpdateRectangle();
                     ret.SetHp(120);
                     ret.SetMp(50, 12);

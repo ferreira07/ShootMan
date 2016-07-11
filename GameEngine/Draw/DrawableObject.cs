@@ -15,7 +15,7 @@ namespace GameEngine.Draw
         private int _Id = maxId++;
 
         public int Id { get { return _Id; } }
-
+        
         public Vector2 Position { get; set; }
 
         public int Width { get; set; }
@@ -52,6 +52,20 @@ namespace GameEngine.Draw
         {
             Dx = dx;
             Dy = dy;
+        }
+
+
+        public override bool Equals(object obj)
+        {
+            return obj is DrawableObject ? Equals(obj as DrawableObject) : false;
+        }
+        public bool Equals(DrawableObject obj)
+        {
+            return obj.Id == Id;
+        }
+        public override int GetHashCode()
+        {
+            return Id;
         }
     }
 }
