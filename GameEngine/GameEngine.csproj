@@ -60,7 +60,9 @@
     <Compile Include="Draw\Sprites.cs" />
     <Compile Include="Draw\TimeChangeSprite.cs" />
     <Compile Include="Map\BattleMap.cs" />
-    <Compile Include="Map\BattleMap.Move.cs" />
+    <Compile Include="Map\ColisionManager.cs" />
+    <Compile Include="Map\IBattleMapFacade.cs" />
+    <Compile Include="Map\IColisionManager.cs" />
     <Compile Include="Map\IMapObject.cs" />
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Move\EProjectilType.cs" />
@@ -98,6 +100,7 @@
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -37,8 +37,7 @@ namespace GameEngine.Impl.Player.Actions
                 if (item.ColisionRectangle.Intersects(position))
                 {
                     (item as MovableBarrier).StartMove(Character.FacingDirection);
-                }
-                
+                }                
             }
         }
 

@@ -95,7 +95,7 @@ namespace GameEngine.Impl.Scene
                     Players.Add(new PlayerSelection() { Controller = new KeyboardController(1) });
                 }
             }
-            if (_oldState!= null && _oldState.IsKeyUp(Keys.Space) && keyboardState.IsKeyDown(Keys.Space))
+            if (_oldState != null && _oldState.IsKeyUp(Keys.Space) && keyboardState.IsKeyDown(Keys.Space))
             {
                 bool hasController = HasKeybord(0);
                 if (!hasController)
@@ -149,7 +149,7 @@ namespace GameEngine.Impl.Scene
 
         private void StartGame()
         {
-            BattleMapBuilder builder = new BattleMapBuilder();
+            BattleMapFacadeBuilder builder = new BattleMapFacadeBuilder();
             foreach (var item in Players)
             {
                 builder.AddCharacter(item.Type, item.Controller);

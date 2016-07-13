@@ -13,9 +13,9 @@ using GameEngine.Impl.Colision;
 
 namespace GameEngine.Map
 {
-    public class BattleMapBuilder
+    public class BattleMapFacadeBuilder
     {
-        private BattleMap Map;
+        private BattleMapFacade Map;
 
         private IBarrierFactory barrierFactory;
 
@@ -31,9 +31,9 @@ namespace GameEngine.Map
             new Vector2((MaxX-1)*m, sY + (MaxY-1)*m)
         };
 
-        public BattleMapBuilder()
+        public BattleMapFacadeBuilder()
         {
-            Map = new BattleMap();
+            Map = new BattleMapFacade();
         }
 
         public void AddBarrierFactory(IBarrierFactory factory)
@@ -64,7 +64,7 @@ namespace GameEngine.Map
             }
         }
 
-        public BattleMap BuildMap()
+        public BattleMapFacade BuildMap()
         {
             for (int i = 0; i <= MaxX; i++)
             {
@@ -81,9 +81,7 @@ namespace GameEngine.Map
             AddRandomBarrier(EBarrierType.BasicBarrier, 10);
 
             Map.SetTime(TimeSpan.FromMinutes(2));
-
-            Map.ColisionStrategyFactory = new ColisionStrategyFactory();
-
+            
             return Map;
         }
 

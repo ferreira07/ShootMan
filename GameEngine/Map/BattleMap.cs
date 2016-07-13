@@ -12,14 +12,7 @@ namespace GameEngine.Map
 {
     public partial class BattleMap
     {
-        public TimeSpan RemainTime { get; private set; }
-        public List<IColider> ColisionObjects { get; private set; }
-        public List<DrawableObject> DrawableObjects { get; private set; }
-        public List<IMapObject> MapObjects { get; private set; }
-        public List<Character> Characters { get; private set; }
 
-
-        private List<IMapObject> _ToRemove;
 
         public BattleMap()
         {
@@ -29,6 +22,15 @@ namespace GameEngine.Map
             DrawableObjects = new List<DrawableObject>();
             _ToRemove = new List<IMapObject>();
         }
+
+
+        #region Objects Manage 
+        public List<IColider> ColisionObjects { get; private set; }
+        public List<DrawableObject> DrawableObjects { get; private set; }
+        public List<IMapObject> MapObjects { get; private set; }
+        public List<Character> Characters { get; private set; }
+
+        private List<IMapObject> _ToRemove;
 
         public void Add(IMapObject obj)
         {
@@ -49,12 +51,6 @@ namespace GameEngine.Map
             {
                 DrawableObjects.Add(drawable);
             }
-
-            obj.Map = this;
-        }
-        public void SetTime(TimeSpan time)
-        {
-            RemainTime = time;
         }
         public void Remove(IMapObject obj)
         {
@@ -72,10 +68,22 @@ namespace GameEngine.Map
             _ToRemove.Clear();
         }
 
+        #endregion
+
+        #region Time Manage
+
+        public TimeSpan RemainTime { get; private set; }
+
+        public void SetTime(TimeSpan time)
+        {
+            RemainTime = time;
+        }
         public void PassTime(TimeSpan elapsedGameTime)
         {
             RemainTime -= elapsedGameTime;
             if (RemainTime <= TimeSpan.Zero) RemainTime = TimeSpan.Zero;
         }
+        
+        #endregion
     }
 }

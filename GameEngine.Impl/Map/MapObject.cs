@@ -1,11 +1,11 @@
-﻿using GameEngine.Colision;
-using GameEngine.Draw;
+﻿using GameEngine.Draw;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
+using GameEngine.Colision;
 
 namespace GameEngine.Map
 {

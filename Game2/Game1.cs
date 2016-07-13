@@ -47,7 +47,7 @@ namespace Game2
             //Scene = new PlayerSelectionScene();
             BattleScene bs = new BattleScene();
 
-            BattleMapBuilder builder = new BattleMapBuilder();
+            BattleMapFacadeBuilder builder = new BattleMapFacadeBuilder();
             builder.AddCharacter(ECharacterType.Fulano, new KeyboardController(0));
             builder.AddCharacter(ECharacterType.Fulano, new KeyboardController(1));
             builder.AddBarrierFactory(new BarrierFactory());

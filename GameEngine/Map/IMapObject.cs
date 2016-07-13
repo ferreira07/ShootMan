@@ -9,6 +9,6 @@ namespace GameEngine.Map
     public interface IMapObject
     {
         int Id { get; }
-        BattleMap Map { get; set; }
+        IBattleMapFacade Map { get; set; }
     }
 }

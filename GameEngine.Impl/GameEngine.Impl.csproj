@@ -51,7 +51,10 @@
     <Compile Include="Colision\ColisionStrategyFactory.cs" />
     <Compile Include="Colision\MovableBarrier.cs" />
     <Compile Include="Colision\Wall.cs" />
-    <Compile Include="Map\BattleMapBuilder.cs" />
+    <Compile Include="Map\BattleMapFacade.cs" />
+    <Compile Include="Map\BattleMapFacadeBuilder.cs" />
+    <Compile Include="Map\ColisionManager.cs" />
+    <Compile Include="Map\MapObject.cs" />
     <Compile Include="Player\Actions\CreateBarrierAction.cs" />
     <Compile Include="Player\Actions\MoveObjectAction.cs" />
     <Compile Include="Player\Actions\ProjectilAction.cs" />
@@ -66,6 +69,9 @@
     <Reference Include="MonoGame.Framework">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\MonoGame\v3.0\Assemblies\Windows\MonoGame.Framework.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Move\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

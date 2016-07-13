@@ -74,15 +74,15 @@ namespace GameEngine.Player
         public TimeSpan FatigatedActionTime { get; private set; }
         public TimeSpan FatigatedMoveTime { get; private set; }
 
-        internal bool IsActFatigated()
+        public bool IsActFatigated()
         {
             return FatigatedActionTime != TimeSpan.Zero;
         }
-        internal bool IsMoveFatigated()
+        public bool IsMoveFatigated()
         {
             return FatigatedMoveTime != TimeSpan.Zero;
         }
-        internal void Fatigated(TimeSpan exaustingActionTime, TimeSpan exaustingMoveTime)
+        public void Fatigated(TimeSpan exaustingActionTime, TimeSpan exaustingMoveTime)
         {
             FatigatedActionTime = exaustingActionTime;
             FatigatedMoveTime = exaustingMoveTime;

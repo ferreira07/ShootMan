@@ -9,16 +9,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Map
+namespace GameEngine.Impl.Map
 {
-    public partial class BattleMap
+    public class ColisionManager
     {
         public IColisionStrategyFactory ColisionStrategyFactory { get; set; }
+
         /// <summary>
         /// Executar movimento, para evitar colisões entre objetos do tipo bloking
         /// </summary>
         /// <param name="obj"></param>
-        public void Move(MovingObject obj, TimeSpan elapsedGameTime)
+        public void Move(MovingObject obj, TimeSpan elapsedGameTime, List<IColider> ColisionObjects)
         {
             Vector2 speed = obj.Speed * elapsedGameTime.Milliseconds / 1000 * new Vector2(1, -1);
 
@@ -35,7 +36,7 @@ namespace GameEngine.Map
         /// <summary>
         /// Verificar Colisão entre objetos do mapa
         /// </summary>
-        public void VerifyColision()
+        public void VerifyColision(List<IColider> ColisionObjects)
         {
             foreach (var item1 in ColisionObjects.Where(c => c.ColisionType == EColisionType.Hit).ToArray())
             {
@@ -71,8 +72,7 @@ namespace GameEngine.Map
         {
             //só tentar mover se tiver alguma velocidade
             if (speed == Vector2.Zero) return;
-
-            //TODO Calcular nova posição
+            
             float px = obj.ColisionRectangle.X + speed.X;
             float py = obj.ColisionRectangle.Y + speed.Y;
 

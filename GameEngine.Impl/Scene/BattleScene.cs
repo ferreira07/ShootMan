@@ -16,17 +16,11 @@ namespace GameEngine.Impl.Scene
 {
     public class BattleScene : IBattleScene
     {
-        public BattleMap Map;
+        public BattleMapFacade Map;
         private EBattleSceneState State = EBattleSceneState.Ready;
 
         public event EventHandler<IScene> ChangeScene;
-
-        private bool IsGameOver()
-        {
-            return !(Map.Characters.Where(c => c.Hp > 0).Count() > 1) || Map.RemainTime == TimeSpan.Zero;
-        }
-
-
+        
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             spriteBatch.Begin();
@@ -60,11 +54,9 @@ namespace GameEngine.Impl.Scene
             }
             else if (State == EBattleSceneState.Runing)
             {
+                Map.StartNewFrame(gameTime.ElapsedGameTime);
 
-                Map.PassTime(gameTime.ElapsedGameTime);
-                Map.RemoveObjects();
-
-                if (IsGameOver())
+                if (Map.IsGameOver())
                 {
                     State = EBattleSceneState.Ending;
                 }
@@ -85,7 +77,7 @@ namespace GameEngine.Impl.Scene
                         }
                     }
                     Map.VerifyColision();
-                    foreach (var control in Map.Characters.Select(c=>c.Controller))
+                    foreach (var control in Map.Characters.Select(c => c.Controller))
                     {
                         if (control.Action(EControllerAction.Pause))
                         {
