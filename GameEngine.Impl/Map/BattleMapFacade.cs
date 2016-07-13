@@ -18,9 +18,11 @@ namespace GameEngine.Map
             this.Map = new BattleMap();
             ColisionManager = new ColisionManager();
             ColisionManager.ColisionStrategyFactory = new ColisionStrategyFactory();
+            DamageManager = new DamageManager();
         }
         private BattleMap Map { get; set; }
         private IColisionManager ColisionManager { get; set; }
+        private IDamageManager DamageManager { get; set; }
 
         public List<Character> Characters { get { return Map.Characters; } }
         public List<IColider> ColisionObjects { get { return Map.ColisionObjects; } }
@@ -63,6 +65,11 @@ namespace GameEngine.Map
         public void SetTime(TimeSpan timeSpan)
         {
             Map.SetTime(timeSpan);
+        }
+
+        public void DoDamage(IAttackContainer attackContainer, IDefensesContainer defenseContainer)
+        {
+            DamageManager.DoDamage(attackContainer, defenseContainer);
         }
     }
 }

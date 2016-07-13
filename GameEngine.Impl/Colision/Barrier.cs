@@ -10,7 +10,7 @@ using GameEngine.Colision;
 
 namespace GameEngine.Impl.Colision
 {
-    public class Barrier : MapObject
+    public class Barrier : MapObject, IDefensesContainer
     {
         public Barrier(RectangleF position, int hp, Sprite sprite)
         {
@@ -20,7 +20,11 @@ namespace GameEngine.Impl.Colision
             Position = new Vector2(position.X, position.Y);
             SetHp(hp);
         }
-        
+
+        protected Barrier()
+        {
+        }
+
         public override EColisionLayer ColisionLayer
         {
             get
@@ -29,7 +33,6 @@ namespace GameEngine.Impl.Colision
             }
         }
 
-        public override EColisionType ColisionType { get { return EColisionType.Blocking; } }              
-        
+        public override EColisionType ColisionType { get { return EColisionType.Blocking; } }        
     }
 }

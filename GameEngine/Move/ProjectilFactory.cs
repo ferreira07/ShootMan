@@ -26,7 +26,7 @@ namespace GameEngine.Move
                     p.DrawRectangle = p.Sprite.SourceRectangle;
                     p.SetSize(10, 10);
                     p.Speed = direction * (Constants.SpeedBase * 2.5f);
-                    p.DamageAmmount = 10;
+                    p.Attack = new Map.Attack(10);
                     break;
                 case EProjectilType.ChargedBullet:
                     p.Width = 20;
@@ -35,7 +35,7 @@ namespace GameEngine.Move
                     p.DrawRectangle = p.Sprite.SourceRectangle;
                     p.SetSize(20, 20);
                     p.Speed = direction * (Constants.SpeedBase * 5f);
-                    p.DamageAmmount = 20;
+                    p.Attack = new Map.Attack(20);
                     break;
                 case EProjectilType.Fireball:
                     p.Width = 16;
@@ -44,7 +44,7 @@ namespace GameEngine.Move
                     p.DrawRectangle = p.Sprite.SourceRectangle;
                     p.SetSize(16, 16);
                     p.Speed = direction * (Constants.SpeedBase * 2f);
-                    p.DamageAmmount = 20;
+                    p.Attack = new Map.Attack(25);
                     break;
             }
             p.Position = _GetStartPosition(direction, CreatorRectangle, p.Width, p.Height);

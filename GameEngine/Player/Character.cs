@@ -21,8 +21,6 @@ namespace GameEngine.Player
             get { return EColisionType.Blocking; }
         }
 
-
-
         public int Mp { get { return (int)Math.Floor(RealMp); } }
         public float RealMp { get; set; }
         public float MpRechargeSpeed { get; set; }

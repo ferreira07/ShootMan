@@ -32,6 +32,7 @@ namespace GameEngine.Player
                     ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5), TimeSpan.FromSeconds(0.2), TimeSpan.FromSeconds(0.2)));
                     ret.AddAction(new ProjectilAction(EControllerAction.Release3, 50, EProjectilType.ChargedBullet, TimeSpan.FromSeconds(1)));
                     ret.MaxSpeed = Constants.SpeedBase;
+                    ret.Defenses = new Map.Defenses();
                     break;
                 case ECharacterType.Beltrano:
                     ret = new Character(Sprites.GetSprite(ESpriteType.char2), controller);
@@ -46,6 +47,7 @@ namespace GameEngine.Player
                     ret.AddAction(new MoveObjectAction(EControllerAction.Release3, 10, TimeSpan.FromSeconds(1)));
                     ret.AddAction(new CreateBarrierAction(EControllerAction.Release4, 30, new BarrierFactory(), TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(0.2), TimeSpan.Zero));
                     ret.MaxSpeed = Constants.SpeedBase * 1.1f;
+                    ret.Defenses = new Map.Defenses();
                     break;
                 case ECharacterType.Siclano:
                     ret = new Character(Sprites.GetSprite(ESpriteType.char3), controller);
@@ -59,6 +61,7 @@ namespace GameEngine.Player
                     ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5), TimeSpan.FromSeconds(0.2), TimeSpan.FromSeconds(0.2)));
                     ret.AddAction(new ProjectilAction(EControllerAction.Release3, 50, EProjectilType.ChargedBullet, TimeSpan.FromSeconds(1)));
                     ret.MaxSpeed = Constants.SpeedBase * 0.9f;
+                    ret.Defenses = new Map.Defenses();
                     break;
             }
 

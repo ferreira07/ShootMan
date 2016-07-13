@@ -7,10 +7,11 @@ using System.Threading.Tasks;
 using GameEngine.Colision;
 using Microsoft.Xna.Framework;
 using GameEngine.Draw;
+using GameEngine.Map;
 
 namespace GameEngine.Impl.Colision
 {
-    public class MovableBarrier : MovingObject
+    public class MovableBarrier : MovingObject, IAttackContainer, IDefensesContainer
     {
         private enum EMovableBarrierState
         {
@@ -62,6 +63,7 @@ namespace GameEngine.Impl.Colision
             this._State = EMovableBarrierState.Moving;
         }
 
+
         public override EColisionLayer ColisionLayer
         {
             get
@@ -78,6 +80,10 @@ namespace GameEngine.Impl.Colision
             }
         }
 
-        public int DamageAmmount { get; internal set; }
+        public Attack GetAttack()
+        {
+            return Attack;
+        }
+        public Attack Attack { get; internal set; }
     }
 }

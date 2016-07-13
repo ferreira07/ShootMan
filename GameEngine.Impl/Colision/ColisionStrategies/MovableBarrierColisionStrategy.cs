@@ -1,4 +1,5 @@
 ﻿using GameEngine.Colision;
+using GameEngine.Map;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,8 @@ namespace GameEngine.Impl.Colision.ColisionStrategies
         }
         public void ProcessColision()
         {
-            Colider.Damage(MovableBarrier.DamageAmmount);
+            if (Colider is IDefensesContainer)
+                MovableBarrier.Map.DoDamage(MovableBarrier, Colider as IDefensesContainer);
             MovableBarrier.Remove();
         }
     }

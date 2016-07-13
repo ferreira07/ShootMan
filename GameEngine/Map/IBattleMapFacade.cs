@@ -20,6 +20,7 @@ namespace GameEngine.Map
         void Remove(IMapObject mapObject);
         void SetTime(TimeSpan timeSpan);
         void StartNewFrame(TimeSpan elapsedGameTime);
+        void DoDamage(IAttackContainer attackContainer, IDefensesContainer defense);
         void VerifyColision();
     }
 }

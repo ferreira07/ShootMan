@@ -9,6 +9,7 @@ using GameEngine.Scene;
 using System.Collections.Generic;
 using System.Linq;
 using GameEngine.Impl.Scene;
+using System;
 
 namespace ShootMan
 {
@@ -47,7 +48,6 @@ namespace ShootMan
 
             Sprites.Load(Content);
             Fonts.Load(Content);
-
             Scene = new PlayerSelectionScene();
 
             Scene.ChangeScene += changeScene;

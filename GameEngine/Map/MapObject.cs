@@ -9,7 +9,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameEngine.Map
 {
-    public abstract class MapObject : DrawableObject, IColider, IMapObject
+    public abstract class MapObject : DrawableObject, IColider, IMapObject, IDefensesContainer
     {
         public abstract EColisionLayer ColisionLayer { get; }
         public RectangleF ColisionRectangle { get; set; }
@@ -47,6 +47,13 @@ namespace GameEngine.Map
         public void Remove()
         {
             Map.Remove(this);
+        }
+
+        public Defenses Defenses { get; set; }
+
+        public Defenses GetDefenses()
+        {
+            return Defenses;
         }
     }
 }

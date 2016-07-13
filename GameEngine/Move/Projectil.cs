@@ -1,4 +1,5 @@
 ﻿using GameEngine.Colision;
+using GameEngine.Map;
 using GameEngine.Player;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GameEngine.Move
 {
-    public class Projectil : MovingObject
+    public class Projectil : MovingObject, IAttackContainer
     {
         public int Piercy { get; set; }
 
@@ -17,7 +18,7 @@ namespace GameEngine.Move
             get { return EColisionType.Hit; }
         }
 
-        public int DamageAmmount { get; internal set; }
+        public Attack Attack { get; internal set; }
 
         public override EColisionLayer ColisionLayer
         {
@@ -30,6 +31,11 @@ namespace GameEngine.Move
         public override void Damage(int ammount)
         {
             throw new NotImplementedException();
+        }
+
+        public Attack GetAttack()
+        {
+            return Attack;
         }
     }
 }
