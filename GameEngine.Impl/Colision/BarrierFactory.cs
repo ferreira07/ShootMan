@@ -13,7 +13,7 @@ namespace GameEngine.Impl.Colision
 {
     public class BarrierFactory : IBarrierFactory
     {
-        public IMapObject CreateBarrier(EBarrierType type, Rectangle position)
+        public IMapObject CreateBarrier(EBarrierType type, RectangleF position)
         {
             IMapObject ret = null;
             switch (type)

@@ -14,10 +14,10 @@ namespace GameEngine.Player
     {
         public EPowerUpType PowerUpType { get; set; }
 
-        public PowerUp(Rectangle position, Sprite sprite, EPowerUpType powerUpType)
+        public PowerUp(RectangleF position, Sprite sprite, EPowerUpType powerUpType)
         {
             Sprite = sprite;
-            DrawRectangle = position;
+            DrawRectangle = position.ToRectangle();
             ColisionRectangle = position;
             Position = new Vector2(position.X, position.Y);
             PowerUpType = powerUpType;

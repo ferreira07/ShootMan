@@ -6,12 +6,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameEngine.Colision;
 
 namespace GameEngine.Move
 {
     public class ProjectilFactory
     {
-        public static Projectil Create(EProjectilType type, Vector2 direction, Rectangle CreatorRectangle)
+        public static Projectil Create(EProjectilType type, Vector2 direction, RectangleF CreatorRectangle)
         {
             Projectil p = new Projectil();
             direction.Normalize();
@@ -51,11 +52,11 @@ namespace GameEngine.Move
             return p;
         }
 
-        private static Vector2 _GetStartPosition(Vector2 dir, Rectangle creatorRect, int width, int height)
+        private static Vector2 _GetStartPosition(Vector2 dir, RectangleF creatorRect, int width, int height)
         {
             float x = 0, y = 0;
-            int cx = creatorRect.X + creatorRect.Width / 2 - width / 2;
-            int cy = creatorRect.Y + creatorRect.Height / 2 - height / 2;
+            float cx = creatorRect.X + creatorRect.Width / 2 - width / 2;
+            float cy = creatorRect.Y + creatorRect.Height / 2 - height / 2;
             float proportionCreator = creatorRect.Width / creatorRect.Height;
             if (Math.Abs(dir.X) > Math.Abs(dir.Y) * proportionCreator)
             {

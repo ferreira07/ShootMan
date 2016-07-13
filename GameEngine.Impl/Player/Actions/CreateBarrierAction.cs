@@ -21,16 +21,16 @@ namespace GameEngine.Impl.Player.Actions
 
         protected override void _Execute()
         {
-            Rectangle position = GetBarrierPosition(Character.FacingDirection, Character.ColisionRectangle);
+            RectangleF position = GetBarrierPosition(Character.FacingDirection, Character.ColisionRectangle);
             Character.Map.Add(Factory.CreateBarrier(EBarrierType.Stone, position));
         }
 
-        private Rectangle GetBarrierPosition(Vector2 dir, Rectangle creatorRect)
+        private RectangleF GetBarrierPosition(Vector2 dir, RectangleF creatorRect)
         {
             int width = 32, height = 32;
             float x = 0, y = 0;
-            int cx = creatorRect.X + creatorRect.Width / 2 - width / 2;
-            int cy = creatorRect.Y + creatorRect.Height / 2 - height / 2;
+            float cx = creatorRect.X + creatorRect.Width / 2 - width / 2;
+            float cy = creatorRect.Y + creatorRect.Height / 2 - height / 2;
             float proportionCreator = creatorRect.Width / creatorRect.Height;
             if (Math.Abs(dir.X) > Math.Abs(dir.Y) * proportionCreator)
             {
@@ -58,7 +58,7 @@ namespace GameEngine.Impl.Player.Actions
                 }
                 x = cx + ((cy - y) * dir.X) / dir.Y;
             }
-            return new Rectangle((int)x, (int)y, width, height);
+            return new RectangleF(x, y, width, height);
         }
     }
 }

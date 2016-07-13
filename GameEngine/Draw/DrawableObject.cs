@@ -15,7 +15,7 @@ namespace GameEngine.Draw
         private int _Id = maxId++;
 
         public int Id { get { return _Id; } }
-        
+
         public Vector2 Position { get; set; }
 
         public int Width { get; set; }
@@ -31,13 +31,13 @@ namespace GameEngine.Draw
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-#if Debuging
-#endif
+#if DEBUG
             if (this is IColider)
             {
                 Sprite s = Sprites.GetSprite(ESpriteType.ColisionArea);
                 spriteBatch.Draw(s.Texture, (this as IColider).ColisionRectangle, s.SourceRectangle, Color.White);
             }
+#endif
             spriteBatch.Draw(Sprite.Texture, DrawRectangle, Sprite.SourceRectangle, Color.White);
 
         }

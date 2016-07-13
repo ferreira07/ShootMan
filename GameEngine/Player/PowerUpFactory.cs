@@ -1,4 +1,5 @@
-﻿using GameEngine.Draw;
+﻿using GameEngine.Colision;
+using GameEngine.Draw;
 using GameEngine.Map;
 using Microsoft.Xna.Framework;
 using System;
@@ -11,7 +12,7 @@ namespace GameEngine.Player
 {
     public class PowerUpFactory
     {
-        public IMapObject CreatePowerUp(EPowerUpType type, Rectangle position)
+        public IMapObject CreatePowerUp(EPowerUpType type, RectangleF position)
         {
             PowerUp ret = null;
             switch (type)

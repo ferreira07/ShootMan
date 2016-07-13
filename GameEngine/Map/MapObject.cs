@@ -12,7 +12,7 @@ namespace GameEngine.Map
     public abstract class MapObject : DrawableObject, IColider, IMapObject
     {
         public abstract EColisionLayer ColisionLayer { get; }
-        public Rectangle ColisionRectangle { get; set; }
+        public RectangleF ColisionRectangle { get; set; }
         public abstract EColisionType ColisionType { get; }
 
         public int Hp { get; set; }

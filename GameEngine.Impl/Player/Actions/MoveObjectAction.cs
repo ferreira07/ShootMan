@@ -29,7 +29,7 @@ namespace GameEngine.Impl.Player.Actions
 
         protected override void _Execute()
         {
-            Rectangle position = GetAreaPosition(Character.FacingDirection, Character.ColisionRectangle);
+            RectangleF position = GetAreaPosition(Character.FacingDirection, Character.ColisionRectangle);
             foreach (var item in Character.Map.ColisionObjects.Where(c =>
                 c is MovableBarrier &&
                 c.ColisionType == EColisionType.Blocking))
@@ -42,11 +42,11 @@ namespace GameEngine.Impl.Player.Actions
             }
         }
 
-        private Rectangle GetAreaPosition(Vector2 facingDirection, Rectangle colisionRectangle)
+        private RectangleF GetAreaPosition(Vector2 facingDirection, RectangleF colisionRectangle)
         {
-            int px = (int)(colisionRectangle.X + facingDirection.X * (colisionRectangle.Width / 2 + Tolerance));
-            int py = (int)(colisionRectangle.Y - facingDirection.Y * (colisionRectangle.Height / 2 + Tolerance));
-            return new Rectangle(px, py, colisionRectangle.Width, colisionRectangle.Height);
+            float px = colisionRectangle.X + facingDirection.X * (colisionRectangle.Width / 2 + Tolerance);
+            float py = colisionRectangle.Y - facingDirection.Y * (colisionRectangle.Height / 2 + Tolerance);
+            return new RectangleF(px, py, colisionRectangle.Width, colisionRectangle.Height);
         }
     }
 }

@@ -21,17 +21,17 @@ namespace GameEngine.Impl.Colision
         private EMovableBarrierState _State;
         private TimeChangeSprite _RisingSprite;
         private Sprite _MovableSprite;
-        public MovableBarrier(Rectangle position, int hp, TimeChangeSprite risingSprite, Sprite movableSprite)
+        public MovableBarrier(RectangleF position, int hp, TimeChangeSprite risingSprite, Sprite movableSprite)
         {
             _RisingSprite = risingSprite;
             _RisingSprite.AnimateOnce = true;
             _MovableSprite = movableSprite;
             Sprite = risingSprite;
-            DrawRectangle = position;
+            DrawRectangle = position.ToRectangle();
             ColisionRectangle = position;
             Position = new Vector2(position.X, position.Y);
-            Width = position.Width;
-            Height = position.Height;
+            Width = DrawRectangle.Width;
+            Height = DrawRectangle.Height;
             SetHp(hp);
             _State = EMovableBarrierState.Rising;
         }

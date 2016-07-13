@@ -19,7 +19,7 @@ namespace GameEngine.Move
         public void UpdateRectangle()
         {
             DrawRectangle = new Rectangle((int)Position.X + Dx, (int)Position.Y + Dy, DrawRectangle.Width, DrawRectangle.Height);
-            ColisionRectangle = new Rectangle((int)Position.X, (int)Position.Y, Width, Height);
+            ColisionRectangle = new RectangleF(Position.X, Position.Y, Width, Height);
         }
 
         public virtual void Update(TimeSpan elapsedGameTime)

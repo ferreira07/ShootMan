@@ -12,10 +12,10 @@ namespace GameEngine.Impl.Colision
 {
     public class Barrier : MapObject
     {
-        public Barrier(Rectangle position, int hp, Sprite sprite)
+        public Barrier(RectangleF position, int hp, Sprite sprite)
         {
             Sprite = sprite;
-            DrawRectangle = position;
+            DrawRectangle = position.ToRectangle();
             ColisionRectangle = position;
             Position = new Vector2(position.X, position.Y);
             SetHp(hp);

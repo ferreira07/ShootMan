@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GameEngine.Colision;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace GameEngine.Move
 {
     public class MoveTo
     {
-        public static Vector2 Move(float x, float y, Rectangle ColisionRectangle, Rectangle item)
+        public static Vector2 Move(float x, float y, RectangleF ColisionRectangle, RectangleF item)
         {
             x = RepositionAxis(x, ColisionRectangle.X, ColisionRectangle.Width, item.X, item.Width);
 
@@ -18,7 +19,7 @@ namespace GameEngine.Move
             return new Vector2(x, y);
         }
 
-        public static float RepositionAxis(float v, int p1, int s1, int p2, int s2)
+        public static float RepositionAxis(float v, float p1, float s1, float p2, float s2)
         {
             if (v > 0 && //Velocidade maior que 0
                 p1 + s1 <= p2 && //Antes não havia colisão

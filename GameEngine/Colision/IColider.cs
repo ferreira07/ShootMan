@@ -4,7 +4,7 @@ namespace GameEngine.Colision
 {
     public interface IColider
     {
-        Rectangle ColisionRectangle { get; }
+        RectangleF ColisionRectangle { get; }
 
         EColisionLayer ColisionLayer { get; }
 

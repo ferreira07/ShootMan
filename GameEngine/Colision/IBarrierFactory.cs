@@ -5,6 +5,6 @@ namespace GameEngine.Colision
 {
     public interface IBarrierFactory
     {
-        IMapObject CreateBarrier(EBarrierType type, Rectangle position);
+        IMapObject CreateBarrier(EBarrierType type, RectangleF position);
     }
 }

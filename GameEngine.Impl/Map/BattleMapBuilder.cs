@@ -87,9 +87,9 @@ namespace GameEngine.Map
             return Map;
         }
 
-        private static Rectangle GetRectangle(int x, int y)
+        private static RectangleF GetRectangle(int x, int y)
         {
-            return new Rectangle(x * m, sY + y * m, 1 * m, 1 * m);
+            return new RectangleF(x * m, sY + y * m, 1 * m, 1 * m);
         }
     }
 }

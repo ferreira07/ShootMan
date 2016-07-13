@@ -15,7 +15,7 @@ namespace GameEngine.Impl.Colision
     {
         public EPowerUpType PowerUp { get; set; }
 
-        public Box(Rectangle position, int hp, Sprite sprite, EPowerUpType powerUp)
+        public Box(RectangleF position, int hp, Sprite sprite, EPowerUpType powerUp)
             : base(position, hp, sprite)
         {
             PowerUp = powerUp;
@@ -25,7 +25,7 @@ namespace GameEngine.Impl.Colision
         {
             Remove();
             PowerUpFactory factory = new PowerUpFactory();
-            Map.Add(factory.CreatePowerUp(this.PowerUp, new Rectangle((int)Position.X+10, (int)Position.Y + 10, 14,14)));
+            Map.Add(factory.CreatePowerUp(this.PowerUp, new RectangleF(Position.X+10, Position.Y + 10, 14,14)));
         }
     }
 }

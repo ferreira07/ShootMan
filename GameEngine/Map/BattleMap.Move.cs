@@ -76,7 +76,7 @@ namespace GameEngine.Map
             float px = obj.ColisionRectangle.X + speed.X;
             float py = obj.ColisionRectangle.Y + speed.Y;
 
-            Rectangle newPosition = new Rectangle((int)px, (int)py, obj.ColisionRectangle.Width, obj.ColisionRectangle.Height);
+            RectangleF newPosition = new RectangleF(px, py, obj.ColisionRectangle.Width, obj.ColisionRectangle.Height);
 
             bool colide = false;
             List<Vector2> sugestedPositions = new List<Vector2>();

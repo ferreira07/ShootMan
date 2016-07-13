@@ -12,10 +12,10 @@ namespace GameEngine.Impl.Colision
 {
     public class Wall : MapObject
     {
-        public Wall(Sprite sprite, Rectangle position)
+        public Wall(Sprite sprite, RectangleF position)
         {
             Sprite = sprite;
-            DrawRectangle = position;
+            DrawRectangle = position.ToRectangle();
             ColisionRectangle = position;
             Position = new Vector2(position.X, position.Y);
         }
