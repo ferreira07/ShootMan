@@ -63,6 +63,20 @@ namespace GameEngine.Player
                     ret.MaxSpeed = Constants.SpeedBase * 0.9f;
                     ret.Defenses = new Map.Defenses();
                     break;
+                case ECharacterType.Fada:
+                    ret = new Character(Sprites.GetSprite(ESpriteType.Fada), controller);
+                    ret.Position = position - new Vector2(16, 16);
+                    ret.SetDrawPosition(-4, -16);
+                    ret.SetSize(16, 16);
+                    ret.UpdateRectangle();
+                    ret.SetHp(80);
+                    ret.SetMp(40, 15);
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release1, 10, EProjectilType.Bullet, TimeSpan.FromSeconds(0.2)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5), TimeSpan.FromSeconds(0.2), TimeSpan.FromSeconds(0.2)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release3, 40, EProjectilType.ChargedBullet, TimeSpan.FromSeconds(1)));
+                    ret.MaxSpeed = Constants.SpeedBase * 1.2f;
+                    ret.Defenses = new Map.Defenses();
+                    break;
             }
 
             return ret;

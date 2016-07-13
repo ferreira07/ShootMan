@@ -10,6 +10,7 @@ namespace GameEngine.Player
     {
         Fulano,
         Beltrano,
-        Siclano
+        Siclano,
+        Fada
     }
 }

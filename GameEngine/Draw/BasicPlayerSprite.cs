@@ -14,11 +14,11 @@ namespace GameEngine.Draw
         {
 
         }
-        public BasicPlayerSprite(Texture2D texture, int w = 32, int h = 48, int moveCount = 4)
+        public BasicPlayerSprite(Texture2D texture, int w = 32, int h = 48, int moveCount = 4, int directionType = 0)
         {
             Texture = texture;
 
-            FacingIndexer = GenerateFacingIndexer();
+            FacingIndexer = GenerateFacingIndexer(directionType);
             MoveCicle = 40;
 
             int dirCount = 4;
@@ -28,7 +28,7 @@ namespace GameEngine.Draw
 
         private static Rectangle[][] GeneratePositions(int w, int h, int dirCount, int moveCount)
         {
-            Rectangle[][]  positions = new Rectangle[dirCount][];
+            Rectangle[][] positions = new Rectangle[dirCount][];
             for (int i = 0; i < dirCount; i++)
             {
                 positions[i] = new Rectangle[moveCount];
@@ -40,13 +40,23 @@ namespace GameEngine.Draw
             return positions;
         }
 
-        private static Dictionary<Vector2, int> GenerateFacingIndexer()
+        private static Dictionary<Vector2, int> GenerateFacingIndexer(int directionType)
         {
-            Dictionary<Vector2, int>  facingIndexer = new Dictionary<Vector2, int>();
-            facingIndexer.Add(new Vector2(0, -1), 0);
-            facingIndexer.Add(new Vector2(-1, 0), 1);
-            facingIndexer.Add(new Vector2(1, 0), 2);
-            facingIndexer.Add(new Vector2(0, 1), 3);
+            Dictionary<Vector2, int> facingIndexer = new Dictionary<Vector2, int>();
+            if (directionType == 0)
+            {
+                facingIndexer.Add(new Vector2(0, -1), 0);
+                facingIndexer.Add(new Vector2(-1, 0), 1);
+                facingIndexer.Add(new Vector2(1, 0), 2);
+                facingIndexer.Add(new Vector2(0, 1), 3);
+            }
+            else
+            {
+                facingIndexer.Add(new Vector2(0, 1), 0);
+                facingIndexer.Add(new Vector2(1, 0), 1);
+                facingIndexer.Add(new Vector2(0, -1), 2);
+                facingIndexer.Add(new Vector2(-1, 0), 3);
+            }
             return facingIndexer;
         }
 

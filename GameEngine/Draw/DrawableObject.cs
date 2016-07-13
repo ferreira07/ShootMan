@@ -35,7 +35,7 @@ namespace GameEngine.Draw
             if (this is IColider)
             {
                 Sprite s = Sprites.GetSprite(ESpriteType.ColisionArea);
-                spriteBatch.Draw(s.Texture, (this as IColider).ColisionRectangle, s.SourceRectangle, Color.White);
+                spriteBatch.Draw(s.Texture, (this as IColider).ColisionRectangle.ToRectangle(), s.SourceRectangle, Color.White);
             }
 #endif
             spriteBatch.Draw(Sprite.Texture, DrawRectangle, Sprite.SourceRectangle, Color.White);

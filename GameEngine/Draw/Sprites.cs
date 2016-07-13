@@ -24,6 +24,8 @@ namespace GameEngine.Draw
             _SpriteDict.Add(ESpriteType.Bullet2, Load(content, "Images\\bullet2", 20));
             _SpriteDict.Add(ESpriteType.Fireball, LoadTimeAnimated(content, "Images\\fireball", 16,16,4, 0.3f));
             _SpriteDict.Add(ESpriteType.RollingStone, LoadAnimated(content, "Images\\rollingstone", 32,32,4));
+
+            _SpriteDict.Add(ESpriteType.Fada, LoadAnimated(content, "Images\\Fairy", 24, 32, 4, 1));
             _SpriteDict.Add(ESpriteType.EmergingStone, LoadTimeAnimated(content, "Images\\emergingstone", 32, 32, 13, 0.1f));
 
             _SpriteDict.Add(ESpriteType.ColisionArea, Load(content, "Images\\ColisionArea", 1));
@@ -49,9 +51,9 @@ namespace GameEngine.Draw
             return LoadAnimated(content, imagePath, 32, 48, 4);
         }
 
-        private static Sprite LoadAnimated(ContentManager content, string imagePath, int w, int h, int count)
+        private static Sprite LoadAnimated(ContentManager content, string imagePath, int w, int h, int count, int directionType = 0)
         {
-            return new BasicPlayerSprite(content.Load<Texture2D>(imagePath), w, h, count);
+            return new BasicPlayerSprite(content.Load<Texture2D>(imagePath), w, h, count, directionType);
         }
 
         public static Sprite GetSprite(ESpriteType spriteType)

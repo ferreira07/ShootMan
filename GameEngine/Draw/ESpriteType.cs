@@ -23,6 +23,7 @@ namespace GameEngine.Draw
         GreenGem,
         RollingStone,
         EmergingStone,
-        ColisionArea
+        ColisionArea,
+        Fada
     }
 }
