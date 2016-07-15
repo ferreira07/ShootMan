@@ -1,5 +1,6 @@
 using GameEngine.Draw;
 using GameEngine.Impl.Colision;
+using GameEngine.Impl.Map.Obstacle;
 using GameEngine.Impl.Scene;
 using GameEngine.Map;
 using GameEngine.Player;

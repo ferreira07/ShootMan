@@ -1,4 +1,5 @@
 ﻿using GameEngine.Colision;
+using GameEngine.Impl.Map.Obstacle;
 using System;
 using System.Collections.Generic;
 using System.Linq;

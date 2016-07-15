@@ -23,7 +23,7 @@ namespace GameEngine.Draw
             _SpriteDict.Add(ESpriteType.Bullet, Load(content, "Images\\bullet1", 10));
             _SpriteDict.Add(ESpriteType.Bullet2, Load(content, "Images\\bullet2", 20));
             _SpriteDict.Add(ESpriteType.Fireball, LoadTimeAnimated(content, "Images\\fireball", 16,16,4, 0.3f));
-            _SpriteDict.Add(ESpriteType.RollingStone, LoadAnimated(content, "Images\\rollingstone", 32,32,4));
+            _SpriteDict.Add(ESpriteType.RollingStone, LoadAnimated(content, "Images\\rollingstone", 32,32,4, 1));
 
             _SpriteDict.Add(ESpriteType.Fada, LoadDirectionTimeAnimated(content, "Images\\Fairy", 24, 32, 4, 1));
             _SpriteDict.Add(ESpriteType.EmergingStone, LoadTimeAnimated(content, "Images\\emergingstone", 32, 32, 13, 0.1f));

@@ -4,6 +4,7 @@ using GameEngine.Colision;
 using GameEngine.Draw;
 using GameEngine.Move;
 using GameEngine.Player;
+using GameEngine.Combat;
 
 namespace GameEngine.Map
 {
@@ -20,7 +21,7 @@ namespace GameEngine.Map
         void Remove(IMapObject mapObject);
         void SetTime(TimeSpan timeSpan);
         void StartNewFrame(TimeSpan elapsedGameTime);
-        void DoDamage(IAttackContainer attackContainer, IDefensesContainer defense);
+        void DoAttack(IAttackContainer attackContainer, IDefensesContainer defense);
         void VerifyColision();
     }
 }

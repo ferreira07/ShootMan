@@ -4,15 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Map
+namespace GameEngine.Combat
 {
     public class Attack
     {
-        public Attack(int damage)
+        public Attack(int damage, EDamageType damageType)
         {
             DamageAmmount = damage;
+            DamageType = damageType;
         }
 
         public int DamageAmmount { get; set; }
+        public EDamageType DamageType { get; set; }
     }
 }

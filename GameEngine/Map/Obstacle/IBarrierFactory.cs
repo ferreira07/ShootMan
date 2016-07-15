@@ -1,7 +1,8 @@
-﻿using GameEngine.Map;
+﻿using GameEngine.Colision;
+using GameEngine.Map;
 using Microsoft.Xna.Framework;
 
-namespace GameEngine.Colision
+namespace GameEngine.Map.Obstacle
 {
     public interface IBarrierFactory
     {

@@ -1,6 +1,8 @@
 ﻿using GameEngine.Colision;
+using GameEngine.Combat;
 using GameEngine.Draw;
 using GameEngine.Map;
+using GameEngine.Map.Obstacle;
 using GameEngine.Player;
 using Microsoft.Xna.Framework;
 using System;
@@ -9,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Impl.Colision
+namespace GameEngine.Impl.Map.Obstacle
 {
     public class BarrierFactory : IBarrierFactory
     {
@@ -39,7 +41,7 @@ namespace GameEngine.Impl.Colision
                 case EBarrierType.Stone:
                     ret = new MovableBarrier(position, 50, (TimeChangeSprite)Sprites.GetSprite(ESpriteType.EmergingStone), Sprites.GetSprite(ESpriteType.RollingStone))
                     {
-                        Attack = new Attack(20),
+                        Attack = new Attack(20, EDamageType.Physical),
                         MaxSpeed = Constants.SpeedBase * 1.5f,
                         Defenses = new Defenses()
                     };

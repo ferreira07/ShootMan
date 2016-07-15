@@ -8,6 +8,8 @@ using GameEngine.Player;
 using GameEngine.Colision;
 using GameEngine.Draw;
 using GameEngine.Impl.Colision;
+using GameEngine.Combat;
+using GameEngine.Impl.Combat;
 
 namespace GameEngine.Map
 {
@@ -67,9 +69,9 @@ namespace GameEngine.Map
             Map.SetTime(timeSpan);
         }
 
-        public void DoDamage(IAttackContainer attackContainer, IDefensesContainer defenseContainer)
+        public void DoAttack(IAttackContainer attackContainer, IDefensesContainer defenseContainer)
         {
-            DamageManager.DoDamage(attackContainer, defenseContainer);
+            DamageManager.DoAttack(attackContainer, defenseContainer);
         }
     }
 }

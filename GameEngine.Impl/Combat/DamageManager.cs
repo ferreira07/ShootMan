@@ -1,20 +1,21 @@
-﻿using System;
+﻿using GameEngine.Combat;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Map
+namespace GameEngine.Impl.Combat
 {
     public class DamageManager : IDamageManager
     {
-        public void DoDamage(IAttackContainer attackContainer, IDefensesContainer defensesContainer)
+        public void DoAttack(IAttackContainer attackContainer, IDefensesContainer defensesContainer)
         {
             Attack a = attackContainer.GetAttack();
-            Defenses d = defensesContainer.GetDefenses();
-
+            Defense d = defensesContainer.GetDefenses().GetDefense(a.DamageType);
+            
             int ammount = a.DamageAmmount - d.DamageReduction;
-            ammount -= (int) (ammount * d.DamageResistence);
+            ammount -= (int) (ammount * d.DamageResistance);
 
             defensesContainer.Damage(ammount);
         }

@@ -12,6 +12,7 @@ using GameEngine.Draw;
 using GameEngine.Scene;
 using GameEngine.Impl.Colision;
 using GameEngine.Player.AI;
+using GameEngine.Impl.Map.Obstacle;
 
 namespace GameEngine.Impl.Scene
 {

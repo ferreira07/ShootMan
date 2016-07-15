@@ -1,4 +1,5 @@
 ﻿using GameEngine.Colision;
+using GameEngine.Map.Obstacle;
 using GameEngine.Player;
 using Microsoft.Xna.Framework;
 using System;

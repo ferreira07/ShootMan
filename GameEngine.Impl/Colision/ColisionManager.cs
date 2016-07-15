@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Impl.Map
+namespace GameEngine.Impl.Colision
 {
-    public class ColisionManager
+    public class ColisionManager : IColisionManager
     {
         public IColisionStrategyFactory ColisionStrategyFactory { get; set; }
 
@@ -72,7 +72,7 @@ namespace GameEngine.Impl.Map
         {
             //só tentar mover se tiver alguma velocidade
             if (speed == Vector2.Zero) return;
-            
+
             float px = obj.ColisionRectangle.X + speed.X;
             float py = obj.ColisionRectangle.Y + speed.Y;
 
@@ -105,7 +105,7 @@ namespace GameEngine.Impl.Map
             {
                 ExecuteMove(obj, speed);
             }
-        }       
+        }
 
         #endregion
     }

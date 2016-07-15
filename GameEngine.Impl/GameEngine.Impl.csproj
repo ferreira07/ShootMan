@@ -41,19 +41,20 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Colision\Barrier.cs" />
-    <Compile Include="Colision\BarrierFactory.cs" />
-    <Compile Include="Colision\Box.cs" />
+    <Compile Include="Combat\DamageManager.cs" />
+    <Compile Include="Map\Obstacle\Barrier.cs" />
+    <Compile Include="Map\Obstacle\BarrierFactory.cs" />
+    <Compile Include="Map\Obstacle\Box.cs" />
     <Compile Include="Colision\ColisionStrategies\MovableBarrierColisionStrategy.cs" />
     <Compile Include="Colision\ColisionStrategies\MovableBarriersColisionStrategy.cs" />
     <Compile Include="Colision\ColisionStrategies\PowerUpCharacterColisionStrategy.cs" />
     <Compile Include="Colision\ColisionStrategies\ProjectilColisionStrategy.cs" />
     <Compile Include="Colision\ColisionStrategyFactory.cs" />
     <Compile Include="Colision\MovableBarrier.cs" />
-    <Compile Include="Colision\Wall.cs" />
+    <Compile Include="Map\Obstacle\Wall.cs" />
     <Compile Include="Map\BattleMapFacade.cs" />
     <Compile Include="Map\BattleMapFacadeBuilder.cs" />
-    <Compile Include="Map\ColisionManager.cs" />
+    <Compile Include="Colision\ColisionManager.cs" />
     <Compile Include="Player\Actions\CreateBarrierAction.cs" />
     <Compile Include="Player\Actions\MoveObjectAction.cs" />
     <Compile Include="Player\Actions\ProjectilAction.cs" />

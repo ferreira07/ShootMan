@@ -34,10 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Colision\EBarrierType.cs" />
+    <Compile Include="Combat\Defense.cs" />
+    <Compile Include="Combat\EDamageType.cs" />
+    <Compile Include="Map\Obstacle\EBarrierType.cs" />
     <Compile Include="Colision\EColisionLayer.cs" />
     <Compile Include="Colision\EColisionType.cs" />
-    <Compile Include="Colision\IBarrierFactory.cs" />
+    <Compile Include="Map\Obstacle\IBarrierFactory.cs" />
     <Compile Include="Colision\IColider.cs" />
     <Compile Include="Colision\IHittable.cs" />
     <Compile Include="Colision\RectangleF.cs" />
@@ -60,16 +62,14 @@
     <Compile Include="Draw\SpriteList2.cs" />
     <Compile Include="Draw\Sprites.cs" />
     <Compile Include="Draw\TimeChangeSprite.cs" />
-    <Compile Include="Map\Attack.cs" />
+    <Compile Include="Combat\Attack.cs" />
     <Compile Include="Map\BattleMap.cs" />
-    <Compile Include="Map\ColisionManager.cs" />
-    <Compile Include="Map\DamageManager.cs" />
-    <Compile Include="Map\Defenses.cs" />
-    <Compile Include="Map\IAttackContainer.cs" />
+    <Compile Include="Combat\Defenses.cs" />
+    <Compile Include="Combat\IAttackContainer.cs" />
     <Compile Include="Map\IBattleMapFacade.cs" />
-    <Compile Include="Map\IColisionManager.cs" />
-    <Compile Include="Map\IDamageManager.cs" />
-    <Compile Include="Map\IDefensesContainer.cs" />
+    <Compile Include="Colision\IColisionManager.cs" />
+    <Compile Include="Combat\IDamageManager.cs" />
+    <Compile Include="Combat\IDefensesContainer.cs" />
     <Compile Include="Map\IMapObject.cs" />
     <Compile Include="Map\MapObject.cs" />
     <Compile Include="Move\EProjectilType.cs" />

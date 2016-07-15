@@ -1,5 +1,6 @@
 ﻿using GameEngine.Colision;
 using GameEngine.Impl.Colision.ColisionStrategies;
+using GameEngine.Impl.Map.Obstacle;
 using GameEngine.Move;
 using GameEngine.Player;
 using System;

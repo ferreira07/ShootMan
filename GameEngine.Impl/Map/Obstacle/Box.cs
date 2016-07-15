@@ -9,7 +9,7 @@ using GameEngine.Draw;
 using Microsoft.Xna.Framework;
 using GameEngine.Player;
 
-namespace GameEngine.Impl.Colision
+namespace GameEngine.Impl.Map.Obstacle
 {
     public class Box : Barrier
     {

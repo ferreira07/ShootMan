@@ -1,4 +1,5 @@
 ﻿using GameEngine.Colision;
+using GameEngine.Combat;
 using GameEngine.Map;
 using GameEngine.Player;
 using System;

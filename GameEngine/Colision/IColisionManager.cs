@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using GameEngine.Colision;
 using GameEngine.Move;
 
-namespace GameEngine.Map
+namespace GameEngine.Colision
 {
     public interface IColisionManager
     {

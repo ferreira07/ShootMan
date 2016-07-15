@@ -1,5 +1,5 @@
 ﻿using GameEngine.Colision;
-using GameEngine.Map;
+using GameEngine.Combat;
 using GameEngine.Move;
 using System;
 using System.Collections.Generic;
@@ -22,7 +22,7 @@ namespace GameEngine.Impl.Colision.ColisionStrategies
         public void ProcessColision()
         {
             if(Colider is IDefensesContainer)
-                Projectil.Map.DoDamage(Projectil, Colider as IDefensesContainer);
+                Projectil.Map.DoAttack(Projectil, Colider as IDefensesContainer);
             Projectil.Piercy--;
             if (Projectil.Piercy < 0)
                 Projectil.Remove();

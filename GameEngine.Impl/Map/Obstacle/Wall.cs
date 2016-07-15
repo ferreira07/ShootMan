@@ -1,28 +1,23 @@
-﻿using Microsoft.Xna.Framework;
-using GameEngine.Draw;
-using GameEngine.Map;
+﻿using GameEngine.Draw;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Xna.Framework;
+using GameEngine.Map;
 using GameEngine.Colision;
 
-namespace GameEngine.Impl.Colision
+namespace GameEngine.Impl.Map.Obstacle
 {
-    public class Barrier : MapObject, IDefensesContainer
+    public class Wall : MapObject
     {
-        public Barrier(RectangleF position, int hp, Sprite sprite)
+        public Wall(Sprite sprite, RectangleF position)
         {
             Sprite = sprite;
             DrawRectangle = position.ToRectangle();
             ColisionRectangle = position;
             Position = new Vector2(position.X, position.Y);
-            SetHp(hp);
-        }
-
-        protected Barrier()
-        {
         }
 
         public override EColisionLayer ColisionLayer
@@ -33,6 +28,11 @@ namespace GameEngine.Impl.Colision
             }
         }
 
-        public override EColisionType ColisionType { get { return EColisionType.Blocking; } }        
+        public override EColisionType ColisionType { get { return EColisionType.Blocking; } }
+
+        public override void Damage(int ammount)
+        {
+            // Faz nada
+        }
     }
 }

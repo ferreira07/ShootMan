@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using GameEngine.Colision;
 using Microsoft.Xna.Framework;
 using GameEngine.Draw;
-using GameEngine.Map;
+using GameEngine.Combat;
 
-namespace GameEngine.Impl.Colision
+namespace GameEngine.Impl.Map.Obstacle
 {
     public class MovableBarrier : MovingObject, IAttackContainer, IDefensesContainer
     {

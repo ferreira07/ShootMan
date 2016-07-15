@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GameEngine.Player.AI;
-using GameEngine.Impl.Colision;
+using GameEngine.Map.Obstacle;
 
 namespace GameEngine.Map
 {
