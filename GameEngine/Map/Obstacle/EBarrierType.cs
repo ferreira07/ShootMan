@@ -11,6 +11,7 @@ namespace GameEngine.Map.Obstacle
         BasicBarrier,
         Wall,
         Box,
-        Stone
+        Stone,
+        Water
     }
 }

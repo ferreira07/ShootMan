@@ -40,11 +40,10 @@ namespace GameEngine.Impl.Colision
         {
             foreach (var item1 in ColisionObjects.Where(c => c.ColisionType == EColisionType.Hit).ToArray())
             {
-                foreach (var item2 in ColisionObjects.ToArray())
+                foreach (var item2 in ColisionObjects.Where(o=> (o.ColisionLayer & item1.ColisionLayer) > 0).ToArray())
                 {
                     if (item1 == item2) continue;
-
-
+                    
                     if (item1.ColisionRectangle.Intersects(item2.ColisionRectangle))
                     {
                         ColisionStrategyFactory.Create(item1, item2)?.ProcessColision();
@@ -82,7 +81,7 @@ namespace GameEngine.Impl.Colision
             List<Vector2> sugestedPositions = new List<Vector2>();
             List<IColider> newColisionObjects = new List<IColider>();
 
-            foreach (var item in colisionObjects)
+            foreach (var item in colisionObjects.Where(o=> (o.ColisionLayer & obj.ColisionLayer) > 0))
             {
                 if (item.ColisionRectangle.Intersects(newPosition))
                 {

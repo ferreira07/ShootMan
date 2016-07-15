@@ -28,6 +28,8 @@ namespace GameEngine.Draw
             _SpriteDict.Add(ESpriteType.Fada, LoadDirectionTimeAnimated(content, "Images\\Fairy", 24, 32, 4, 1));
             _SpriteDict.Add(ESpriteType.EmergingStone, LoadTimeAnimated(content, "Images\\emergingstone", 32, 32, 13, 0.1f));
 
+            _SpriteDict.Add(ESpriteType.Water, LoadTimeAnimated(content, "Images\\water", 32, 32, 2, 1.5f));
+
             _SpriteDict.Add(ESpriteType.ColisionArea, Load(content, "Images\\ColisionArea", 1));
             _SpriteDict.Add(ESpriteType.Crate, Load(content, "Images\\crate", 32));
             _SpriteDict.Add(ESpriteType.RedGem, LoadTimeAnimated(content, "Images\\RedGem", 14,14,4, 1));

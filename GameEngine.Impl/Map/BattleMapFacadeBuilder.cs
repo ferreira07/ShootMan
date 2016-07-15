@@ -79,6 +79,7 @@ namespace GameEngine.Map
 
             AddRandomBarrier(EBarrierType.Box, 4);
             AddRandomBarrier(EBarrierType.BasicBarrier, 10);
+            AddRandomBarrier(EBarrierType.Water, 6);
 
             Map.SetTime(TimeSpan.FromMinutes(2));
             

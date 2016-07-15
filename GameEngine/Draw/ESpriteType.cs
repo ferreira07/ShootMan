@@ -24,6 +24,7 @@ namespace GameEngine.Draw
         RollingStone,
         EmergingStone,
         ColisionArea,
-        Fada
+        Fada,
+        Water
     }
 }

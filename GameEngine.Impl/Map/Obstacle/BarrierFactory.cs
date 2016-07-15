@@ -38,6 +38,12 @@ namespace GameEngine.Impl.Map.Obstacle
                         Defenses = new Defenses()
                     };
                     break;
+                case EBarrierType.Water:
+                    ret = new Water(Sprites.GetSprite(ESpriteType.Water), position)
+                    {
+                        Defenses = new Defenses()
+                    };
+                    break;
                 case EBarrierType.Stone:
                     ret = new MovableBarrier(position, 50, (TimeChangeSprite)Sprites.GetSprite(ESpriteType.EmergingStone), Sprites.GetSprite(ESpriteType.RollingStone))
                     {

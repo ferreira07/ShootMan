@@ -55,6 +55,7 @@
     <Compile Include="Map\BattleMapFacade.cs" />
     <Compile Include="Map\BattleMapFacadeBuilder.cs" />
     <Compile Include="Colision\ColisionManager.cs" />
+    <Compile Include="Map\Obstacle\Water.cs" />
     <Compile Include="Player\Actions\CreateBarrierAction.cs" />
     <Compile Include="Player\Actions\MoveObjectAction.cs" />
     <Compile Include="Player\Actions\ProjectilAction.cs" />

@@ -95,7 +95,10 @@ namespace GameEngine.Player
         private TimeSpan StartChargeShoot { get; set; }
 
         private EColisionLayer _ColisionLayer { get; set; }
-
+        public void SetColisionLayer(EColisionLayer value)
+        {
+            _ColisionLayer = value;
+        }
         public override EColisionLayer ColisionLayer
         {
             get
@@ -103,7 +106,6 @@ namespace GameEngine.Player
                 return _ColisionLayer;
             }
         }
-
         public Vector2 FacingDirection { get; private set; }
 
         public Character(Sprite sprite, IController controller)
