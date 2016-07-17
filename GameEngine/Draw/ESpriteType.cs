@@ -25,6 +25,10 @@ namespace GameEngine.Draw
         EmergingStone,
         ColisionArea,
         Fada,
-        Water
+        Water,
+        Bullet3,
+        HpBar,
+        MpBar,
+        BarBackground
     }
 }

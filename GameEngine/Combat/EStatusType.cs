@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameEngine.Move
+namespace GameEngine.Combat
 {
-    public enum EProjectilType
+    public enum EStatusType
     {
-        Bullet,
-        ChargedBullet,
-        Fireball,
-        PoisonBullet
+        Poison,
+        Slow
     }
 }

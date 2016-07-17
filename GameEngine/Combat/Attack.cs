@@ -16,5 +16,11 @@ namespace GameEngine.Combat
 
         public int DamageAmmount { get; set; }
         public EDamageType DamageType { get; set; }
+        public Status Status { get; set; }
+
+        public bool HasStatus()
+        {
+            return Status != null;
+        }
     }
 }

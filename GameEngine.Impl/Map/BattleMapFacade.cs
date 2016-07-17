@@ -71,7 +71,11 @@ namespace GameEngine.Map
 
         public void DoAttack(IAttackContainer attackContainer, IDefensesContainer defenseContainer)
         {
-            DamageManager.DoAttack(attackContainer, defenseContainer);
+            DamageManager.DoAttack(attackContainer.GetAttack(), defenseContainer);
+        }
+        public void DoAttack(Attack attack, IDefensesContainer defenseContainer)
+        {
+            DamageManager.DoAttack(attack, defenseContainer);
         }
     }
 }

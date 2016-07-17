@@ -16,6 +16,14 @@ namespace GameEngine.Colision
             Width = w;
             Height = h;
         }
+
+        public RectangleF(Vector2 position, int width, int height) : this()
+        {
+            X = position.X;
+            Y = position.Y;
+            Width = width;
+            Height = height;
+        }
         #region Properties
         public float X { get; set; }
         public float Y { get; set; }

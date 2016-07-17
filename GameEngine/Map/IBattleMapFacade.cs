@@ -22,6 +22,7 @@ namespace GameEngine.Map
         void SetTime(TimeSpan timeSpan);
         void StartNewFrame(TimeSpan elapsedGameTime);
         void DoAttack(IAttackContainer attackContainer, IDefensesContainer defense);
+        void DoAttack(Attack attack, IDefensesContainer defense);
         void VerifyColision();
     }
 }

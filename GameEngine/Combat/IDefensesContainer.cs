@@ -11,7 +11,6 @@ namespace GameEngine.Combat
         int Hp { get; }
         Defenses GetDefenses();
         void Damage(int ammount);
-
-        //TODO ADDStatus
+        void AddStatus(Status status);
     }
 }

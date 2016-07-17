@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameEngine.Combat;
 
 namespace GameEngine.Player
 {
@@ -115,6 +116,7 @@ namespace GameEngine.Player
             UpdateRectangle();
             Controller = controller;
             Actions = new List<Action>();
+            Status = new Dictionary<EStatusType, Combat.Status>();
         }
 
         public override void Update(TimeSpan elapsedGameTime)
@@ -122,6 +124,19 @@ namespace GameEngine.Player
             Controller.UpdateState();
             Recharge(elapsedGameTime);
             CheckActions(elapsedGameTime);
+            UpdateStatus(elapsedGameTime);
+        }
+
+        private void UpdateStatus(TimeSpan elapsedGameTime)
+        {
+            List<EStatusType> toRemove = new List<EStatusType>();
+            foreach (var item in Status.ToArray())
+            {
+                if (item.Value.PassTime(elapsedGameTime))
+                {
+                    Status.Remove(item.Key);
+                }
+            }
         }
 
         private void SetFacing(Vector2 v)
@@ -165,14 +180,25 @@ namespace GameEngine.Player
             }
         }
 
-        public override void Damage(int ammount)
+        public Dictionary<EStatusType, Status> Status { get; set; }
+        public override void AddStatus(Status status)
         {
-            this.Hp -= ammount;
-            if (Hp <= 0)
+            Status s;
+            if (Status.TryGetValue(status.StatusType, out s))
             {
-                Hp = 0;
-                //TODO comportamento adequado para personagem morto
-                Remove();
+                if (s.RemainTime < status.RemainTime)
+                {
+                    s.RemainTime = status.RemainTime;
+                }
+                if (s.TimeCicleAttack.DamageAmmount < status.TimeCicleAttack.DamageAmmount)
+                {
+                    s.TimeCicleAttack = status.TimeCicleAttack;
+                }
+            }
+            else
+            {
+                Status.Add(status.StatusType, status);
+                status.AffectedObject = this;
             }
         }
     }

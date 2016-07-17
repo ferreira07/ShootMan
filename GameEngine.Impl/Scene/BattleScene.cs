@@ -21,6 +21,11 @@ namespace GameEngine.Impl.Scene
 
         public event EventHandler<IScene> ChangeScene;
         
+        private SpriteFont font = Fonts.GetFont(EFontType.Font1);
+        private Sprite backSprite = Sprites.GetSprite(ESpriteType.BarBackground);
+        private Sprite hpSprite = Sprites.GetSprite(ESpriteType.HpBar);
+        private Sprite mpSprite = Sprites.GetSprite(ESpriteType.MpBar);
+
         public void Draw(SpriteBatch spriteBatch, GameTime gameTime)
         {
             spriteBatch.Begin();
@@ -37,8 +42,14 @@ namespace GameEngine.Impl.Scene
             {
                 if (!c.IsDead)
                 {
-                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), c.Hp.ToString(), new Vector2(px, 20), Color.Black);
-                    spriteBatch.DrawString(Fonts.GetFont(EFontType.Font1), c.Mp.ToString(), new Vector2(px, 40), Color.Blue);
+                    spriteBatch.Draw(backSprite.Texture, new Rectangle(px, 20, 100, 36), backSprite.SourceRectangle, Color.White);
+                    spriteBatch.Draw(hpSprite.Texture, new Rectangle(px, 20, c.Hp*100/c.MaxHp, 18), hpSprite.SourceRectangle, Color.White);
+                    spriteBatch.Draw(mpSprite.Texture, new Rectangle(px, 38, c.Mp * 100 / c.MaxMp, 18), mpSprite.SourceRectangle, Color.White);
+
+                    spriteBatch.Draw(c.Sprite.Texture, new Rectangle(px+100, 10, c.Sprite.SourceRectangle.Width, c.Sprite.SourceRectangle.Height), c.Sprite.SourceRectangle, Color.White);
+
+                    spriteBatch.DrawString(font, c.Hp.ToString(), new Vector2(px, 20), Color.Black);
+                    spriteBatch.DrawString(font, c.Mp.ToString(), new Vector2(px, 38), Color.Blue);
                 }
                 px += dx;
             }

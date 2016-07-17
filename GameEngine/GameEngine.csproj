@@ -36,6 +36,8 @@
   <ItemGroup>
     <Compile Include="Combat\Defense.cs" />
     <Compile Include="Combat\EDamageType.cs" />
+    <Compile Include="Combat\EStatusType.cs" />
+    <Compile Include="Combat\Status.cs" />
     <Compile Include="Map\Obstacle\EBarrierType.cs" />
     <Compile Include="Colision\EColisionLayer.cs" />
     <Compile Include="Colision\EColisionType.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Scene\EBattleSceneState.cs" />
     <Compile Include="Scene\IBattleScene.cs" />
     <Compile Include="Scene\IScene.cs" />
+    <Compile Include="Util\CreateObjectHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="MonoGame.Framework">

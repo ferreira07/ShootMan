@@ -9,15 +9,18 @@ namespace GameEngine.Impl.Combat
 {
     public class DamageManager : IDamageManager
     {
-        public void DoAttack(IAttackContainer attackContainer, IDefensesContainer defensesContainer)
+        public void DoAttack(Attack attack, IDefensesContainer defensesContainer)
         {
-            Attack a = attackContainer.GetAttack();
-            Defense d = defensesContainer.GetDefenses().GetDefense(a.DamageType);
+            Defense d = defensesContainer.GetDefenses().GetDefense(attack.DamageType);
             
-            int ammount = a.DamageAmmount - d.DamageReduction;
+            int ammount = attack.DamageAmmount - d.DamageReduction;
             ammount -= (int) (ammount * d.DamageResistance);
 
             defensesContainer.Damage(ammount);
+            if(attack.HasStatus())
+            {
+                defensesContainer.AddStatus(attack.Status);
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ namespace GameEngine.Impl.Map.Obstacle
     {
         public IMapObject CreateBarrier(EBarrierType type, RectangleF position)
         {
-            IMapObject ret = null;
+            MapObject ret = null;
             switch (type)
             {
                 case EBarrierType.BasicBarrier:
@@ -53,6 +53,7 @@ namespace GameEngine.Impl.Map.Obstacle
                     };
                     break;
             }
+            ret.Defenses.AddResistance(EDamageType.Poison, 0.1f);
             return ret;
         }
 

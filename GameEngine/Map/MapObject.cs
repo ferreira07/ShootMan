@@ -37,6 +37,11 @@ namespace GameEngine.Map
                 OnZeroHp();
             }
         }
+
+        public virtual void AddStatus(Status status)
+        {
+            
+        }
         protected virtual void OnZeroHp()
         {
             //TODO comportamento adequado para objeto destruido

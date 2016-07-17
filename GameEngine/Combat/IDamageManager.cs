@@ -2,6 +2,6 @@
 {
     public interface IDamageManager
     {
-        void DoAttack(IAttackContainer attackContainer, IDefensesContainer defensesContainer);
+        void DoAttack(Attack attack, IDefensesContainer defensesContainer);
     }
 }

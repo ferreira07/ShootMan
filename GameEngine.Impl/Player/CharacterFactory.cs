@@ -30,7 +30,7 @@ namespace GameEngine.Player
                     ret.UpdateRectangle();
                     ret.SetHp(100);
                     ret.SetMp(50, 15);
-                    ret.AddAction(new ProjectilAction(EControllerAction.Release1, 10, EProjectilType.Bullet, TimeSpan.FromSeconds(0.2)));
+                    ret.AddAction(new ProjectilAction(EControllerAction.Release1, 10, EProjectilType.PoisonBullet, TimeSpan.FromSeconds(0.2)));
                     ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5), TimeSpan.FromSeconds(0.2), TimeSpan.FromSeconds(0.2)));
                     ret.AddAction(new ProjectilAction(EControllerAction.Release3, 50, EProjectilType.ChargedBullet, TimeSpan.FromSeconds(1)));
                     ret.MaxSpeed = Constants.SpeedBase;

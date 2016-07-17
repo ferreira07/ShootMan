@@ -22,6 +22,7 @@ namespace GameEngine.Draw
             _SpriteDict.Add(ESpriteType.Title, Load(content, "Images\\titulo"));
             _SpriteDict.Add(ESpriteType.Bullet, Load(content, "Images\\bullet1", 10));
             _SpriteDict.Add(ESpriteType.Bullet2, Load(content, "Images\\bullet2", 20));
+            _SpriteDict.Add(ESpriteType.Bullet3, LoadTimeAnimated(content, "Images\\bullet3", 10, 10, 4, 0.5f));
             _SpriteDict.Add(ESpriteType.Fireball, LoadTimeAnimated(content, "Images\\fireball", 16,16,4, 0.3f));
             _SpriteDict.Add(ESpriteType.RollingStone, LoadAnimated(content, "Images\\rollingstone", 32,32,4, 1));
 
@@ -30,6 +31,9 @@ namespace GameEngine.Draw
 
             _SpriteDict.Add(ESpriteType.Water, LoadTimeAnimated(content, "Images\\water", 32, 32, 2, 1.5f));
 
+            _SpriteDict.Add(ESpriteType.HpBar, Load(content, "Images\\HpBar", 1, 2));
+            _SpriteDict.Add(ESpriteType.MpBar, Load(content, "Images\\MpBar", 1, 2));
+            _SpriteDict.Add(ESpriteType.BarBackground, Load(content, "Images\\BarBackground", 1));
             _SpriteDict.Add(ESpriteType.ColisionArea, Load(content, "Images\\ColisionArea", 1));
             _SpriteDict.Add(ESpriteType.Crate, Load(content, "Images\\crate", 32));
             _SpriteDict.Add(ESpriteType.RedGem, LoadTimeAnimated(content, "Images\\RedGem", 14,14,4, 1));
