@@ -155,7 +155,23 @@ namespace GameEngine.Impl.Scene
             {
                 builder.AddCharacter(item.Type, item.Controller);
             }
-            builder.AddBarrierFactory(new BarrierFactory());
+            BarrierFactory factory = new BarrierFactory();
+            factory.BarrierSprites = new List<Sprite>
+            {
+                Sprites.GetSprite(ESpriteType.barrier1),
+                Sprites.GetSprite(ESpriteType.barrier2),
+                Sprites.GetSprite(ESpriteType.barrier3)
+            };
+            factory.WallSprites = new List<Sprite>
+            {
+                Sprites.GetSprite(ESpriteType.barrier1)
+            };
+            factory.BoxSprites = new List<Sprite>
+            {
+                Sprites.GetSprite(ESpriteType.Crate)
+            };
+
+            builder.AddBarrierFactory(factory);
             var newScene = new BattleScene() { Map = builder.BuildMap() };
 
             ChangeScene?.Invoke(this, newScene);

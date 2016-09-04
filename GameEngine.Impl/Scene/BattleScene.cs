@@ -23,6 +23,7 @@ namespace GameEngine.Impl.Scene
         
         private SpriteFont font = Fonts.GetFont(EFontType.Font1);
         private Sprite backSprite = Sprites.GetSprite(ESpriteType.BarBackground);
+        private Sprite poison = Sprites.GetSprite(ESpriteType.Poison);
         private Sprite hpSprite = Sprites.GetSprite(ESpriteType.HpBar);
         private Sprite mpSprite = Sprites.GetSprite(ESpriteType.MpBar);
 
@@ -50,6 +51,11 @@ namespace GameEngine.Impl.Scene
 
                     spriteBatch.DrawString(font, c.Hp.ToString(), new Vector2(px, 20), Color.Black);
                     spriteBatch.DrawString(font, c.Mp.ToString(), new Vector2(px, 38), Color.Blue);
+
+                    if (c.Status.ContainsKey(GameEngine.Combat.EStatusType.Poison))
+                    {
+                        spriteBatch.Draw(poison.Texture, new Rectangle(px+120, 45, 20, 20), poison.SourceRectangle, Color.White);
+                    }
                 }
                 px += dx;
             }

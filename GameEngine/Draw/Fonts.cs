@@ -15,7 +15,7 @@ namespace GameEngine.Draw
         public static void Load(ContentManager content)
         {
             _FontDict = new Dictionary<EFontType, SpriteFont>();
-            _FontDict.Add(EFontType.Font1, content.Load<SpriteFont>("arial"));            
+            _FontDict.Add(EFontType.Font1, content.Load<SpriteFont>("Arial"));            
 
         }
 

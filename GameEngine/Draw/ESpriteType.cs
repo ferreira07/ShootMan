@@ -12,8 +12,8 @@ namespace GameEngine.Draw
         char2,
         char3,
         Title,
-        barrier11,
-        barrier12,
+        barrier1,
+        barrier2,
         Bullet,
         Bullet2,
         Fireball,
@@ -29,6 +29,10 @@ namespace GameEngine.Draw
         Bullet3,
         HpBar,
         MpBar,
-        BarBackground
+        BarBackground,
+        Poison,
+        barrier3,
+        Grass1,
+        Grass2
     }
 }

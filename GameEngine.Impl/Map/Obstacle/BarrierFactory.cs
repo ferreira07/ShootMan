@@ -15,25 +15,30 @@ namespace GameEngine.Impl.Map.Obstacle
 {
     public class BarrierFactory : IBarrierFactory
     {
+
+        public List<Sprite> BarrierSprites { get; set; }
+        public List<Sprite> BoxSprites { get; set; }
+        public List<Sprite> WallSprites { get; set; }
+
         public IMapObject CreateBarrier(EBarrierType type, RectangleF position)
         {
             MapObject ret = null;
             switch (type)
             {
                 case EBarrierType.BasicBarrier:
-                    ret = new Barrier(position, 50, Sprites.GetSprite(ESpriteType.barrier11))
+                    ret = new Barrier(position, 50, _GetRandom(BarrierSprites))
                     {
                         Defenses = new Defenses()
                     };
                     break;
                 case EBarrierType.Box:
-                    ret = new Box(position, 10, Sprites.GetSprite(ESpriteType.Crate), RandomPowerUp())
+                    ret = new Box(position, 10, _GetRandom(BoxSprites), RandomPowerUp())
                     {
                         Defenses = new Defenses()
                     };
                     break;
                 case EBarrierType.Wall:
-                    ret = new Wall(Sprites.GetSprite(ESpriteType.barrier11), position)
+                    ret = new Wall(_GetRandom(WallSprites), position)
                     {
                         Defenses = new Defenses()
                     };
@@ -57,6 +62,11 @@ namespace GameEngine.Impl.Map.Obstacle
             return ret;
         }
 
+        private Sprite _GetRandom(List<Sprite> sprites)
+        {
+            return sprites[Random.Next(sprites.Count)];
+        }
+        
         static Random Random = new Random();
         private static EPowerUpType RandomPowerUp()
         {

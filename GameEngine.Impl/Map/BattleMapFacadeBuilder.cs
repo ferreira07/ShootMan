@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using GameEngine.Player.AI;
 using GameEngine.Map.Obstacle;
+using GameEngine.Impl.Map;
 
 namespace GameEngine.Map
 {
@@ -71,12 +72,18 @@ namespace GameEngine.Map
                 Map.Add(barrierFactory.CreateBarrier(EBarrierType.Wall, GetRectangle(i, 0)));
                 Map.Add(barrierFactory.CreateBarrier(EBarrierType.Wall, GetRectangle(i, MaxY)));
             }
-            for (int i = 0; i <= MaxY; i++)
+            for (int i = 0; i <= MaxY-2; i++)
             {
                 Map.Add(barrierFactory.CreateBarrier(EBarrierType.Wall, GetRectangle(0, i + 1)));
                 Map.Add(barrierFactory.CreateBarrier(EBarrierType.Wall, GetRectangle(MaxX, i + 1)));
             }
-
+            for (int i = 1; i < MaxX; i++)
+            {
+                for (int j = 1; j < MaxY; j++)
+                {
+                    Map.Add(new Floor(Sprites.GetSprite(ESpriteType.Grass1), GetRectangle(i, j).ToRectangle()));
+                }
+            }
             AddRandomBarrier(EBarrierType.Box, 4);
             AddRandomBarrier(EBarrierType.BasicBarrier, 10);
             AddRandomBarrier(EBarrierType.Water, 6);

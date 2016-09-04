@@ -74,7 +74,7 @@ namespace GameEngine.Player
                     ret.SetDrawPosition(-4, -16);
                     ret.SetSize(16, 16);
                     ret.UpdateRectangle();
-                    ret.SetHp(80);
+                    ret.SetHp(60);
                     ret.SetMp(40, 15);
                     ret.AddAction(new ProjectilAction(EControllerAction.Release1, 10, EProjectilType.Bullet, TimeSpan.FromSeconds(0.2)));
                     ret.AddAction(new ProjectilAction(EControllerAction.Release2, 20, EProjectilType.Fireball, TimeSpan.FromSeconds(0.5), TimeSpan.FromSeconds(0.2), TimeSpan.FromSeconds(0.2)));

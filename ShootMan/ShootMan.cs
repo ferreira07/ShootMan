@@ -46,7 +46,7 @@ namespace ShootMan
             //graphics.IsFullScreen = true;
             graphics.ApplyChanges();
 
-            Sprites.Load(Content);
+            Sprites.Load(Content, "Images\\");
             Fonts.Load(Content);
             Scene = new PlayerSelectionScene();
 

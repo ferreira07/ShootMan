@@ -42,7 +42,7 @@ namespace Game2
         {
             // TODO: Add your initialization logic here
 
-            Sprites.Load(Content);
+            Sprites.Load(Content, "");
             Fonts.Load(Content);
 
             //Scene = new PlayerSelectionScene();
@@ -52,7 +52,7 @@ namespace Game2
             builder.AddCharacter(ECharacterType.Fulano, new KeyboardController(0));
             builder.AddCharacter(ECharacterType.Fulano, new KeyboardController(1));
             builder.AddBarrierFactory(new BarrierFactory());
-            var newScene = new BattleScene() { Map = builder.BuildMap() };
+            bs = new BattleScene() { Map = builder.BuildMap() };
             Scene = bs;
 
 

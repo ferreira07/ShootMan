@@ -13,33 +13,39 @@ namespace GameEngine.Draw
     {
         private static Dictionary<ESpriteType, Sprite> _SpriteDict;
 
-        public static void Load(ContentManager content)
+        public static void Load(ContentManager content, string folderName)
         {
             _SpriteDict = new Dictionary<ESpriteType, Sprite>();
-            _SpriteDict.Add(ESpriteType.char1, LoadCharacter(content, "Images\\char0"));
-            _SpriteDict.Add(ESpriteType.char2, LoadCharacter(content, "Images\\char1"));
-            _SpriteDict.Add(ESpriteType.char3, LoadCharacter(content, "Images\\char2"));
-            _SpriteDict.Add(ESpriteType.Title, Load(content, "Images\\titulo"));
-            _SpriteDict.Add(ESpriteType.Bullet, Load(content, "Images\\bullet1", 10));
-            _SpriteDict.Add(ESpriteType.Bullet2, Load(content, "Images\\bullet2", 20));
-            _SpriteDict.Add(ESpriteType.Bullet3, LoadTimeAnimated(content, "Images\\bullet3", 10, 10, 4, 0.5f));
-            _SpriteDict.Add(ESpriteType.Fireball, LoadTimeAnimated(content, "Images\\fireball", 16,16,4, 0.3f));
-            _SpriteDict.Add(ESpriteType.RollingStone, LoadAnimated(content, "Images\\rollingstone", 32,32,4, 1));
+            _SpriteDict.Add(ESpriteType.char1, LoadCharacter(content, folderName+"char0"));
+            _SpriteDict.Add(ESpriteType.char2, LoadCharacter(content, folderName + "char1"));
+            _SpriteDict.Add(ESpriteType.char3, LoadCharacter(content, folderName + "char2"));
+            _SpriteDict.Add(ESpriteType.Title, LoadImage(content, folderName + "titulo"));
+            _SpriteDict.Add(ESpriteType.Bullet, Load(content, folderName + "bullet1", 10));
+            _SpriteDict.Add(ESpriteType.Bullet2, Load(content, folderName + "bullet2", 20));
+            _SpriteDict.Add(ESpriteType.Bullet3, LoadTimeAnimated(content, folderName + "bullet3", 10, 10, 4, 0.5f));
+            _SpriteDict.Add(ESpriteType.Fireball, LoadTimeAnimated(content, folderName + "fireball", 16,16,4, 0.3f));
+            _SpriteDict.Add(ESpriteType.RollingStone, LoadAnimated(content, folderName + "rollingstone", 32,32,4, 1));
 
-            _SpriteDict.Add(ESpriteType.Fada, LoadDirectionTimeAnimated(content, "Images\\Fairy", 24, 32, 4, 1));
-            _SpriteDict.Add(ESpriteType.EmergingStone, LoadTimeAnimated(content, "Images\\emergingstone", 32, 32, 13, 0.1f));
+            _SpriteDict.Add(ESpriteType.Poison, Load(content, folderName + "poison", 25));
+            _SpriteDict.Add(ESpriteType.Grass1, Load(content, folderName + "grass1", 32));
+            _SpriteDict.Add(ESpriteType.Grass2, Load(content, folderName + "grass2", 32));
 
-            _SpriteDict.Add(ESpriteType.Water, LoadTimeAnimated(content, "Images\\water", 32, 32, 2, 1.5f));
+            _SpriteDict.Add(ESpriteType.Fada, LoadDirectionTimeAnimated(content, folderName + "fairy", 24, 32, 4, 1));
+            _SpriteDict.Add(ESpriteType.EmergingStone, LoadTimeAnimated(content, folderName + "emergingstone", 32, 32, 13, 0.1f));
 
-            _SpriteDict.Add(ESpriteType.HpBar, Load(content, "Images\\HpBar", 1, 2));
-            _SpriteDict.Add(ESpriteType.MpBar, Load(content, "Images\\MpBar", 1, 2));
-            _SpriteDict.Add(ESpriteType.BarBackground, Load(content, "Images\\BarBackground", 1));
-            _SpriteDict.Add(ESpriteType.ColisionArea, Load(content, "Images\\ColisionArea", 1));
-            _SpriteDict.Add(ESpriteType.Crate, Load(content, "Images\\crate", 32));
-            _SpriteDict.Add(ESpriteType.RedGem, LoadTimeAnimated(content, "Images\\RedGem", 14,14,4, 1));
-            _SpriteDict.Add(ESpriteType.BlueGem, LoadTimeAnimated(content, "Images\\BlueGem", 14, 14, 4, 1));
-            _SpriteDict.Add(ESpriteType.GreenGem, LoadTimeAnimated(content, "Images\\GreenGem", 14, 14, 4, 1));
-            _SpriteDict.Add(ESpriteType.barrier11, LoadList(content, "Images\\Barrier1", new Rectangle(0,0,32,32), new Rectangle(32, 0, 32, 32)));
+            _SpriteDict.Add(ESpriteType.Water, LoadTimeAnimated(content, folderName + "water", 32, 32, 2, 1.5f));
+
+            _SpriteDict.Add(ESpriteType.HpBar, Load(content, folderName + "hpbar", 1, 2));
+            _SpriteDict.Add(ESpriteType.MpBar, Load(content, folderName + "mpbar", 1, 2));
+            _SpriteDict.Add(ESpriteType.BarBackground, Load(content, folderName + "BarBackground", 1));
+            _SpriteDict.Add(ESpriteType.ColisionArea, Load(content, folderName + "ColisionArea", 1));
+            _SpriteDict.Add(ESpriteType.Crate, Load(content, folderName + "crate", 32));
+            _SpriteDict.Add(ESpriteType.RedGem, LoadTimeAnimated(content, folderName + "redgem", 14,14,4, 1));
+            _SpriteDict.Add(ESpriteType.BlueGem, LoadTimeAnimated(content, folderName + "bluegem", 14, 14, 4, 1));
+            _SpriteDict.Add(ESpriteType.GreenGem, LoadTimeAnimated(content, folderName + "greengem", 14, 14, 4, 1));
+            _SpriteDict.Add(ESpriteType.barrier1, LoadList(content, folderName + "barrier1", new Rectangle(0,0,32,32), new Rectangle(32, 0, 32, 32)));
+            _SpriteDict.Add(ESpriteType.barrier2, LoadList(content, folderName + "barrier2", new Rectangle(0, 0, 32, 32), new Rectangle(32, 0, 32, 32)));
+            _SpriteDict.Add(ESpriteType.barrier3, LoadList(content, folderName + "barrier3", new Rectangle(0, 0, 32, 32), new Rectangle(32, 0, 32, 32)));
         }
 
         private static Sprite LoadTimeAnimated(ContentManager content, string imagePath, int w, int h, int count, float time)
@@ -71,7 +77,7 @@ namespace GameEngine.Draw
             return _SpriteDict[spriteType].Clone();
         }
 
-        private static Sprite Load(ContentManager content, string imagePath)
+        private static Sprite LoadImage(ContentManager content, string imagePath)
         {
             return Load(content, imagePath, 32, 48);
         }
